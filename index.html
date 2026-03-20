@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#065f46" />
-  <link rel="manifest" href="manifest.json" />
+  <link rel="manifest" href="./manifest.json" />
   <title>Bandit Xray Rolex Manual</title>
   <style>
     :root{
@@ -59,13 +59,13 @@
 </head>
 <body>
 <div class="wrap">
-  <div class="card sticky" style="margin-bottom:16px">
+  <div class="card sticky" id="installCard" style="margin-bottom:16px">
     <div class="topbar">
       <div>
         <div style="font-weight:bold;color:#065f46">Bandit Xray Rolex Manual</div>
         <div class="muted">Installable field app with search, inference, scam detection, OCR, camera, learning, and updates.</div>
       </div>
-      <button class="btn" id="installBtn" disabled>Install</button>
+      <button class="btn" id="installBtn" style="display:none" disabled>Install</button>
     </div>
   </div>
 
@@ -137,10 +137,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js').catch(() => {});
-}
-
 const claspData = {
   VSF: ["8PQ","6SH","7GJ","1LQ","H7Z","TL11","U7T","K6G","705","W5T","UZ2","3VV","P2K","1RD"],
   Clean: ["1LD","ORB","ORV","1NQ","F6U","F80","5ZR","6WP","4JK","1PD","E4F","E4P","T2A","5ZS"],
@@ -176,41 +172,11 @@ const combos = [
 ];
 
 const models = [
-  {
-    name:"Daytona",
-    tell:"Subdial spacing",
-    rep:["Subdials too close","Dial looks compressed"],
-    gen:["Balanced spacing","Open, even symmetry"],
-    codeNotes:["LV66 is mixed and weaker","7CD leans ARF/BTF context-sensitive","5NF appears in Noob lineage"]
-  },
-  {
-    name:"GMT-Master II",
-    tell:"Hand stack",
-    rep:["Incorrect hand order","Bezel transition slightly off"],
-    gen:["Proper hand layering","Clean bezel split"],
-    codeNotes:["71H appears in Noob CHS history","ORV can appear on newer Clean-adjacent batches"]
-  },
-  {
-    name:"Submariner",
-    tell:"Cyclops + bezel engraving",
-    rep:["Weak date magnification","Shallow bezel cuts"],
-    gen:["Strong cyclops","Deep crisp engraving"],
-    codeNotes:["1LQ/H7Z lean VSF","1LD leans Clean","U1N appears on EWF-linked bracelets"]
-  },
-  {
-    name:"Datejust",
-    tell:"Dial text + cyclops",
-    rep:["Thicker font","Print inconsistency"],
-    gen:["Razor-sharp print","Perfect spacing"],
-    codeNotes:["6R****V6 + F6U strongly suggests Clean family","R86Z + P2K leans VSF","49GC + 7QE can point GMF"]
-  },
-  {
-    name:"Explorer / OP",
-    tell:"Dial print + case shape",
-    rep:["Soft text","Less refined case lines"],
-    gen:["Minimal but razor sharp","Balanced lugs"],
-    codeNotes:["8H6W + 5ZR leans Clean Explorer","T11Y + U7T leans VSF OP"]
-  }
+  {name:"Daytona",tell:"Subdial spacing",rep:["Subdials too close","Dial looks compressed"],gen:["Balanced spacing","Open, even symmetry"],codeNotes:["LV66 is mixed and weaker","7CD leans ARF/BTF context-sensitive","5NF appears in Noob lineage"]},
+  {name:"GMT-Master II",tell:"Hand stack",rep:["Incorrect hand order","Bezel transition slightly off"],gen:["Proper hand layering","Clean bezel split"],codeNotes:["71H appears in Noob CHS history","ORV can appear on newer Clean-adjacent batches"]},
+  {name:"Submariner",tell:"Cyclops + bezel engraving",rep:["Weak date magnification","Shallow bezel cuts"],gen:["Strong cyclops","Deep crisp engraving"],codeNotes:["1LQ/H7Z lean VSF","1LD leans Clean","U1N appears on EWF-linked bracelets"]},
+  {name:"Datejust",tell:"Dial text + cyclops",rep:["Thicker font","Print inconsistency"],gen:["Razor-sharp print","Perfect spacing"],codeNotes:["6R****V6 + F6U strongly suggests Clean family","R86Z + P2K leans VSF","49GC + 7QE can point GMF"]},
+  {name:"Explorer / OP",tell:"Dial print + case shape",rep:["Soft text","Less refined case lines"],gen:["Minimal but razor sharp","Balanced lugs"],codeNotes:["8H6W + 5ZR leans Clean Explorer","T11Y + U7T leans VSF OP"]}
 ];
 
 const qcSystem = [
@@ -243,6 +209,10 @@ let cameraStream = null;
 let cameraInterval = null;
 let ocrBusy = false;
 let currentIntel = null;
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(() => {});
+}
 
 function saveLS(){
   localStorage.setItem('bx_saved', JSON.stringify(savedItems));
@@ -302,11 +272,9 @@ function getScoreBreakdown({model,serial,clasp,visualFactory}){
   combos.forEach(item => {
     const [comboSerial, comboClasp] = item.combo.split(" + ");
     const needle = comboSerial.replace(/\*+/g, "");
-    if (upperSerial && upperClasp && upperSerial.includes(needle) && upperClasp === comboClasp.toUpperCase()) {
-      if (scores[item.factory] !== undefined) {
-        scores[item.factory] += weights.combo;
-        reasons[item.factory].push(`Known combo match: ${item.combo} (+${weights.combo})`);
-      }
+    if (upperSerial && upperClasp && upperSerial.includes(needle) && upperClasp === comboClasp.toUpperCase() && scores[item.factory] !== undefined) {
+      scores[item.factory] += weights.combo;
+      reasons[item.factory].push(`Known combo match: ${item.combo} (+${weights.combo})`);
     }
   });
 
@@ -342,30 +310,14 @@ function getScamSignals({model,serial,clasp,visualFactory,ranked,sellerClaim}){
   const top = ranked?.[0];
   const serialMapped = Object.values(serialData).some(list => list.some(x => upperSerial.includes(x.replace(/\*+/g, ""))));
 
-  if (upperClasp && lowTierClaspCodes.includes(upperClasp)) {
-    flags.push({level:"high", title:"Low-tier clasp code", detail:`${upperClasp} is commonly associated with low-tier, aftermarket, or budget bracelet usage.`});
-  }
-  if (upperSerial && !serialMapped && upperSerial.length >= 2) {
-    flags.push({level:"medium", title:"Unmapped serial pattern", detail:"This serial cluster is not in the known mapped dataset and may indicate a low-tier or random engraving batch."});
-  }
-  if (visualFactory && visualFactory !== "none" && top?.factory && visualFactory !== top.factory && top.score >= 40) {
-    flags.push({level:"high", title:"Visual/code conflict", detail:`Visual profile leans ${visualFactory}, but codes lean ${top.factory}. This can indicate a hybrid build or fake factory claim.`});
-  }
-  if (upperClasp && highTierPopularCodes.includes(upperClasp)) {
-    flags.push({level:"low", title:"Popular high-tier code", detail:"This clasp is widely copied. Visual confirmation is still mandatory."});
-  }
-  if ((model || "") === "Daytona" && upperSerial.includes("LV66")) {
-    flags.push({level:"medium", title:"Shared Daytona serial cluster", detail:"LV66 appears across multiple factories, so serial confidence is reduced on Daytona."});
-  }
-  if (upperClasp && sharedCodes.includes(upperClasp)) {
-    flags.push({level:"medium", title:"Shared or legacy bracelet code", detail:`${upperClasp} may reflect bracelet overlap, legacy tooling, or aftermarket components rather than a clean factory ID.`});
-  }
-  if (sellerClaim && sellerClaim !== "none" && top?.factory && sellerClaim !== top.factory && top.score >= 45) {
-    flags.unshift({level:"high", title:"Seller claim mismatch", detail:`Seller claims ${sellerClaim}, but current signals lean ${top.factory}. Possible fake factory labeling or bait-and-switch risk.`});
-  }
-  if (top?.score < 35 && (upperSerial || upperClasp)) {
-    flags.push({level:"medium", title:"Weak mapping confidence", detail:"Known data does not strongly support a single factory. Treat seller claims cautiously."});
-  }
+  if (upperClasp && lowTierClaspCodes.includes(upperClasp)) flags.push({level:"high", title:"Low-tier clasp code", detail:`${upperClasp} is commonly associated with low-tier, aftermarket, or budget bracelet usage.`});
+  if (upperSerial && !serialMapped && upperSerial.length >= 2) flags.push({level:"medium", title:"Unmapped serial pattern", detail:"This serial cluster is not in the known mapped dataset and may indicate a low-tier or random engraving batch."});
+  if (visualFactory && visualFactory !== "none" && top?.factory && visualFactory !== top.factory && top.score >= 40) flags.push({level:"high", title:"Visual/code conflict", detail:`Visual profile leans ${visualFactory}, but codes lean ${top.factory}. This can indicate a hybrid build or fake factory claim.`});
+  if (upperClasp && highTierPopularCodes.includes(upperClasp)) flags.push({level:"low", title:"Popular high-tier code", detail:"This clasp is widely copied. Visual confirmation is still mandatory."});
+  if ((model || "") === "Daytona" && upperSerial.includes("LV66")) flags.push({level:"medium", title:"Shared Daytona serial cluster", detail:"LV66 appears across multiple factories, so serial confidence is reduced on Daytona."});
+  if (upperClasp && sharedCodes.includes(upperClasp)) flags.push({level:"medium", title:"Shared or legacy bracelet code", detail:`${upperClasp} may reflect bracelet overlap, legacy tooling, or aftermarket components rather than a clean factory ID.`});
+  if (sellerClaim && sellerClaim !== "none" && top?.factory && sellerClaim !== top.factory && top.score >= 45) flags.unshift({level:"high", title:"Seller claim mismatch", detail:`Seller claims ${sellerClaim}, but current signals lean ${top.factory}. Possible fake factory labeling or bait-and-switch risk.`});
+  if (top?.score < 35 && (upperSerial || upperClasp)) flags.push({level:"medium", title:"Weak mapping confidence", detail:"Known data does not strongly support a single factory. Treat seller claims cautiously."});
   return flags;
 }
 
@@ -386,26 +338,19 @@ function getDecisionTreeOutput({model,strongestTell,dialQuality,caseQuality,seri
   if (dialQuality === "bad") outcomes.push("Dial print fails → treat as strongest visual red flag.");
   else if (dialQuality === "mid") outcomes.push("Dial print is only mid-tier → possible GMF/BP/EWF range or hybrid build.");
   else outcomes.push("Dial print looks strong → supports higher-tier possibility.");
-
   if (caseQuality === "bad") outcomes.push("Case shape/guards fail → likely low or mid-tier case source.");
   else if (caseQuality === "mid") outcomes.push("Case shape is acceptable but not sharp → could be mid-tier or mixed build.");
   else outcomes.push("Case shape is sharp → supports Clean/VSF-class finishing.");
-
   if (!serialMapped) outcomes.push("Serial is unmapped → do not trust serial as proof of factory.");
   else outcomes.push("Serial cluster is mapped → use only as supporting evidence, not proof.");
-
   if (claspTier === "low") outcomes.push("Clasp falls into low-tier/legacy bucket → strong scam or aftermarket bracelet risk.");
   else if (claspTier === "mixed") outcomes.push("Clasp is shared/legacy → useful only with strong visuals.");
-  else outcomes.push("Clasp is in high-tier set → still verify visuals because popular codes are copied.");
-
-  if (sellerClaim !== "none" && visualFactory !== "none" && sellerClaim !== visualFactory) {
-    outcomes.push(`Seller claim (${sellerClaim}) conflicts with visual lean (${visualFactory}) → possible fake factory labeling.`);
-  }
-
+  else if (claspTier === "high") outcomes.push("Clasp is in high-tier set → still verify visuals because popular codes are copied.");
+  if (sellerClaim !== "none" && visualFactory !== "none" && sellerClaim !== visualFactory) outcomes.push(`Seller claim (${sellerClaim}) conflicts with visual lean (${visualFactory}) → possible fake factory labeling.`);
   let verdict = "Proceed cautiously";
   if (outcomes.some(x => x.includes("high counterfeit risk")) || claspTier === "low" || dialQuality === "bad") verdict = "High scam risk";
   else if (dialQuality === "good" && caseQuality === "good" && strongestTell === "good" && claspTier !== "low") verdict = "Likely acceptable, keep verifying";
-  return {verdict, outcomes};
+  return { verdict, outcomes };
 }
 
 function parseAutoScan(input){
@@ -442,14 +387,6 @@ function parseAutoScan(input){
   return {model, serial, clasp, seller};
 }
 
-function classifyClaspTier(clasp){
-  const code = (clasp || "").toUpperCase();
-  if (!code) return "mixed";
-  if (lowTierClaspCodes.includes(code)) return "low";
-  if (highTierPopularCodes.includes(code) || Object.values(claspData).some(list => list.includes(code))) return "high";
-  return "mixed";
-}
-
 function extractTextCandidates(text){
   const parsed = parseAutoScan(text);
   const ranked = getScoreBreakdown({model: parsed.model || "Submariner", serial: parsed.serial, clasp: parsed.clasp, visualFactory: ""});
@@ -457,19 +394,63 @@ function extractTextCandidates(text){
   return {parsed, ranked, flags};
 }
 
-const searchIndex = [
-  ...Object.entries(claspData).flatMap(([factory, codes]) => codes.map(code => ({ type: "Clasp", key: code, value: factory }))),
-  ...Object.entries(serialData).flatMap(([factory, codes]) => codes.map(code => ({ type: "Serial", key: code, value: factory }))),
-  ...combos.map(c => ({ type: "Combo", key: c.combo, value: `${c.factory} (${c.confidence}%)` })),
-  ...models.map(m => ({ type: "Model", key: m.name, value: m.tell }))
-];
+function preprocessCanvas(srcCanvas){
+  const out = document.createElement('canvas');
+  const w = srcCanvas.width;
+  const h = srcCanvas.height;
+  out.width = w;
+  out.height = h;
+  const sctx = srcCanvas.getContext('2d');
+  const octx = out.getContext('2d');
+  const img = sctx.getImageData(0,0,w,h);
+  const d = img.data;
+  for (let i = 0; i < d.length; i += 4) {
+    const gray = 0.299*d[i] + 0.587*d[i+1] + 0.114*d[i+2];
+    const boosted = gray > 150 ? 255 : gray < 95 ? 0 : gray;
+    d[i] = d[i+1] = d[i+2] = boosted;
+  }
+  octx.putImageData(img,0,0);
+  return out;
+}
+
+async function doOCR(source, resultId, textId){
+  if (ocrBusy) return;
+  ocrBusy = true;
+  document.getElementById('ocrStatus').textContent = 'Reading…';
+  try{
+    const prepared = source instanceof HTMLCanvasElement ? preprocessCanvas(source) : source;
+    const { data } = await Tesseract.recognize(prepared, 'eng');
+    const text = (data.text || '').trim();
+    if (textId) document.getElementById(textId).textContent = text || 'No text detected';
+    const res = extractTextCandidates(text);
+    document.getElementById(resultId).innerHTML = `
+      <div class="result">
+        <div><b>Model:</b> ${esc(res.parsed.model || "Unknown")}</div>
+        <div><b>Serial:</b> ${esc(res.parsed.serial || "None")}</div>
+        <div><b>Clasp:</b> ${esc(res.parsed.clasp || "None")}</div>
+        <div><b>Top Factory:</b> ${esc(res.ranked[0]?.factory || "Unknown")}</div>
+        <div><b>Confidence:</b> ${res.ranked[0]?.score || 0}%</div>
+      </div>
+      ${res.flags.map(f => `<div class="result bad section">⚠ ${esc(f.title)}</div>`).join('') || '<div class="list-item section">No major scam flags from extracted text alone.</div>'}`;
+    document.getElementById('ocrStatus').textContent = 'Scan complete';
+  } catch(e){
+    document.getElementById('ocrStatus').textContent = 'OCR failed';
+  } finally {
+    ocrBusy = false;
+  }
+}
 
 function renderSearchResults(q){
   const out = document.getElementById('searchResults');
+  const searchIndex = [
+    ...Object.entries(claspData).flatMap(([factory, codes]) => codes.map(code => ({ type:"Clasp", key:code, value:factory }))),
+    ...Object.entries(serialData).flatMap(([factory, codes]) => codes.map(code => ({ type:"Serial", key:code, value:factory }))),
+    ...combos.map(c => ({ type:"Combo", key:c.combo, value:`${c.factory} (${c.confidence}%)` })),
+    ...models.map(m => ({ type:"Model", key:m.name, value:m.tell }))
+  ];
   if (!q.trim()) { out.innerHTML = ''; return; }
   const results = searchIndex.filter(item =>
-    item.key.toLowerCase().includes(q.toLowerCase()) ||
-    item.value.toLowerCase().includes(q.toLowerCase())
+    item.key.toLowerCase().includes(q.toLowerCase()) || item.value.toLowerCase().includes(q.toLowerCase())
   ).slice(0,50);
 
   out.innerHTML = results.length ? results.map(item => `
@@ -545,20 +526,14 @@ function updateIntelligence(){
 function renderCodesPanel(){
   document.getElementById('panel-codes').innerHTML =
     `<div class="grid grid-3">${Object.entries(claspData).map(([factory, codes]) => `
-      <div class="card">
-        <h3>${esc(factory)}</h3>
-        <div class="section">${codes.map(c => `<span class="badge">${esc(c)}</span>`).join('')}</div>
-      </div>
+      <div class="card"><h3>${esc(factory)}</h3><div class="section">${codes.map(c => `<span class="badge">${esc(c)}</span>`).join('')}</div></div>
     `).join('')}</div>`;
 }
 
 function renderSerialsPanel(){
   document.getElementById('panel-serials').innerHTML =
     `<div class="grid grid-3">${Object.entries(serialData).map(([factory, codes]) => `
-      <div class="card">
-        <h3>${esc(factory)}</h3>
-        <div class="section">${codes.map(c => `<span class="pill">${esc(c)}</span>`).join('')}</div>
-      </div>
+      <div class="card"><h3>${esc(factory)}</h3><div class="section">${codes.map(c => `<span class="pill">${esc(c)}</span>`).join('')}</div></div>
     `).join('')}</div>`;
 }
 
@@ -694,15 +669,7 @@ function renderIntelPanel(){
 
 function renderScamPanel(){
   const s = currentIntel || {model:"Submariner", serial:"", clasp:"", visualFactory:"none", sellerClaim:"none", ranked:getScoreBreakdown({model:"Submariner"})};
-  const flags = getScamSignals({
-    model:s.model,
-    serial:s.serial,
-    clasp:s.clasp,
-    visualFactory:s.visualFactory,
-    ranked:s.ranked,
-    sellerClaim:s.sellerClaim
-  });
-
+  const flags = getScamSignals({model:s.model, serial:s.serial, clasp:s.clasp, visualFactory:s.visualFactory, ranked:s.ranked, sellerClaim:s.sellerClaim});
   document.getElementById('panel-scam').innerHTML = `
     <div class="row row-main">
       <div class="card">
@@ -805,52 +772,6 @@ window.runAutoScan = function(){
     </div>
     ${flags.map(f => `<div class="result bad section">⚠ ${esc(f.title)}</div>`).join('') || '<div class="list-item section">No major scam flags from parsed text.</div>'}`;
 };
-
-function preprocessCanvas(srcCanvas){
-  const out = document.createElement('canvas');
-  const w = srcCanvas.width;
-  const h = srcCanvas.height;
-  out.width = w;
-  out.height = h;
-  const sctx = srcCanvas.getContext('2d');
-  const octx = out.getContext('2d');
-  const img = sctx.getImageData(0,0,w,h);
-  const d = img.data;
-  for (let i = 0; i < d.length; i += 4) {
-    const gray = 0.299*d[i] + 0.587*d[i+1] + 0.114*d[i+2];
-    const boosted = gray > 150 ? 255 : gray < 95 ? 0 : gray;
-    d[i] = d[i+1] = d[i+2] = boosted;
-  }
-  octx.putImageData(img,0,0);
-  return out;
-}
-
-async function doOCR(source, resultId, textId){
-  if (ocrBusy) return;
-  ocrBusy = true;
-  document.getElementById('ocrStatus').textContent = 'Reading…';
-  try{
-    const prepared = source instanceof HTMLCanvasElement ? preprocessCanvas(source) : source;
-    const { data } = await Tesseract.recognize(prepared, 'eng');
-    const text = (data.text || '').trim();
-    if (textId) document.getElementById(textId).textContent = text || 'No text detected';
-    const res = extractTextCandidates(text);
-    document.getElementById(resultId).innerHTML = `
-      <div class="result">
-        <div><b>Model:</b> ${esc(res.parsed.model || "Unknown")}</div>
-        <div><b>Serial:</b> ${esc(res.parsed.serial || "None")}</div>
-        <div><b>Clasp:</b> ${esc(res.parsed.clasp || "None")}</div>
-        <div><b>Top Factory:</b> ${esc(res.ranked[0]?.factory || "Unknown")}</div>
-        <div><b>Confidence:</b> ${res.ranked[0]?.score || 0}%</div>
-      </div>
-      ${res.flags.map(f => `<div class="result bad section">⚠ ${esc(f.title)}</div>`).join('') || '<div class="list-item section">No major scam flags from extracted text alone.</div>'}`;
-    document.getElementById('ocrStatus').textContent = 'Scan complete';
-  } catch(e){
-    document.getElementById('ocrStatus').textContent = 'OCR failed';
-  } finally {
-    ocrBusy = false;
-  }
-}
 
 function renderVisionPanel(){
   document.getElementById('panel-vision').innerHTML = `
@@ -1071,21 +992,39 @@ function initTabs(){
   });
 }
 
+function hideInstallUI(){
+  const btn = document.getElementById('installBtn');
+  const card = document.getElementById('installCard');
+  if (btn) btn.style.display = 'none';
+  if (card) card.style.display = 'none';
+}
+
 function setupInstall(){
+  const btn = document.getElementById('installBtn');
+
+  const standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  if (standalone) {
+    hideInstallUI();
+    return;
+  }
+
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    const btn = document.getElementById('installBtn');
+    btn.style.display = 'inline-block';
     btn.disabled = false;
-    btn.textContent = 'Install';
   });
 
-  document.getElementById('installBtn').onclick = async () => {
+  btn.onclick = async () => {
     if (!deferredPrompt) return;
     await deferredPrompt.prompt();
     deferredPrompt = null;
-    document.getElementById('installBtn').disabled = true;
+    hideInstallUI();
   };
+
+  window.addEventListener('appinstalled', () => {
+    hideInstallUI();
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
