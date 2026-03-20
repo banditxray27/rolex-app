@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bandit Xray Rolex Manual</title>
   <meta name="theme-color" content="#065f46" />
   <link rel="manifest" href="manifest.json" />
+  <title>Bandit Xray Rolex Manual</title>
   <style>
     :root{
-      --green:#065f46; --green2:#047857; --bg:#f5f5f4; --card:#fff; --muted:#6b7280;
+      --green:#065f46; --bg:#f5f5f4; --card:#fff; --muted:#6b7280;
       --red:#b91c1c; --amber:#b45309; --border:#e5e7eb;
     }
     *{box-sizing:border-box}
@@ -30,7 +30,7 @@
     .badge.red{background:#fee2e2;color:#991b1b}
     .badge.amber{background:#fef3c7;color:#92400e}
     .pill{display:inline-block;padding:8px 10px;border-radius:999px;background:#f3f4f6;margin:4px;font-size:13px}
-    .search{width:100%;padding:14px 14px;border:1px solid #d1d5db;border-radius:16px;font-size:16px}
+    .search, select, textarea{width:100%;padding:14px;border:1px solid #d1d5db;border-radius:16px;font-size:16px;background:#fff}
     .grid{display:grid;gap:14px}
     .grid-3{grid-template-columns:repeat(3,1fr)}
     .grid-2{grid-template-columns:repeat(2,1fr)}
@@ -43,16 +43,15 @@
     .good{background:#ecfdf5;color:#065f46}
     .bad{background:#fef2f2;color:#991b1b}
     .warn{background:#fffbeb;color:#92400e}
-    .textarea{width:100%;min-height:160px;border:1px solid #d1d5db;border-radius:16px;padding:12px;font-family:inherit}
     .progress{height:10px;background:#e5e7eb;border-radius:999px;overflow:hidden}
     .bar{height:100%;background:var(--green)}
     .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .hero{display:flex;gap:14px;align-items:center}
     .icon{width:60px;height:60px;display:flex;align-items:center;justify-content:center;border-radius:999px;border:4px solid #065f46;background:#064e3b;color:#fff;font-size:28px}
-    video{width:100%;aspect-ratio:16/9;background:#000;border-radius:16px;object-fit:cover}
     .hidden{display:none}
     .list-item{padding:10px;border-radius:12px;background:#fafaf9;border:1px solid var(--border);margin-bottom:8px}
-    .sticky-install{margin-bottom:16px}
+    video{width:100%;aspect-ratio:16/9;background:#000;border-radius:16px;object-fit:cover}
+    .sticky{position:sticky;top:0;z-index:10}
     @media (max-width: 900px){
       .row-2,.row-main,.grid-3,.grid-2{grid-template-columns:1fr}
     }
@@ -60,13 +59,13 @@
 </head>
 <body>
 <div class="wrap">
-  <div class="card sticky-install">
+  <div class="card sticky" style="margin-bottom:16px">
     <div class="topbar">
       <div>
-        <div style="font-weight:bold;color:#065f46">Installed App</div>
-        <div class="muted">This is the full local field manual build.</div>
+        <div style="font-weight:bold;color:#065f46">Bandit Xray Rolex Manual</div>
+        <div class="muted">Installable field app with search, inference, scam detection, OCR, camera, learning, and updates.</div>
       </div>
-      <div class="badge dark">Bandit Xray</div>
+      <button class="btn" id="installBtn" disabled>Install</button>
     </div>
   </div>
 
@@ -77,7 +76,7 @@
         <div>
           <div style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#065f46;font-weight:bold">Bandit Xray</div>
           <h1>Rolex Master Field Manual 2026</h1>
-          <div class="muted">Searchable database, inference, scam detection, decision tree, OCR, camera, updates, and learning.</div>
+          <div class="muted">Searchable database, inference engine, scam detector, decision tree, update system, and improved OCR camera tools.</div>
         </div>
       </div>
       <div class="section">
@@ -88,7 +87,7 @@
 
     <div class="card">
       <h3>Saved Items</h3>
-      <div class="muted" style="margin:6px 0 10px">Quick references saved from search</div>
+      <div class="muted" style="margin:6px 0 10px">Quick references</div>
       <div id="savedItems"></div>
     </div>
   </div>
@@ -97,16 +96,19 @@
     <h3>Intelligence System</h3>
     <div class="row row-main section">
       <div class="grid grid-2">
-        <div><div class="small muted">Model</div><select id="modelInput" class="search"></select></div>
-        <div><div class="small muted">Visual profile leans</div><select id="visualFactory" class="search"></select></div>
-        <div><div class="small muted">Seller claims</div><select id="sellerClaim" class="search"></select></div>
-        <div><div class="small muted">Confidence meter theme</div><select id="confidenceTheme" class="search"><option value="dynamic">Dynamic risk colors</option><option value="simple">Simple monochrome</option></select></div>
+        <div><div class="small muted">Model</div><select id="modelInput"></select></div>
+        <div><div class="small muted">Visual profile leans</div><select id="visualFactory"></select></div>
+        <div><div class="small muted">Seller claims</div><select id="sellerClaim"></select></div>
+        <div><div class="small muted">Confidence theme</div><select id="confidenceTheme"><option value="dynamic">Dynamic risk colors</option><option value="simple">Simple monochrome</option></select></div>
         <div style="grid-column:1/-1"><div class="small muted">Serial pattern</div><input id="serialInput" class="search" placeholder="Example: 6R12V6, S19, R86Z, LV66…" /></div>
         <div style="grid-column:1/-1"><div class="small muted">Clasp code</div><input id="claspInput" class="search" placeholder="Example: 1LD, 7GJ, 4RL…" /></div>
       </div>
       <div class="result">
         <div class="topbar">
-          <div><div class="small muted">Top inference</div><div id="topFactory" style="font-size:28px;font-weight:bold;color:#065f46">No result</div></div>
+          <div>
+            <div class="small muted">Top inference</div>
+            <div id="topFactory" style="font-size:28px;font-weight:bold;color:#065f46">No result</div>
+          </div>
           <span id="topScore" class="badge dark">0%</span>
         </div>
         <div class="progress section"><div id="topBar" class="bar" style="width:0%"></div></div>
@@ -136,7 +138,7 @@
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <script>
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').catch(()=>{});
+  navigator.serviceWorker.register('./sw.js').catch(() => {});
 }
 
 const claspData = {
@@ -148,6 +150,7 @@ const claspData = {
   "EWF / BTF": ["2EM","5LX","W5Y","U1N"],
   Mixed: ["7UL","2WP","R5Y","X9X","3XU","RP9","H5X","CL1","MA11","D12","T10","S9"]
 };
+
 const serialData = {
   VSF: ["S19","S29","S39","Q66","Q66T","K25","K28","R8","R9","R86Z","5R04W","5R06W","Z10Y","H13J","X3Y6","2R8S","2R9X","T11Y"],
   Clean: ["L6V","L6V6","Y2L","Y2L3","Y2L6","F6U","XN77","6R****V6","Z59T","5UU0","274R","031E","686R","2K6J","N1K9","8H6W"],
@@ -156,6 +159,7 @@ const serialData = {
   "GMF / BP": ["49GC","7MC5","X273","G3","G4","B1","B2"],
   Mixed: ["LV66","OXJ2","H88F","V4"]
 };
+
 const combos = [
   { factory: "VSF", combo: "S19 + 7GJ", confidence: 88 },
   { factory: "VSF", combo: "Q66 + 1LQ", confidence: 91 },
@@ -170,20 +174,53 @@ const combos = [
   { factory: "Noob", combo: "F520 + ST9", confidence: 90 },
   { factory: "GMF / BP", combo: "49GC + 7QE", confidence: 79 }
 ];
+
 const models = [
-  {name:"Daytona", tell:"Subdial spacing", rep:["Subdials too close","Dial looks compressed"], gen:["Balanced spacing","Open, even symmetry"], codeNotes:["LV66 is mixed and weaker","7CD leans ARF/BTF context-sensitive","5NF appears in Noob lineage"]},
-  {name:"GMT-Master II", tell:"Hand stack", rep:["Incorrect hand order","Bezel transition slightly off"], gen:["Proper hand layering","Clean bezel split"], codeNotes:["71H appears in Noob CHS history","ORV can appear on newer Clean-adjacent batches"]},
-  {name:"Submariner", tell:"Cyclops + bezel engraving", rep:["Weak date magnification","Shallow bezel cuts"], gen:["Strong cyclops","Deep crisp engraving"], codeNotes:["1LQ/H7Z lean VSF","1LD leans Clean","U1N appears on EWF-linked bracelets"]},
-  {name:"Datejust", tell:"Dial text + cyclops", rep:["Thicker font","Print inconsistency"], gen:["Razor-sharp print","Perfect spacing"], codeNotes:["6R****V6 + F6U strongly suggests Clean family","R86Z + P2K leans VSF","49GC + 7QE can point GMF"]},
-  {name:"Explorer / OP", tell:"Dial print + case shape", rep:["Soft text","Less refined case lines"], gen:["Minimal but razor sharp","Balanced lugs"], codeNotes:["8H6W + 5ZR leans Clean Explorer","T11Y + U7T leans VSF OP"]}
+  {
+    name:"Daytona",
+    tell:"Subdial spacing",
+    rep:["Subdials too close","Dial looks compressed"],
+    gen:["Balanced spacing","Open, even symmetry"],
+    codeNotes:["LV66 is mixed and weaker","7CD leans ARF/BTF context-sensitive","5NF appears in Noob lineage"]
+  },
+  {
+    name:"GMT-Master II",
+    tell:"Hand stack",
+    rep:["Incorrect hand order","Bezel transition slightly off"],
+    gen:["Proper hand layering","Clean bezel split"],
+    codeNotes:["71H appears in Noob CHS history","ORV can appear on newer Clean-adjacent batches"]
+  },
+  {
+    name:"Submariner",
+    tell:"Cyclops + bezel engraving",
+    rep:["Weak date magnification","Shallow bezel cuts"],
+    gen:["Strong cyclops","Deep crisp engraving"],
+    codeNotes:["1LQ/H7Z lean VSF","1LD leans Clean","U1N appears on EWF-linked bracelets"]
+  },
+  {
+    name:"Datejust",
+    tell:"Dial text + cyclops",
+    rep:["Thicker font","Print inconsistency"],
+    gen:["Razor-sharp print","Perfect spacing"],
+    codeNotes:["6R****V6 + F6U strongly suggests Clean family","R86Z + P2K leans VSF","49GC + 7QE can point GMF"]
+  },
+  {
+    name:"Explorer / OP",
+    tell:"Dial print + case shape",
+    rep:["Soft text","Less refined case lines"],
+    gen:["Minimal but razor sharp","Balanced lugs"],
+    codeNotes:["8H6W + 5ZR leans Clean Explorer","T11Y + U7T leans VSF OP"]
+  }
 ];
+
 const qcSystem = [
-  { title: "Dial Print", good: "Sharp, clean, even", bad: "Fuzzy, thick, uneven", weight: "Highest" },
-  { title: "Case Shape", good: "Balanced lugs and crown guards", bad: "Fat guards, soft lines", weight: "High" },
-  { title: "SEL Fit", good: "Tight and seamless", bad: "Visible gaps or looseness", weight: "High" },
-  { title: "Lume", good: "Even, long-lasting", bad: "Uneven, fades quickly", weight: "Medium" },
-  { title: "Rehaut", good: "Usually aligned and deep", bad: "Off-center or shallow", weight: "Low" }
+  { title:"Dial Print", good:"Sharp, clean, even", bad:"Fuzzy, thick, uneven", weight:"Highest" },
+  { title:"Case Shape", good:"Balanced lugs and crown guards", bad:"Fat guards, soft lines", weight:"High" },
+  { title:"SEL Fit", good:"Tight and seamless", bad:"Visible gaps or looseness", weight:"High" },
+  { title:"Lume", good:"Even, long-lasting", bad:"Uneven, fades quickly", weight:"Medium" },
+  { title:"Rehaut", good:"Usually aligned and deep", bad:"Off-center or shallow", weight:"Low" }
 ];
+
 const factoryProfiles = {
   VSF:{strengths:["Best movement reputation","Strong cyclops/crystal","Consistent serial clusters"], cautions:["Case can look softer than Clean","Bracelet may overlap with ARF-supplied parts"]},
   Clean:{strengths:["Sharp case shape","Strong bezel and overall finishing","6R****V6 is the strongest recurring serial signal"], cautions:["Can be copied by fake Clean sellers","Some bracelets overlap with ARF supply"]},
@@ -192,6 +229,7 @@ const factoryProfiles = {
   "GMF / BP":{strengths:["Useful mid-tier mapping","49GC + 7QE combo is notable"], cautions:["Less standardized than VSF/Clean","Finishing cues matter more"]},
   "EWF / BTF":{strengths:["Some useful clasp identifiers like U1N/W5Y"], cautions:["Model context matters heavily","Daytona/BTF codes are less reliable alone"]}
 };
+
 const lowTierClaspCodes = ["D12","MA11","T10","S9","CL1","EO6","DE6","PJ4"];
 const highTierPopularCodes = ["1LD","ORB","ORV","1NQ","8PQ","7GJ","1LQ"];
 const sharedCodes = ["5HF","EO6","DE6","PJ4","7CD","LV66"];
@@ -200,462 +238,859 @@ const factoryList = ["VSF","Clean","ARF","Noob","GMF / BP","EWF / BTF"];
 let savedItems = JSON.parse(localStorage.getItem('bx_saved') || '[]');
 let learnedCases = JSON.parse(localStorage.getItem('bx_cases') || '[]');
 let updateLog = JSON.parse(localStorage.getItem('bx_updates') || '[]');
+let deferredPrompt = null;
 let cameraStream = null;
 let cameraInterval = null;
 let ocrBusy = false;
+let currentIntel = null;
 
 function saveLS(){
-  localStorage.setItem('bx_saved',JSON.stringify(savedItems));
-  localStorage.setItem('bx_cases',JSON.stringify(learnedCases));
-  localStorage.setItem('bx_updates',JSON.stringify(updateLog));
+  localStorage.setItem('bx_saved', JSON.stringify(savedItems));
+  localStorage.setItem('bx_cases', JSON.stringify(learnedCases));
+  localStorage.setItem('bx_updates', JSON.stringify(updateLog));
 }
-function esc(s){return String(s).replace(/[&<>"']/g,m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m]));}
+
+function esc(s){
+  return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
 function inferModelWeight(model){
-  if(model==="Daytona")return {visual:50,serial:20,clasp:15,combo:15};
-  if(model==="GMT-Master II")return{visual:45,serial:20,clasp:15,combo:20};
-  if(model==="Submariner")return{visual:40,serial:25,clasp:20,combo:15};
-  if(model==="Datejust")return{visual:35,serial:30,clasp:20,combo:15};
-  return{visual:40,serial:25,clasp:20,combo:15};
+  if(model==="Daytona") return {visual:50,serial:20,clasp:15,combo:15};
+  if(model==="GMT-Master II") return {visual:45,serial:20,clasp:15,combo:20};
+  if(model==="Submariner") return {visual:40,serial:25,clasp:20,combo:15};
+  if(model==="Datejust") return {visual:35,serial:30,clasp:20,combo:15};
+  return {visual:40,serial:25,clasp:20,combo:15};
 }
+
 function confidenceClass(score, theme){
   if(theme==="simple") return "dark";
   if(score>=75) return "";
   if(score>=45) return "amber";
   return "red";
 }
-function getScoreBreakdown({model,serial,clasp,visualFactory}){
-  const scores=Object.fromEntries(factoryList.map(f=>[f,0]));
-  const reasons=Object.fromEntries(factoryList.map(f=>[f,[]]));
-  const weights=inferModelWeight(model||"Submariner");
-  const upperSerial=(serial||"").toUpperCase();
-  const upperClasp=(clasp||"").toUpperCase();
 
-  if(visualFactory&&visualFactory!=="none"&&scores[visualFactory]!==undefined){
-    scores[visualFactory]+=weights.visual;
+function getScoreBreakdown({model,serial,clasp,visualFactory}){
+  const scores = Object.fromEntries(factoryList.map(f => [f, 0]));
+  const reasons = Object.fromEntries(factoryList.map(f => [f, []]));
+  const weights = inferModelWeight(model || "Submariner");
+  const upperSerial = (serial || "").toUpperCase();
+  const upperClasp = (clasp || "").toUpperCase();
+
+  if (visualFactory && visualFactory !== "none" && scores[visualFactory] !== undefined) {
+    scores[visualFactory] += weights.visual;
     reasons[visualFactory].push(`Visual profile leans ${visualFactory} (+${weights.visual})`);
   }
 
-  Object.entries(serialData).forEach(([factory,list])=>{
-    if(upperSerial&&list.some(x=>upperSerial.includes(x.replace(/\*+/g,"")))){
-      if(scores[factory]!==undefined){
-        scores[factory]+=weights.serial;
+  Object.entries(serialData).forEach(([factory, list]) => {
+    if (upperSerial && list.some(x => upperSerial.includes(x.replace(/\*+/g, "")))) {
+      if (scores[factory] !== undefined) {
+        scores[factory] += weights.serial;
         reasons[factory].push(`Serial pattern matches ${factory} (+${weights.serial})`);
       }
     }
   });
 
-  Object.entries(claspData).forEach(([factory,list])=>{
-    if(upperClasp&&list.includes(upperClasp)){
-      if(scores[factory]!==undefined){
-        scores[factory]+=weights.clasp;
+  Object.entries(claspData).forEach(([factory, list]) => {
+    if (upperClasp && list.includes(upperClasp)) {
+      if (scores[factory] !== undefined) {
+        scores[factory] += weights.clasp;
         reasons[factory].push(`Clasp code maps to ${factory} (+${weights.clasp})`);
       }
     }
   });
 
-  combos.forEach(item=>{
-    const [comboSerial, comboClasp]=item.combo.split(" + ");
-    const needle=comboSerial.replace(/\*+/g,"");
-    if(upperSerial&&upperClasp&&upperSerial.includes(needle)&&upperClasp===comboClasp.toUpperCase()&&scores[item.factory]!==undefined){
-      scores[item.factory]+=weights.combo;
-      reasons[item.factory].push(`Known combo match: ${item.combo} (+${weights.combo})`);
+  combos.forEach(item => {
+    const [comboSerial, comboClasp] = item.combo.split(" + ");
+    const needle = comboSerial.replace(/\*+/g, "");
+    if (upperSerial && upperClasp && upperSerial.includes(needle) && upperClasp === comboClasp.toUpperCase()) {
+      if (scores[item.factory] !== undefined) {
+        scores[item.factory] += weights.combo;
+        reasons[item.factory].push(`Known combo match: ${item.combo} (+${weights.combo})`);
+      }
     }
   });
 
-  if((model||"")==="Daytona"&&upperSerial.includes("LV66")){
-    ["VSF","Clean","EWF / BTF"].forEach(f=>{
-      if(scores[f]!==undefined){
-        scores[f]=Math.max(0,scores[f]-8);
+  if ((model || "") === "Daytona" && upperSerial.includes("LV66")) {
+    ["VSF","Clean","EWF / BTF"].forEach(f => {
+      if (scores[f] !== undefined) {
+        scores[f] = Math.max(0, scores[f] - 8);
         reasons[f].push("LV66 is mixed/shared on Daytona, lowering confidence (-8)");
       }
     });
   }
 
-  if(upperClasp==="5HF"){
-    ["ARF","Clean","VSF"].forEach(f=>{
-      if(scores[f]!==undefined){
-        scores[f]+=4;
+  if (upperClasp === "5HF") {
+    ["ARF","Clean","VSF"].forEach(f => {
+      if (scores[f] !== undefined) {
+        scores[f] += 4;
         reasons[f].push("5HF can reflect shared bracelet supply, weak multi-factory signal (+4)");
       }
     });
   }
 
-  return factoryList
-    .map(factory=>({factory, score:Math.min(scores[factory],100), reasons:reasons[factory]}))
-    .sort((a,b)=>b.score-a.score);
+  return factoryList.map(factory => ({
+    factory,
+    score: Math.min(scores[factory], 100),
+    reasons: reasons[factory]
+  })).sort((a,b) => b.score - a.score);
 }
-function getScamSignals({model,serial,clasp,visualFactory,ranked,sellerClaim}){
-  const flags=[];
-  const upperSerial=(serial||"").toUpperCase();
-  const upperClasp=(clasp||"").toUpperCase();
-  const top=ranked?.[0];
-  const serialMapped=Object.values(serialData).some(list=>list.some(x=>upperSerial.includes(x.replace(/\*+/g,""))));
 
-  if(upperClasp&&lowTierClaspCodes.includes(upperClasp)) flags.push({level:"high", title:"Low-tier clasp code", detail:`${upperClasp} is commonly associated with low-tier, aftermarket, or budget bracelet usage.`});
-  if(upperSerial&&!serialMapped&&upperSerial.length>=2) flags.push({level:"medium", title:"Unmapped serial pattern", detail:"This serial cluster is not in the known mapped dataset and may indicate a low-tier or random engraving batch."});
-  if(visualFactory&&visualFactory!=="none"&&top?.factory&&visualFactory!==top.factory&&top.score>=40) flags.push({level:"high", title:"Visual/code conflict", detail:`Visual profile leans ${visualFactory}, but codes lean ${top.factory}. This can indicate a hybrid build or fake factory claim.`});
-  if(upperClasp&&highTierPopularCodes.includes(upperClasp)) flags.push({level:"low", title:"Popular high-tier code", detail:"This clasp is widely copied. Visual confirmation is still mandatory."});
-  if((model||"")==="Daytona"&&upperSerial.includes("LV66")) flags.push({level:"medium", title:"Shared Daytona serial cluster", detail:"LV66 appears across multiple factories, so serial confidence is reduced on Daytona."});
-  if(upperClasp&&sharedCodes.includes(upperClasp)) flags.push({level:"medium", title:"Shared or legacy bracelet code", detail:`${upperClasp} may reflect bracelet overlap, legacy tooling, or aftermarket components rather than a clean factory ID.`});
-  if(sellerClaim&&sellerClaim!=="none"&&top?.factory&&sellerClaim!==top.factory&&top.score>=45) flags.unshift({level:"high", title:"Seller claim mismatch", detail:`Seller claims ${sellerClaim}, but current signals lean ${top.factory}. Possible fake factory labeling or bait-and-switch risk.`});
-  if(top?.score<35&&(upperSerial||upperClasp)) flags.push({level:"medium", title:"Weak mapping confidence", detail:"Known data does not strongly support a single factory. Treat seller claims cautiously."});
+function getScamSignals({model,serial,clasp,visualFactory,ranked,sellerClaim}){
+  const flags = [];
+  const upperSerial = (serial || "").toUpperCase();
+  const upperClasp = (clasp || "").toUpperCase();
+  const top = ranked?.[0];
+  const serialMapped = Object.values(serialData).some(list => list.some(x => upperSerial.includes(x.replace(/\*+/g, ""))));
+
+  if (upperClasp && lowTierClaspCodes.includes(upperClasp)) {
+    flags.push({level:"high", title:"Low-tier clasp code", detail:`${upperClasp} is commonly associated with low-tier, aftermarket, or budget bracelet usage.`});
+  }
+  if (upperSerial && !serialMapped && upperSerial.length >= 2) {
+    flags.push({level:"medium", title:"Unmapped serial pattern", detail:"This serial cluster is not in the known mapped dataset and may indicate a low-tier or random engraving batch."});
+  }
+  if (visualFactory && visualFactory !== "none" && top?.factory && visualFactory !== top.factory && top.score >= 40) {
+    flags.push({level:"high", title:"Visual/code conflict", detail:`Visual profile leans ${visualFactory}, but codes lean ${top.factory}. This can indicate a hybrid build or fake factory claim.`});
+  }
+  if (upperClasp && highTierPopularCodes.includes(upperClasp)) {
+    flags.push({level:"low", title:"Popular high-tier code", detail:"This clasp is widely copied. Visual confirmation is still mandatory."});
+  }
+  if ((model || "") === "Daytona" && upperSerial.includes("LV66")) {
+    flags.push({level:"medium", title:"Shared Daytona serial cluster", detail:"LV66 appears across multiple factories, so serial confidence is reduced on Daytona."});
+  }
+  if (upperClasp && sharedCodes.includes(upperClasp)) {
+    flags.push({level:"medium", title:"Shared or legacy bracelet code", detail:`${upperClasp} may reflect bracelet overlap, legacy tooling, or aftermarket components rather than a clean factory ID.`});
+  }
+  if (sellerClaim && sellerClaim !== "none" && top?.factory && sellerClaim !== top.factory && top.score >= 45) {
+    flags.unshift({level:"high", title:"Seller claim mismatch", detail:`Seller claims ${sellerClaim}, but current signals lean ${top.factory}. Possible fake factory labeling or bait-and-switch risk.`});
+  }
+  if (top?.score < 35 && (upperSerial || upperClasp)) {
+    flags.push({level:"medium", title:"Weak mapping confidence", detail:"Known data does not strongly support a single factory. Treat seller claims cautiously."});
+  }
   return flags;
 }
+
 function getDecisionTreeOutput({model,strongestTell,dialQuality,caseQuality,serialMapped,claspTier,sellerClaim,visualFactory}){
-  const outcomes=[];
-  if(model==="Daytona"){
-    if(strongestTell==="bad") outcomes.push("Daytona subdial spacing fails → high counterfeit risk regardless of code.");
+  const outcomes = [];
+  if (model === "Daytona") {
+    if (strongestTell === "bad") outcomes.push("Daytona subdial spacing fails → high counterfeit risk regardless of code.");
     else outcomes.push("Daytona subdial spacing passes → continue to dial/case validation.");
   }
-  if(model==="GMT-Master II"){
-    if(strongestTell==="bad") outcomes.push("GMT hand stack/bezel split fails → likely wrong movement tier or low-tier build.");
+  if (model === "GMT-Master II") {
+    if (strongestTell === "bad") outcomes.push("GMT hand stack/bezel split fails → likely wrong movement tier or low-tier build.");
     else outcomes.push("GMT hand stack looks good → continue to serial/clasp support.");
   }
-  if(["Submariner","Datejust"].includes(model)){
-    if(strongestTell==="bad") outcomes.push(`${model} primary tell fails → downgrade any high-tier seller claim.`);
+  if (["Submariner","Datejust"].includes(model)) {
+    if (strongestTell === "bad") outcomes.push(`${model} primary tell fails → downgrade any high-tier seller claim.`);
     else outcomes.push(`${model} primary tell looks good → check dial and bracelet before trusting codes.`);
   }
-  if(dialQuality==="bad") outcomes.push("Dial print fails → treat as strongest visual red flag.");
-  else if(dialQuality==="mid") outcomes.push("Dial print is only mid-tier → possible GMF/BP/EWF range or hybrid build.");
+  if (dialQuality === "bad") outcomes.push("Dial print fails → treat as strongest visual red flag.");
+  else if (dialQuality === "mid") outcomes.push("Dial print is only mid-tier → possible GMF/BP/EWF range or hybrid build.");
   else outcomes.push("Dial print looks strong → supports higher-tier possibility.");
-  if(caseQuality==="bad") outcomes.push("Case shape/guards fail → likely low or mid-tier case source.");
-  else if(caseQuality==="mid") outcomes.push("Case shape is acceptable but not sharp → could be mid-tier or mixed build.");
+
+  if (caseQuality === "bad") outcomes.push("Case shape/guards fail → likely low or mid-tier case source.");
+  else if (caseQuality === "mid") outcomes.push("Case shape is acceptable but not sharp → could be mid-tier or mixed build.");
   else outcomes.push("Case shape is sharp → supports Clean/VSF-class finishing.");
-  if(!serialMapped) outcomes.push("Serial is unmapped → do not trust serial as proof of factory.");
+
+  if (!serialMapped) outcomes.push("Serial is unmapped → do not trust serial as proof of factory.");
   else outcomes.push("Serial cluster is mapped → use only as supporting evidence, not proof.");
-  if(claspTier==="low") outcomes.push("Clasp falls into low-tier/legacy bucket → strong scam or aftermarket bracelet risk.");
-  else if(claspTier==="mixed") outcomes.push("Clasp is shared/legacy → useful only with strong visuals.");
+
+  if (claspTier === "low") outcomes.push("Clasp falls into low-tier/legacy bucket → strong scam or aftermarket bracelet risk.");
+  else if (claspTier === "mixed") outcomes.push("Clasp is shared/legacy → useful only with strong visuals.");
   else outcomes.push("Clasp is in high-tier set → still verify visuals because popular codes are copied.");
-  if(sellerClaim!=="none"&&visualFactory!=="none"&&sellerClaim!==visualFactory) outcomes.push(`Seller claim (${sellerClaim}) conflicts with visual lean (${visualFactory}) → possible fake factory labeling.`);
-  let verdict="Proceed cautiously";
-  if(outcomes.some(x=>x.includes("high counterfeit risk"))||claspTier==="low"||dialQuality==="bad") verdict="High scam risk";
-  else if(dialQuality==="good"&&caseQuality==="good"&&strongestTell==="good"&&claspTier!=="low") verdict="Likely acceptable, keep verifying";
-  return {verdict,outcomes};
-}
-function parseAutoScan(input){
-  const text=(input||"").toUpperCase();
-  const modelNeedles=["SUB","SUBMARINER","DAYTONA","GMT","GMT-MASTER","DATEJUST","DJ","EXPLORER","OP","OYSTER"];
-  const factories=["VSF","CLEAN","ARF","NOOB","GMF","BP","EWF","BTF"];
-  let model="";
-  modelNeedles.forEach(m=>{
-    if(text.includes(m)){
-      if(m.startsWith("SUB")) model="Submariner";
-      else if(m.startsWith("DAY")) model="Daytona";
-      else if(m.startsWith("GMT")) model="GMT-Master II";
-      else if(m.startsWith("DATE")||m==="DJ") model="Datejust";
-      else model="Explorer / OP";
-    }
-  });
-  let serial="", clasp="";
-  const flatClasp=Object.values(claspData).flat();
-  const tokens=text.split(/[^A-Z0-9]/).filter(Boolean);
-  tokens.forEach(t=>{
-    if(!clasp&&flatClasp.includes(t)) clasp=t;
-    if(!serial&&t.length>=2&&t.length<=10&&/[0-9]/.test(t)) serial=t;
-  });
-  let seller="none";
-  factories.forEach(f=>{ if(text.includes(f)) seller=f==="CLEAN"?"Clean":f; });
-  return {model,serial,clasp,seller};
-}
-function extractTextCandidates(text){
-  const parsed=parseAutoScan(text);
-  const ranked=getScoreBreakdown({model:parsed.model||"Submariner",serial:parsed.serial,clasp:parsed.clasp,visualFactory:""});
-  const flags=getScamSignals({model:parsed.model||"Submariner",serial:parsed.serial,clasp:parsed.clasp,visualFactory:"none",ranked,sellerClaim:parsed.seller});
-  return {parsed,ranked,flags};
+
+  if (sellerClaim !== "none" && visualFactory !== "none" && sellerClaim !== visualFactory) {
+    outcomes.push(`Seller claim (${sellerClaim}) conflicts with visual lean (${visualFactory}) → possible fake factory labeling.`);
+  }
+
+  let verdict = "Proceed cautiously";
+  if (outcomes.some(x => x.includes("high counterfeit risk")) || claspTier === "low" || dialQuality === "bad") verdict = "High scam risk";
+  else if (dialQuality === "good" && caseQuality === "good" && strongestTell === "good" && claspTier !== "low") verdict = "Likely acceptable, keep verifying";
+  return {verdict, outcomes};
 }
 
-function renderSearchResults(q){
-  const out=document.getElementById('searchResults');
-  if(!q.trim()){out.innerHTML=''; return;}
-  const index=[
-    ...Object.entries(claspData).flatMap(([factory,codes])=>codes.map(code=>({type:"Clasp", key:code, value:factory}))),
-    ...Object.entries(serialData).flatMap(([factory,codes])=>codes.map(code=>({type:"Serial", key:code, value:factory}))),
-    ...combos.map(c=>({type:"Combo", key:c.combo, value:`${c.factory} (${c.confidence}%)`})),
-    ...models.map(m=>({type:"Model", key:m.name, value:m.tell}))
-  ];
-  const results=index.filter(item=>item.key.toLowerCase().includes(q.toLowerCase())||item.value.toLowerCase().includes(q.toLowerCase())).slice(0,50);
-  out.innerHTML = results.length ? results.map(item=>`
-    <div class="list-item" style="display:flex;justify-content:space-between;gap:10px;align-items:center">
-      <div><div class="small muted">${esc(item.type)}</div><div style="font-weight:bold">${esc(item.key)}</div><div class="small">${esc(item.value)}</div></div>
-      <button class="btn secondary" onclick='saveSearchItem(${JSON.stringify(item)})'>Save</button>
-    </div>`).join('') : `<div class="muted">No matches found.</div>`;
+function parseAutoScan(input){
+  const text = (input || "").toUpperCase();
+  const modelNeedles = ["SUB","SUBMARINER","DAYTONA","GMT","GMT-MASTER","DATEJUST","DJ","EXPLORER","OP","OYSTER"];
+  const factories = ["VSF","CLEAN","ARF","NOOB","GMF","BP","EWF","BTF"];
+  let model = "";
+
+  modelNeedles.forEach(m => {
+    if (text.includes(m)) {
+      if (m.startsWith("SUB")) model = "Submariner";
+      else if (m.startsWith("DAY")) model = "Daytona";
+      else if (m.startsWith("GMT")) model = "GMT-Master II";
+      else if (m.startsWith("DATE") || m === "DJ") model = "Datejust";
+      else model = "Explorer / OP";
+    }
+  });
+
+  let serial = "";
+  let clasp = "";
+  const flatClasp = Object.values(claspData).flat();
+  const tokens = text.split(/[^A-Z0-9]/).filter(Boolean);
+
+  tokens.forEach(t => {
+    if (!clasp && flatClasp.includes(t)) clasp = t;
+    if (!serial && t.length >= 2 && t.length <= 10 && /[0-9]/.test(t)) serial = t;
+  });
+
+  let seller = "none";
+  factories.forEach(f => {
+    if (text.includes(f)) seller = f === "CLEAN" ? "Clean" : f;
+  });
+
+  return {model, serial, clasp, seller};
 }
+
+function classifyClaspTier(clasp){
+  const code = (clasp || "").toUpperCase();
+  if (!code) return "mixed";
+  if (lowTierClaspCodes.includes(code)) return "low";
+  if (highTierPopularCodes.includes(code) || Object.values(claspData).some(list => list.includes(code))) return "high";
+  return "mixed";
+}
+
+function extractTextCandidates(text){
+  const parsed = parseAutoScan(text);
+  const ranked = getScoreBreakdown({model: parsed.model || "Submariner", serial: parsed.serial, clasp: parsed.clasp, visualFactory: ""});
+  const flags = getScamSignals({model: parsed.model || "Submariner", serial: parsed.serial, clasp: parsed.clasp, visualFactory: "none", ranked, sellerClaim: parsed.seller});
+  return {parsed, ranked, flags};
+}
+
+const searchIndex = [
+  ...Object.entries(claspData).flatMap(([factory, codes]) => codes.map(code => ({ type: "Clasp", key: code, value: factory }))),
+  ...Object.entries(serialData).flatMap(([factory, codes]) => codes.map(code => ({ type: "Serial", key: code, value: factory }))),
+  ...combos.map(c => ({ type: "Combo", key: c.combo, value: `${c.factory} (${c.confidence}%)` })),
+  ...models.map(m => ({ type: "Model", key: m.name, value: m.tell }))
+];
+
+function renderSearchResults(q){
+  const out = document.getElementById('searchResults');
+  if (!q.trim()) { out.innerHTML = ''; return; }
+  const results = searchIndex.filter(item =>
+    item.key.toLowerCase().includes(q.toLowerCase()) ||
+    item.value.toLowerCase().includes(q.toLowerCase())
+  ).slice(0,50);
+
+  out.innerHTML = results.length ? results.map(item => `
+    <div class="list-item" style="display:flex;justify-content:space-between;gap:10px;align-items:center">
+      <div>
+        <div class="small muted">${esc(item.type)}</div>
+        <div style="font-weight:bold">${esc(item.key)}</div>
+        <div class="small">${esc(item.value)}</div>
+      </div>
+      <button class="btn secondary" onclick='saveSearchItem(${JSON.stringify(item)})'>Save</button>
+    </div>
+  `).join('') : `<div class="muted">No matches found.</div>`;
+}
+
 window.saveSearchItem = function(item){
-  const id=`${item.type}:${item.key}`;
-  if(!savedItems.some(x=>x.id===id)){
-    savedItems.unshift({...item,id});
+  const id = `${item.type}:${item.key}`;
+  if (!savedItems.some(x => x.id === id)) {
+    savedItems.unshift({...item, id});
     saveLS();
     renderSaved();
   }
-}
+};
+
 function renderSaved(){
-  const el=document.getElementById('savedItems');
-  el.innerHTML = savedItems.length ? savedItems.map(item=>`<div class="list-item"><div class="small muted">${esc(item.type)}</div><div style="font-weight:bold">${esc(item.key)}</div><div class="small">${esc(item.value)}</div></div>`).join('') : `<div class="muted">No saved items yet.</div>`;
+  const el = document.getElementById('savedItems');
+  el.innerHTML = savedItems.length ? savedItems.map(item => `
+    <div class="list-item">
+      <div class="small muted">${esc(item.type)}</div>
+      <div style="font-weight:bold">${esc(item.key)}</div>
+      <div class="small">${esc(item.value)}</div>
+    </div>
+  `).join('') : `<div class="muted">No saved items yet.</div>`;
 }
+
 function populateSelects(){
-  const modelSel=document.getElementById('modelInput');
-  const visualSel=document.getElementById('visualFactory');
-  const sellerSel=document.getElementById('sellerClaim');
-  [modelSel].forEach(sel=> sel.innerHTML=models.map(m=>`<option>${esc(m.name)}</option>`).join(''));
-  [visualSel, sellerSel].forEach(sel=> sel.innerHTML=`<option value="none">No selection</option>`+factoryList.map(f=>`<option>${esc(f)}</option>`).join(''));
+  const modelSel = document.getElementById('modelInput');
+  const visualSel = document.getElementById('visualFactory');
+  const sellerSel = document.getElementById('sellerClaim');
+  modelSel.innerHTML = models.map(m => `<option>${esc(m.name)}</option>`).join('');
+  visualSel.innerHTML = `<option value="none">No selection</option>` + factoryList.map(f => `<option>${esc(f)}</option>`).join('');
+  sellerSel.innerHTML = `<option value="none">No selection</option>` + factoryList.map(f => `<option>${esc(f)}</option>`).join('');
 }
+
 function updateIntelligence(){
-  const model=document.getElementById('modelInput').value;
-  const serial=document.getElementById('serialInput').value.toUpperCase();
-  const clasp=document.getElementById('claspInput').value.toUpperCase();
-  const visualFactory=document.getElementById('visualFactory').value;
-  const sellerClaim=document.getElementById('sellerClaim').value;
-  const theme=document.getElementById('confidenceTheme').value;
-  const ranked=getScoreBreakdown({model,serial,clasp,visualFactory:visualFactory==="none"?"":visualFactory});
-  const top=ranked[0]||{factory:"No result",score:0,reasons:[]};
-  document.getElementById('topFactory').textContent=top.factory;
-  const topScore=document.getElementById('topScore');
-  topScore.textContent=`${top.score}%`;
-  topScore.className=`badge ${confidenceClass(top.score, theme)}`;
-  document.getElementById('topBar').style.width=`${top.score}%`;
-  document.getElementById('topBar').style.background = theme==="simple" ? "#111827" : (top.score>=75 ? "#047857" : top.score>=45 ? "#b45309" : "#b91c1c");
-  document.getElementById('topReasons').innerHTML=top.reasons.length ? top.reasons.map(r=>`<div class="list-item">${esc(r)}</div>`).join('') : `<div class="list-item">Add a model, serial, clasp, or visual lean to generate a result.</div>`;
-  window._currentIntel={model,serial,clasp,visualFactory,sellerClaim,ranked,top};
+  const model = document.getElementById('modelInput').value;
+  const serial = document.getElementById('serialInput').value.toUpperCase();
+  const clasp = document.getElementById('claspInput').value.toUpperCase();
+  const visualFactory = document.getElementById('visualFactory').value;
+  const sellerClaim = document.getElementById('sellerClaim').value;
+  const theme = document.getElementById('confidenceTheme').value;
+
+  const ranked = getScoreBreakdown({model, serial, clasp, visualFactory});
+  const top = ranked[0] || {factory:"No result", score:0, reasons:[]};
+
+  document.getElementById('topFactory').textContent = top.factory;
+  const topScore = document.getElementById('topScore');
+  topScore.textContent = `${top.score}%`;
+  topScore.className = `badge ${confidenceClass(top.score, theme)}`;
+
+  const bar = document.getElementById('topBar');
+  bar.style.width = `${top.score}%`;
+  bar.style.background = theme === "simple" ? "#111827" : (top.score >= 75 ? "#047857" : top.score >= 45 ? "#b45309" : "#b91c1c");
+
+  document.getElementById('topReasons').innerHTML = top.reasons.length
+    ? top.reasons.map(r => `<div class="list-item">${esc(r)}</div>`).join('')
+    : `<div class="list-item">Add a model, serial, clasp, or visual lean to generate a result.</div>`;
+
+  currentIntel = {model, serial, clasp, visualFactory, sellerClaim, ranked, top};
   renderIntelPanel();
   renderScamPanel();
 }
+
 function renderCodesPanel(){
-  document.getElementById('panel-codes').innerHTML=`<div class="grid grid-3">${Object.entries(claspData).map(([factory,codes])=>`<div class="card"><h3>${esc(factory)}</h3><div class="section">${codes.map(c=>`<span class="badge">${esc(c)}</span>`).join('')}</div></div>`).join('')}</div>`;
+  document.getElementById('panel-codes').innerHTML =
+    `<div class="grid grid-3">${Object.entries(claspData).map(([factory, codes]) => `
+      <div class="card">
+        <h3>${esc(factory)}</h3>
+        <div class="section">${codes.map(c => `<span class="badge">${esc(c)}</span>`).join('')}</div>
+      </div>
+    `).join('')}</div>`;
 }
+
 function renderSerialsPanel(){
-  document.getElementById('panel-serials').innerHTML=`<div class="grid grid-3">${Object.entries(serialData).map(([factory,codes])=>`<div class="card"><h3>${esc(factory)}</h3><div class="section">${codes.map(c=>`<span class="pill">${esc(c)}</span>`).join('')}</div></div>`).join('')}</div>`;
+  document.getElementById('panel-serials').innerHTML =
+    `<div class="grid grid-3">${Object.entries(serialData).map(([factory, codes]) => `
+      <div class="card">
+        <h3>${esc(factory)}</h3>
+        <div class="section">${codes.map(c => `<span class="pill">${esc(c)}</span>`).join('')}</div>
+      </div>
+    `).join('')}</div>`;
 }
+
 function renderCombosPanel(){
-  const theme=document.getElementById('confidenceTheme')?.value || 'dynamic';
-  document.getElementById('panel-combos').innerHTML=`<div class="grid grid-2">${combos.map(item=>`<div class="card"><div class="topbar"><div><div class="small muted">${esc(item.factory)}</div><div style="font-size:22px;font-weight:bold;color:#065f46">${esc(item.combo)}</div></div><span class="badge ${confidenceClass(item.confidence,theme)}">${item.confidence}%</span></div></div>`).join('')}</div>`;
+  const theme = document.getElementById('confidenceTheme')?.value || 'dynamic';
+  document.getElementById('panel-combos').innerHTML =
+    `<div class="grid grid-2">${combos.map(item => `
+      <div class="card">
+        <div class="topbar">
+          <div>
+            <div class="small muted">${esc(item.factory)}</div>
+            <div style="font-size:22px;font-weight:bold;color:#065f46">${esc(item.combo)}</div>
+          </div>
+          <span class="badge ${confidenceClass(item.confidence, theme)}">${item.confidence}%</span>
+        </div>
+      </div>
+    `).join('')}</div>`;
 }
+
 function renderModelsPanel(){
-  document.getElementById('panel-models').innerHTML=`<div class="grid grid-2">${models.map(m=>`<div class="card">
-    <div class="topbar"><h3>${esc(m.name)}</h3><span class="badge dark">Instant tell: ${esc(m.tell)}</span></div>
-    <div class="grid grid-2 section">
-      <div class="result bad"><div style="font-weight:bold;margin-bottom:8px">REP tells</div>${m.rep.map(x=>`<div>• ${esc(x)}</div>`).join('')}</div>
-      <div class="result good"><div style="font-weight:bold;margin-bottom:8px">GEN signs</div>${m.gen.map(x=>`<div>• ${esc(x)}</div>`).join('')}</div>
-    </div>
-    <div class="result section"><div style="font-weight:bold;margin-bottom:8px">Code notes</div>${m.codeNotes.map(x=>`<div>• ${esc(x)}</div>`).join('')}</div>
-  </div>`).join('')}</div>`;
+  document.getElementById('panel-models').innerHTML =
+    `<div class="grid grid-2">${models.map(m => `
+      <div class="card">
+        <div class="topbar">
+          <h3>${esc(m.name)}</h3>
+          <span class="badge dark">Instant tell: ${esc(m.tell)}</span>
+        </div>
+        <div class="grid grid-2 section">
+          <div class="result bad">
+            <div style="font-weight:bold;margin-bottom:8px">REP tells</div>
+            ${m.rep.map(x => `<div>• ${esc(x)}</div>`).join('')}
+          </div>
+          <div class="result good">
+            <div style="font-weight:bold;margin-bottom:8px">GEN signs</div>
+            ${m.gen.map(x => `<div>• ${esc(x)}</div>`).join('')}
+          </div>
+        </div>
+        <div class="result section">
+          <div style="font-weight:bold;margin-bottom:8px">Code notes</div>
+          ${m.codeNotes.map(x => `<div>• ${esc(x)}</div>`).join('')}
+        </div>
+      </div>
+    `).join('')}</div>`;
 }
+
 function renderQCPanel(){
-  document.getElementById('panel-qc').innerHTML=`<div class="grid grid-3">${qcSystem.map(item=>`<div class="card"><div class="topbar"><h3>${esc(item.title)}</h3><span class="badge dark">${esc(item.weight)}</span></div><div class="result good section"><b>GEN:</b> ${esc(item.good)}</div><div class="result bad section"><b>REP:</b> ${esc(item.bad)}</div></div>`).join('')}</div>`;
+  document.getElementById('panel-qc').innerHTML =
+    `<div class="grid grid-3">${qcSystem.map(item => `
+      <div class="card">
+        <div class="topbar">
+          <h3>${esc(item.title)}</h3>
+          <span class="badge dark">${esc(item.weight)}</span>
+        </div>
+        <div class="result good section"><b>GEN:</b> ${esc(item.good)}</div>
+        <div class="result bad section"><b>REP:</b> ${esc(item.bad)}</div>
+      </div>
+    `).join('')}</div>`;
 }
+
 function renderWorkflowPanel(){
-  document.getElementById('panel-workflow').innerHTML=`<div class="row row-main"><div class="card"><h3>Pro QC Workflow</h3>${[
+  const steps = [
     "1. Identify the model first.",
     "2. Apply the instant tell: Daytona=subdials, GMT=hand stack, Sub/Datejust=cyclops.",
     "3. Check dial print and spacing.",
     "4. Check case shape and crown guards.",
     "5. Check SEL fit and bracelet finishing.",
     "6. Only then use serial clusters and clasp as support."
-  ].map(step=>`<div class="list-item section">${esc(step)}</div>`).join('')}</div>
-  <div class="grid"><div class="card"><h3>Trust Most</h3><div class="list-item section">Dial print</div><div class="list-item">Case shape</div><div class="list-item">Model-specific tell</div><div class="list-item">Movement, if known</div></div>
-  <div class="card"><h3>Trust Less</h3><div class="list-item section">Clasp codes alone</div><div class="list-item">Serials alone</div><div class="list-item">Rehaut alone</div></div></div></div>`;
-}
-function renderIntelPanel(){
-  const ranked=(window._currentIntel?.ranked)||getScoreBreakdown({model:"Submariner"});
-  const theme=document.getElementById('confidenceTheme')?.value || 'dynamic';
-  document.getElementById('panel-intel').innerHTML=`<div class="row row-main">
-    <div class="card"><h3>Ranked Factory Output</h3>${ranked.map(row=>`<div class="result section"><div class="topbar"><div style="font-weight:bold;color:#065f46">${esc(row.factory)}</div><span class="badge ${confidenceClass(row.score,theme)}">${row.score}%</span></div><div class="progress section"><div class="bar" style="width:${row.score}%;background:${theme==="simple" ? "#111827" : row.score>=75 ? "#047857" : row.score>=45 ? "#b45309" : "#b91c1c"}"></div></div><div class="section">${row.reasons.length?row.reasons.map(r=>`<div>• ${esc(r)}</div>`).join(''):'• No strong signals yet'}</div></div>`).join('')}</div>
-    <div class="grid">
-      <div class="card"><h3>Decision Rule</h3><div class="list-item section">If model tell + visual profile + serial cluster all align, confidence rises sharply.</div><div class="list-item">If clasp matches but visual profile conflicts, treat as possible parts overlap or bait-and-switch.</div><div class="list-item">If Daytona uses LV66, lower code confidence and prioritize dial/case analysis.</div></div>
-      <div class="card"><h3>Factory Profiles</h3>${Object.entries(factoryProfiles).map(([factory,profile])=>`<div class="list-item section"><div style="font-weight:bold;color:#065f46">${esc(factory)}</div><div class="small"><b>Strengths:</b> ${esc(profile.strengths.join(", "))}</div><div class="small"><b>Cautions:</b> ${esc(profile.cautions.join(", "))}</div></div>`).join('')}</div>
-    </div>
-  </div>`;
-}
-function renderScamPanel(){
-  const s=window._currentIntel || {model:"Submariner",serial:"",clasp:"",visualFactory:"none",sellerClaim:"none",ranked:getScoreBreakdown({model:"Submariner"})};
-  const flags=getScamSignals({model:s.model,serial:s.serial,clasp:s.clasp,visualFactory:s.visualFactory,ranked:s.ranked,sellerClaim:s.sellerClaim});
-  document.getElementById('panel-scam').innerHTML=`<div class="row row-main">
-    <div class="card"><h3>Scam Detection Output</h3>${flags.length?flags.map(flag=>`<div class="result section ${flag.level==="high"?"bad":flag.level==="medium"?"warn":""}"><div class="topbar"><div style="font-weight:bold">${esc(flag.title)}</div><span class="badge ${flag.level==="high"?"red":flag.level==="medium"?"amber":"dark"}">${esc(flag.level)}</span></div><div class="small section">${esc(flag.detail)}</div></div>`).join(''):`<div class="result good section">No obvious scam signals detected from current inputs. Keep verifying visuals and seller consistency.</div>`}</div>
-    <div class="grid">
-      <div class="card"><h3>Automatic Red Flags</h3><div class="list-item section">Low-tier clasp codes like D12, MA11, T10, S9, CL1.</div><div class="list-item">Seller claims a top factory but visuals and mapped codes disagree.</div><div class="list-item">Random serial with no mapped cluster plus weak finishing.</div><div class="list-item">Shared/legacy bracelet codes used as sole proof of factory.</div></div>
-      <div class="card"><h3>Core Rule</h3><div class="list-item section">Codes tell you what the watch claims to be. Visuals tell you what it actually is.</div></div>
-    </div></div>`;
-}
-function renderTreePanel(){
-  document.getElementById('panel-tree').innerHTML=`<div class="row row-main">
-    <div class="card">
-      <h3>Decision Tree Input</h3>
-      <div class="grid grid-2 section">
-        <div><div class="small muted">Model</div><select id="treeModel" class="search">${models.map(m=>`<option>${esc(m.name)}</option>`).join('')}</select></div>
-        <div><div class="small muted">Primary tell</div><select id="treeStrongestTell" class="search"><option value="good">Looks good</option><option value="mid">Unclear / mid</option><option value="bad">Looks bad</option></select></div>
-        <div><div class="small muted">Dial quality</div><select id="treeDialQuality" class="search"><option value="good">Sharp / good</option><option value="mid">Average / mid</option><option value="bad">Weak / bad</option></select></div>
-        <div><div class="small muted">Case quality</div><select id="treeCaseQuality" class="search"><option value="good">Sharp / good</option><option value="mid">Average / mid</option><option value="bad">Weak / bad</option></select></div>
-        <div><div class="small muted">Serial mapped?</div><select id="treeSerialMapped" class="search"><option value="yes">Yes</option><option value="no">No</option></select></div>
-        <div><div class="small muted">Clasp tier</div><select id="treeClaspTier" class="search"><option value="high">High-tier mapped</option><option value="mixed">Shared / mixed</option><option value="low">Low-tier / legacy</option></select></div>
+  ];
+  document.getElementById('panel-workflow').innerHTML = `
+    <div class="row row-main">
+      <div class="card">
+        <h3>Pro QC Workflow</h3>
+        ${steps.map(step => `<div class="list-item section">${esc(step)}</div>`).join('')}
       </div>
-      <button class="btn" onclick="runDecisionTree()">Run decision tree</button>
-    </div>
-    <div class="card"><h3>Decision Output</h3><div id="treeOutput" class="section"></div></div>
-  </div>`;
+      <div class="grid">
+        <div class="card">
+          <h3>Trust Most</h3>
+          <div class="list-item section">Dial print</div>
+          <div class="list-item">Case shape</div>
+          <div class="list-item">Model-specific tell</div>
+          <div class="list-item">Movement, if known</div>
+        </div>
+        <div class="card">
+          <h3>Trust Less</h3>
+          <div class="list-item section">Clasp codes alone</div>
+          <div class="list-item">Serials alone</div>
+          <div class="list-item">Rehaut alone</div>
+        </div>
+      </div>
+    </div>`;
 }
-window.runDecisionTree=function(){
-  const res=getDecisionTreeOutput({
-    model:document.getElementById('treeModel').value,
-    strongestTell:document.getElementById('treeStrongestTell').value,
-    dialQuality:document.getElementById('treeDialQuality').value,
-    caseQuality:document.getElementById('treeCaseQuality').value,
-    serialMapped:document.getElementById('treeSerialMapped').value==="yes",
-    claspTier:document.getElementById('treeClaspTier').value,
-    sellerClaim:document.getElementById('sellerClaim').value,
-    visualFactory:document.getElementById('visualFactory').value
+
+function renderIntelPanel(){
+  const ranked = currentIntel?.ranked || getScoreBreakdown({model:"Submariner"});
+  const theme = document.getElementById('confidenceTheme')?.value || 'dynamic';
+  document.getElementById('panel-intel').innerHTML = `
+    <div class="row row-main">
+      <div class="card">
+        <h3>Ranked Factory Output</h3>
+        ${ranked.map(row => `
+          <div class="result section">
+            <div class="topbar">
+              <div style="font-weight:bold;color:#065f46">${esc(row.factory)}</div>
+              <span class="badge ${confidenceClass(row.score, theme)}">${row.score}%</span>
+            </div>
+            <div class="progress section">
+              <div class="bar" style="width:${row.score}%;background:${theme==="simple" ? "#111827" : row.score>=75 ? "#047857" : row.score>=45 ? "#b45309" : "#b91c1c"}"></div>
+            </div>
+            <div class="section">${row.reasons.length ? row.reasons.map(r => `<div>• ${esc(r)}</div>`).join('') : '• No strong signals yet'}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h3>Decision Rule</h3>
+          <div class="list-item section">If model tell + visual profile + serial cluster all align, confidence rises sharply.</div>
+          <div class="list-item">If clasp matches but visual profile conflicts, treat as possible parts overlap or bait-and-switch.</div>
+          <div class="list-item">If Daytona uses LV66, lower code confidence and prioritize dial/case analysis.</div>
+        </div>
+        <div class="card">
+          <h3>Factory Profiles</h3>
+          ${Object.entries(factoryProfiles).map(([factory, profile]) => `
+            <div class="list-item section">
+              <div style="font-weight:bold;color:#065f46">${esc(factory)}</div>
+              <div class="small"><b>Strengths:</b> ${esc(profile.strengths.join(", "))}</div>
+              <div class="small"><b>Cautions:</b> ${esc(profile.cautions.join(", "))}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderScamPanel(){
+  const s = currentIntel || {model:"Submariner", serial:"", clasp:"", visualFactory:"none", sellerClaim:"none", ranked:getScoreBreakdown({model:"Submariner"})};
+  const flags = getScamSignals({
+    model:s.model,
+    serial:s.serial,
+    clasp:s.clasp,
+    visualFactory:s.visualFactory,
+    ranked:s.ranked,
+    sellerClaim:s.sellerClaim
   });
-  document.getElementById('treeOutput').innerHTML=`<div class="result ${res.verdict==="High scam risk"?"bad":res.verdict==="Likely acceptable, keep verifying"?"good":"warn"}" style="font-weight:bold">${esc(res.verdict)}</div>${res.outcomes.map(item=>`<div class="list-item section">${esc(item)}</div>`).join('')}`;
+
+  document.getElementById('panel-scam').innerHTML = `
+    <div class="row row-main">
+      <div class="card">
+        <h3>Scam Detection Output</h3>
+        ${flags.length ? flags.map(flag => `
+          <div class="result section ${flag.level==="high"?"bad":flag.level==="medium"?"warn":""}">
+            <div class="topbar">
+              <div style="font-weight:bold">${esc(flag.title)}</div>
+              <span class="badge ${flag.level==="high"?"red":flag.level==="medium"?"amber":"dark"}">${esc(flag.level)}</span>
+            </div>
+            <div class="small section">${esc(flag.detail)}</div>
+          </div>
+        `).join('') : `<div class="result good section">No obvious scam signals detected from current inputs. Keep verifying visuals and seller consistency.</div>`}
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h3>Automatic Red Flags</h3>
+          <div class="list-item section">Low-tier clasp codes like D12, MA11, T10, S9, CL1.</div>
+          <div class="list-item">Seller claims a top factory but visuals and mapped codes disagree.</div>
+          <div class="list-item">Random serial with no mapped cluster plus weak finishing.</div>
+          <div class="list-item">Shared/legacy bracelet codes used as sole proof of factory.</div>
+        </div>
+        <div class="card">
+          <h3>Core Rule</h3>
+          <div class="list-item section">Codes tell you what the watch claims to be. Visuals tell you what it actually is.</div>
+        </div>
+      </div>
+    </div>`;
 }
+
+function renderTreePanel(){
+  document.getElementById('panel-tree').innerHTML = `
+    <div class="row row-main">
+      <div class="card">
+        <h3>Decision Tree Input</h3>
+        <div class="grid grid-2 section">
+          <div><div class="small muted">Model</div><select id="treeModel">${models.map(m => `<option>${esc(m.name)}</option>`).join('')}</select></div>
+          <div><div class="small muted">Primary tell</div><select id="treeStrongestTell"><option value="good">Looks good</option><option value="mid">Unclear / mid</option><option value="bad">Looks bad</option></select></div>
+          <div><div class="small muted">Dial quality</div><select id="treeDialQuality"><option value="good">Sharp / good</option><option value="mid">Average / mid</option><option value="bad">Weak / bad</option></select></div>
+          <div><div class="small muted">Case quality</div><select id="treeCaseQuality"><option value="good">Sharp / good</option><option value="mid">Average / mid</option><option value="bad">Weak / bad</option></select></div>
+          <div><div class="small muted">Serial mapped?</div><select id="treeSerialMapped"><option value="yes">Yes</option><option value="no">No</option></select></div>
+          <div><div class="small muted">Clasp tier</div><select id="treeClaspTier"><option value="high">High-tier mapped</option><option value="mixed">Shared / mixed</option><option value="low">Low-tier / legacy</option></select></div>
+        </div>
+        <button class="btn" onclick="runDecisionTree()">Run decision tree</button>
+      </div>
+      <div class="card">
+        <h3>Decision Output</h3>
+        <div id="treeOutput" class="section"></div>
+      </div>
+    </div>`;
+}
+
+window.runDecisionTree = function(){
+  const res = getDecisionTreeOutput({
+    model: document.getElementById('treeModel').value,
+    strongestTell: document.getElementById('treeStrongestTell').value,
+    dialQuality: document.getElementById('treeDialQuality').value,
+    caseQuality: document.getElementById('treeCaseQuality').value,
+    serialMapped: document.getElementById('treeSerialMapped').value === "yes",
+    claspTier: document.getElementById('treeClaspTier').value,
+    sellerClaim: document.getElementById('sellerClaim').value,
+    visualFactory: document.getElementById('visualFactory').value
+  });
+
+  document.getElementById('treeOutput').innerHTML =
+    `<div class="result ${res.verdict==="High scam risk"?"bad":res.verdict==="Likely acceptable, keep verifying"?"good":"warn"}" style="font-weight:bold">${esc(res.verdict)}</div>` +
+    res.outcomes.map(item => `<div class="list-item section">${esc(item)}</div>`).join('');
+};
+
 function renderAutoPanel(){
-  document.getElementById('panel-auto').innerHTML=`<div class="row row-main">
-    <div class="card"><h3>Auto Scan Input</h3><input id="autoInput" class="search section" placeholder="Paste messy text like: Sub 6R12V6 1LD seller says VSF" /><button class="btn section" onclick="runAutoScan()">Scan</button></div>
-    <div class="card"><h3>Scan Result</h3><div id="autoResult" class="section muted">Run a scan to see results</div></div>
-  </div>`;
+  document.getElementById('panel-auto').innerHTML = `
+    <div class="row row-main">
+      <div class="card">
+        <h3>Auto Scan Input</h3>
+        <input id="autoInput" class="search section" placeholder="Paste messy text like: Sub 6R12V6 1LD seller says VSF" />
+        <button class="btn section" onclick="runAutoScan()">Scan</button>
+      </div>
+      <div class="card">
+        <h3>Scan Result</h3>
+        <div id="autoResult" class="section muted">Run a scan to see results</div>
+      </div>
+    </div>`;
 }
-window.runAutoScan=function(){
-  const parsed=parseAutoScan(document.getElementById('autoInput').value);
-  const ranked=getScoreBreakdown({model:parsed.model||"Submariner",serial:parsed.serial,clasp:parsed.clasp,visualFactory:""});
-  const flags=getScamSignals({model:parsed.model||"Submariner",serial:parsed.serial,clasp:parsed.clasp,visualFactory:"none",ranked,sellerClaim:parsed.seller});
-  document.getElementById('autoResult').innerHTML=`<div class="result"><div><b>Model:</b> ${esc(parsed.model||"Unknown")}</div><div><b>Serial:</b> ${esc(parsed.serial||"None")}</div><div><b>Clasp:</b> ${esc(parsed.clasp||"None")}</div><div><b>Seller claim:</b> ${esc(parsed.seller||"none")}</div></div><div class="result good section"><div><b>Top Factory:</b> ${esc(ranked[0]?.factory||"Unknown")}</div><div><b>Confidence:</b> ${ranked[0]?.score||0}%</div></div>${flags.map(f=>`<div class="result bad section">⚠ ${esc(f.title)}</div>`).join('')||'<div class="list-item section">No major scam flags from parsed text.</div>'}`;
+
+window.runAutoScan = function(){
+  const parsed = parseAutoScan(document.getElementById('autoInput').value);
+  const ranked = getScoreBreakdown({model: parsed.model || "Submariner", serial: parsed.serial, clasp: parsed.clasp, visualFactory: ""});
+  const flags = getScamSignals({model: parsed.model || "Submariner", serial: parsed.serial, clasp: parsed.clasp, visualFactory: "none", ranked, sellerClaim: parsed.seller});
+
+  document.getElementById('autoResult').innerHTML = `
+    <div class="result">
+      <div><b>Model:</b> ${esc(parsed.model || "Unknown")}</div>
+      <div><b>Serial:</b> ${esc(parsed.serial || "None")}</div>
+      <div><b>Clasp:</b> ${esc(parsed.clasp || "None")}</div>
+      <div><b>Seller claim:</b> ${esc(parsed.seller || "none")}</div>
+    </div>
+    <div class="result good section">
+      <div><b>Top Factory:</b> ${esc(ranked[0]?.factory || "Unknown")}</div>
+      <div><b>Confidence:</b> ${ranked[0]?.score || 0}%</div>
+    </div>
+    ${flags.map(f => `<div class="result bad section">⚠ ${esc(f.title)}</div>`).join('') || '<div class="list-item section">No major scam flags from parsed text.</div>'}`;
+};
+
+function preprocessCanvas(srcCanvas){
+  const out = document.createElement('canvas');
+  const w = srcCanvas.width;
+  const h = srcCanvas.height;
+  out.width = w;
+  out.height = h;
+  const sctx = srcCanvas.getContext('2d');
+  const octx = out.getContext('2d');
+  const img = sctx.getImageData(0,0,w,h);
+  const d = img.data;
+  for (let i = 0; i < d.length; i += 4) {
+    const gray = 0.299*d[i] + 0.587*d[i+1] + 0.114*d[i+2];
+    const boosted = gray > 150 ? 255 : gray < 95 ? 0 : gray;
+    d[i] = d[i+1] = d[i+2] = boosted;
+  }
+  octx.putImageData(img,0,0);
+  return out;
 }
+
 async function doOCR(source, resultId, textId){
-  if(ocrBusy) return;
-  ocrBusy=true;
-  document.getElementById('ocrStatus').textContent='Reading…';
+  if (ocrBusy) return;
+  ocrBusy = true;
+  document.getElementById('ocrStatus').textContent = 'Reading…';
   try{
-    const { data } = await Tesseract.recognize(source, 'eng');
-    const text=(data.text||'').trim();
-    if(textId) document.getElementById(textId).textContent=text||'No text detected';
-    const res=extractTextCandidates(text);
-    document.getElementById(resultId).innerHTML=`<div class="result"><div><b>Model:</b> ${esc(res.parsed.model||"Unknown")}</div><div><b>Serial:</b> ${esc(res.parsed.serial||"None")}</div><div><b>Clasp:</b> ${esc(res.parsed.clasp||"None")}</div><div><b>Top Factory:</b> ${esc(res.ranked[0]?.factory||"Unknown")}</div><div><b>Confidence:</b> ${res.ranked[0]?.score||0}%</div></div>${res.flags.map(f=>`<div class="result bad section">⚠ ${esc(f.title)}</div>`).join('')||'<div class="list-item section">No major scam flags from extracted text alone.</div>'}`;
-    document.getElementById('ocrStatus').textContent='Scan complete';
-  }catch(e){
-    document.getElementById('ocrStatus').textContent='OCR failed';
-  }finally{
-    ocrBusy=false;
+    const prepared = source instanceof HTMLCanvasElement ? preprocessCanvas(source) : source;
+    const { data } = await Tesseract.recognize(prepared, 'eng');
+    const text = (data.text || '').trim();
+    if (textId) document.getElementById(textId).textContent = text || 'No text detected';
+    const res = extractTextCandidates(text);
+    document.getElementById(resultId).innerHTML = `
+      <div class="result">
+        <div><b>Model:</b> ${esc(res.parsed.model || "Unknown")}</div>
+        <div><b>Serial:</b> ${esc(res.parsed.serial || "None")}</div>
+        <div><b>Clasp:</b> ${esc(res.parsed.clasp || "None")}</div>
+        <div><b>Top Factory:</b> ${esc(res.ranked[0]?.factory || "Unknown")}</div>
+        <div><b>Confidence:</b> ${res.ranked[0]?.score || 0}%</div>
+      </div>
+      ${res.flags.map(f => `<div class="result bad section">⚠ ${esc(f.title)}</div>`).join('') || '<div class="list-item section">No major scam flags from extracted text alone.</div>'}`;
+    document.getElementById('ocrStatus').textContent = 'Scan complete';
+  } catch(e){
+    document.getElementById('ocrStatus').textContent = 'OCR failed';
+  } finally {
+    ocrBusy = false;
   }
 }
+
 function renderVisionPanel(){
-  document.getElementById('panel-vision').innerHTML=`<div class="row row-main">
-    <div class="grid">
-      <div class="card">
-        <h3>Screenshot / Photo OCR</h3>
-        <input id="imgUpload" type="file" accept="image/*" class="section" />
-        <div id="ocrStatus" class="list-item section">Idle</div>
-        <div class="small muted">Upload a screenshot or close photo of clasp/serial engraving.</div>
-        <div class="result section"><div style="font-weight:bold">Extracted text</div><div id="imageText" class="small muted section">None yet</div></div>
+  document.getElementById('panel-vision').innerHTML = `
+    <div class="row row-main">
+      <div class="grid">
+        <div class="card">
+          <h3>Screenshot / Photo OCR</h3>
+          <input id="imgUpload" type="file" accept="image/*" class="section" />
+          <div id="ocrStatus" class="list-item section">Idle</div>
+          <div class="small muted">Upload a screenshot or close photo of clasp or serial engraving.</div>
+          <div class="result section"><div style="font-weight:bold">Extracted text</div><div id="imageText" class="small muted section">None yet</div></div>
+        </div>
+        <div class="card">
+          <h3>Live Camera Read</h3>
+          <video id="video" autoplay muted playsinline></video>
+          <canvas id="canvas" class="hidden"></canvas>
+          <canvas id="freezePreview" class="hidden"></canvas>
+          <div class="section">
+            <button class="btn" id="startCam">Start camera</button>
+            <button class="btn secondary" id="freezeCam">Freeze frame</button>
+            <button class="btn secondary" id="stopCam">Stop camera</button>
+          </div>
+          <div class="list-item">Use the rear camera. Fill the frame with the engraving. The app scans a cropped center zone and boosts contrast.</div>
+          <div class="result section"><div style="font-weight:bold">Live extracted text</div><div id="liveText" class="small muted section">No live text yet</div></div>
+          <div class="result section"><div style="font-weight:bold">Stability status</div><div id="stabilityText" class="small muted section">Waiting for camera</div></div>
+        </div>
       </div>
-      <div class="card">
-        <h3>Live Camera Read</h3>
-        <video id="video" autoplay muted playsinline></video>
-        <canvas id="canvas" class="hidden"></canvas>
-        <div class="section"><button class="btn" id="startCam">Start camera</button> <button class="btn secondary" id="stopCam">Stop camera</button></div>
-        <div class="list-item">This uses browser OCR and is experimental. Hold the clasp/serial straight, close, and well-lit for best results.</div>
-        <div class="result section"><div style="font-weight:bold">Live extracted text</div><div id="liveText" class="small muted section">No live text yet</div></div>
+      <div class="grid">
+        <div class="card"><h3>Vision Result</h3><div id="visionResult" class="small muted">Upload an image or start the camera to extract live codes and serials.</div></div>
+        <div class="card">
+          <h3>Camera Notes</h3>
+          <div class="list-item section">Best on large engraved clasp text and straight-on serial shots.</div>
+          <div class="list-item">Use bright diffuse light and avoid strong reflections.</div>
+          <div class="list-item">Freeze Frame is usually more accurate than continuous live OCR.</div>
+        </div>
       </div>
-    </div>
-    <div class="grid">
-      <div class="card"><h3>Vision Result</h3><div id="visionResult" class="small muted">Upload an image or start the camera to extract live codes and serials.</div></div>
-      <div class="card"><h3>Camera Notes</h3><div class="list-item section">Best on large engraved clasp text and straight-on serial shots.</div><div class="list-item">Low light, reflections, and curved crystal distortion will reduce accuracy.</div><div class="list-item">Treat live OCR as a helper, not proof. Always verify visually.</div></div>
-    </div>
-  </div>`;
-  document.getElementById('imgUpload').addEventListener('change', async (e)=>{
-    const file=e.target.files?.[0];
-    if(!file) return;
-    await doOCR(file,'visionResult','imageText');
+    </div>`;
+
+  document.getElementById('imgUpload').addEventListener('change', async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    await doOCR(file, 'visionResult', 'imageText');
   });
-  document.getElementById('startCam').onclick=async()=>{
+
+  document.getElementById('startCam').onclick = async () => {
     try{
-      cameraStream = await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false});
-      const video=document.getElementById('video');
-      video.srcObject=cameraStream;
-      cameraInterval=setInterval(async ()=>{
-        if(ocrBusy) return;
-        const canvas=document.getElementById('canvas');
-        const video=document.getElementById('video');
-        if(!video.videoWidth) return;
-        canvas.width=video.videoWidth;
-        canvas.height=video.videoHeight;
-        canvas.getContext('2d').drawImage(video,0,0,canvas.width,canvas.height);
-        await doOCR(canvas,'visionResult','liveText');
-      },3500);
-      document.getElementById('ocrStatus').textContent='Camera active';
-    }catch(e){
-      document.getElementById('ocrStatus').textContent='Camera unavailable or permission denied';
+      cameraStream = await navigator.mediaDevices.getUserMedia({ video:{ facingMode:{ ideal:'environment' } }, audio:false });
+      const video = document.getElementById('video');
+      video.srcObject = cameraStream;
+
+      cameraInterval = setInterval(async () => {
+        if (ocrBusy) return;
+        const canvas = document.getElementById('canvas');
+        if (!video.videoWidth) return;
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        const cropW = Math.floor(canvas.width * 0.7);
+        const cropH = Math.floor(canvas.height * 0.28);
+        const cropX = Math.floor((canvas.width - cropW) / 2);
+        const cropY = Math.floor((canvas.height - cropH) / 2);
+
+        const cropped = document.createElement('canvas');
+        cropped.width = cropW;
+        cropped.height = cropH;
+        cropped.getContext('2d').drawImage(canvas, cropX, cropY, cropW, cropH, 0, 0, cropW, cropH);
+
+        document.getElementById('stabilityText').textContent = 'Scanning cropped center zone';
+        await doOCR(cropped, 'visionResult', 'liveText');
+      }, 3500);
+
+      document.getElementById('ocrStatus').textContent = 'Camera active';
+    } catch(e){
+      document.getElementById('ocrStatus').textContent = 'Camera unavailable or permission denied';
     }
   };
-  document.getElementById('stopCam').onclick=()=>{
-    if(cameraInterval) clearInterval(cameraInterval);
-    if(cameraStream) cameraStream.getTracks().forEach(t=>t.stop());
-    document.getElementById('ocrStatus').textContent='Camera stopped';
+
+  document.getElementById('freezeCam').onclick = async () => {
+    const video = document.getElementById('video');
+    if (!video.videoWidth) return;
+
+    const preview = document.getElementById('freezePreview');
+    preview.width = video.videoWidth;
+    preview.height = video.videoHeight;
+    preview.getContext('2d').drawImage(video, 0, 0, preview.width, preview.height);
+
+    document.getElementById('stabilityText').textContent = 'Frozen frame captured';
+    await doOCR(preview, 'visionResult', 'liveText');
+  };
+
+  document.getElementById('stopCam').onclick = () => {
+    if (cameraInterval) clearInterval(cameraInterval);
+    if (cameraStream) cameraStream.getTracks().forEach(t => t.stop());
+    cameraInterval = null;
+    cameraStream = null;
+    document.getElementById('ocrStatus').textContent = 'Camera stopped';
+    document.getElementById('stabilityText').textContent = 'Stopped';
   };
 }
+
 function renderLearnPanel(){
-  document.getElementById('panel-learn').innerHTML=`<div class="row row-main">
-    <div class="card"><h3>Learning Mode</h3><div class="list-item section">Save cases as you review watches. Over time this builds your own reference stack of likely patterns, risk levels, and repeated seller behavior.</div><div class="list-item">This version stores learning cases locally in your browser as a reusable pattern log.</div></div>
-    <div class="card"><h3>Saved Cases</h3>${learnedCases.length?learnedCases.map(c=>`<div class="list-item section"><div style="font-weight:bold;color:#065f46">${esc(c.model)}</div><div class="small">Serial: ${esc(c.serial||"None")}</div><div class="small">Clasp: ${esc(c.clasp||"None")}</div><div class="small">Inferred: ${esc(c.inferred)}</div><div class="small">Confidence: ${c.confidence}%</div><div class="small">Scam flags: ${c.scamFlags}</div></div>`).join(''):'<div class="muted section">No saved learning cases yet.</div>'}</div>
-  </div>`;
+  document.getElementById('panel-learn').innerHTML = `
+    <div class="row row-main">
+      <div class="card">
+        <h3>Learning Mode</h3>
+        <div class="list-item section">Save cases as you review watches. Over time this builds your own reference stack of likely patterns, risk levels, and repeated seller behavior.</div>
+        <div class="list-item">This version stores learning cases locally in your browser.</div>
+      </div>
+      <div class="card">
+        <h3>Saved Cases</h3>
+        ${learnedCases.length ? learnedCases.map(c => `
+          <div class="list-item section">
+            <div style="font-weight:bold;color:#065f46">${esc(c.model)}</div>
+            <div class="small">Serial: ${esc(c.serial || "None")}</div>
+            <div class="small">Clasp: ${esc(c.clasp || "None")}</div>
+            <div class="small">Inferred: ${esc(c.inferred)}</div>
+            <div class="small">Confidence: ${c.confidence}%</div>
+            <div class="small">Scam flags: ${c.scamFlags}</div>
+          </div>
+        `).join('') : '<div class="muted section">No saved learning cases yet.</div>'}
+      </div>
+    </div>`;
 }
+
 function renderUpdatePanel(){
-  document.getElementById('panel-update').innerHTML=`<div class="row row-main">
-    <div class="card"><h3>Paste Update Data</h3><textarea id="updateText" class="textarea" placeholder="Example:
+  document.getElementById('panel-update').innerHTML = `
+    <div class="row row-main">
+      <div class="card">
+        <h3>Paste Update Data</h3>
+        <textarea id="updateText" placeholder="Example:
 VSF: ABC DEF
-CLEAN: XYZ"></textarea><div class="section"><button class="btn" onclick="applyUpdate()">Apply Update</button></div></div>
-    <div class="card"><h3>Update Log</h3><div id="updateLog">${updateLog.length?updateLog.map(log=>`<div class="list-item section">${esc(log)}</div>`).join(''):'<div class="muted">No updates yet</div>'}</div></div>
-  </div>`;
+CLEAN: XYZ"></textarea>
+        <div class="section"><button class="btn" onclick="applyUpdate()">Apply Update</button></div>
+      </div>
+      <div class="card">
+        <h3>Update Log</h3>
+        <div id="updateLog">
+          ${updateLog.length ? updateLog.map(log => `<div class="list-item section">${esc(log)}</div>`).join('') : '<div class="muted">No updates yet</div>'}
+        </div>
+      </div>
+    </div>`;
 }
-window.applyUpdate=function(){
-  const updateText=document.getElementById('updateText').value.toUpperCase();
-  let added=0;
-  updateText.split(/\n+/).forEach(line=>{
-    if(line.includes(':')){
-      const [rawKey, rawValues]=line.split(':');
-      const key=rawKey.trim();
-      const codes=rawValues.split(/[, ]+/).filter(Boolean);
-      if(claspData[key]) codes.forEach(c=>{ if(!claspData[key].includes(c)){ claspData[key].push(c); added++; }});
-      if(serialData[key]) codes.forEach(c=>{ if(!serialData[key].includes(c)){ serialData[key].push(c); added++; }});
+
+window.applyUpdate = function(){
+  const updateText = document.getElementById('updateText').value.toUpperCase();
+  let added = 0;
+
+  updateText.split(/\n+/).forEach(line => {
+    if (line.includes(':')) {
+      const [rawKey, rawValues] = line.split(':');
+      const key = rawKey.trim();
+      const codes = rawValues.split(/[, ]+/).filter(Boolean);
+
+      if (claspData[key]) {
+        codes.forEach(c => {
+          if (!claspData[key].includes(c)) {
+            claspData[key].push(c);
+            added++;
+          }
+        });
+      }
+
+      if (serialData[key]) {
+        codes.forEach(c => {
+          if (!serialData[key].includes(c)) {
+            serialData[key].push(c);
+            added++;
+          }
+        });
+      }
     }
   });
+
   updateLog.unshift(`Added ${added} new entries`);
   saveLS();
   renderCodesPanel();
   renderSerialsPanel();
   renderUpdatePanel();
-}
+};
+
 function saveCurrentCase(){
-  if(!window._currentIntel?.top) return;
+  if (!currentIntel?.top) return;
   learnedCases.unshift({
     id: Date.now(),
-    model: window._currentIntel.model,
-    serial: window._currentIntel.serial,
-    clasp: window._currentIntel.clasp,
-    inferred: window._currentIntel.top.factory,
-    confidence: window._currentIntel.top.score,
+    model: currentIntel.model,
+    serial: currentIntel.serial,
+    clasp: currentIntel.clasp,
+    inferred: currentIntel.top.factory,
+    confidence: currentIntel.top.score,
     scamFlags: getScamSignals({
-      model:window._currentIntel.model,
-      serial:window._currentIntel.serial,
-      clasp:window._currentIntel.clasp,
-      visualFactory:window._currentIntel.visualFactory,
-      ranked:window._currentIntel.ranked,
-      sellerClaim:window._currentIntel.sellerClaim
+      model: currentIntel.model,
+      serial: currentIntel.serial,
+      clasp: currentIntel.clasp,
+      visualFactory: currentIntel.visualFactory,
+      ranked: currentIntel.ranked,
+      sellerClaim: currentIntel.sellerClaim
     }).length
   });
   learnedCases = learnedCases.slice(0,20);
   saveLS();
   renderLearnPanel();
 }
+
 function initTabs(){
-  const tabs=['codes','serials','combos','models','qc','workflow','intel','scam','tree','auto','vision','learn','update'];
-  document.getElementById('tabs').innerHTML=tabs.map((t,i)=>`<button class="tab ${i===0?'active':''}" data-tab="${t}">${t[0].toUpperCase()+t.slice(1)}</button>`).join('');
-  document.querySelectorAll('.tab').forEach(btn=>btn.onclick=()=>{
-    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  const tabs = ['codes','serials','combos','models','qc','workflow','intel','scam','tree','auto','vision','learn','update'];
+  document.getElementById('tabs').innerHTML = tabs.map((t,i) =>
+    `<button class="tab ${i===0?'active':''}" data-tab="${t}">${t[0].toUpperCase()+t.slice(1)}</button>`
+  ).join('');
+
+  document.querySelectorAll('.tab').forEach(btn => btn.onclick = () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
     btn.classList.add('active');
-    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
   });
 }
 
-document.addEventListener('DOMContentLoaded',()=>{
+function setupInstall(){
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    const btn = document.getElementById('installBtn');
+    btn.disabled = false;
+    btn.textContent = 'Install';
+  });
+
+  document.getElementById('installBtn').onclick = async () => {
+    if (!deferredPrompt) return;
+    await deferredPrompt.prompt();
+    deferredPrompt = null;
+    document.getElementById('installBtn').disabled = true;
+  };
+}
+
+document.addEventListener('DOMContentLoaded', () => {
   initTabs();
+  setupInstall();
   populateSelects();
   renderSaved();
   renderCodesPanel();
@@ -672,13 +1107,15 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderLearnPanel();
   renderUpdatePanel();
 
-  document.getElementById('searchBox').addEventListener('input',e=>renderSearchResults(e.target.value));
-  ['modelInput','visualFactory','sellerClaim','confidenceTheme','serialInput','claspInput'].forEach(id=>{
-    const el=document.getElementById(id);
-    el.addEventListener('input',()=>{ updateIntelligence(); renderCombosPanel(); });
-    el.addEventListener('change',()=>{ updateIntelligence(); renderCombosPanel(); });
-  });
-  document.getElementById('saveCaseBtn').onclick=saveCurrentCase;
+  document.getElementById('searchBox').addEventListener('input', e => renderSearchResults(e.target.value));
+  document.getElementById('modelInput').addEventListener('change', updateIntelligence);
+  document.getElementById('visualFactory').addEventListener('change', updateIntelligence);
+  document.getElementById('sellerClaim').addEventListener('change', updateIntelligence);
+  document.getElementById('confidenceTheme').addEventListener('change', () => { updateIntelligence(); renderCombosPanel(); renderIntelPanel(); });
+  document.getElementById('serialInput').addEventListener('input', updateIntelligence);
+  document.getElementById('claspInput').addEventListener('input', updateIntelligence);
+  document.getElementById('saveCaseBtn').onclick = saveCurrentCase;
+
   updateIntelligence();
 });
 </script>
