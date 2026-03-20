@@ -1,11 +1,76 @@
+const CACHE_NAME = "bandit-xray-rolex-v2";
+const APP_SHELL = [
+  "/rolex-app/",
+  "/rolex-app/index.html",
+  "/rolex-app/manifest.json",
+  "/rolex-app/icon.svg"
+];
+
 self.addEventListener("install", (event) => {
-  event.waitUntil(self.skipWaiting());
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL))
+  );
+  self.skipWaiting();
 });
 
 self.addEventListener("activate", (event) => {
-  event.waitUntil(self.clients.claim());
+  event.waitUntil(
+    Promise.all([
+      self.clients.claim(),
+      caches.keys().then((keys) =>
+        Promise.all(
+          keys
+            .filter((key) => key !== CACHE_NAME)
+            .map((key) => caches.delete(key))
+        )
+      )
+    ])
+  );
 });
 
 self.addEventListener("fetch", (event) => {
-  event.respondWith(fetch(event.request));
+  const request = event.request;
+  const url = new URL(request.url);
+
+  if (request.method !== "GET") return;
+
+  if (url.origin !== self.location.origin) {
+    event.respondWith(
+      fetch(request).catch(() => caches.match(request))
+    );
+    return;
+  }
+
+  if (request.mode === "navigate") {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put("/rolex-app/index.html", copy);
+          });
+          return response;
+        })
+        .catch(() => caches.match("/rolex-app/index.html"))
+    );
+    return;
+  }
+
+  event.respondWith(
+    caches.match(request).then((cached) => {
+      if (cached) return cached;
+
+      return fetch(request).then((response) => {
+        if (!response || response.status !== 200 || response.type !== "basic") {
+          return response;
+        }
+
+        const copy = response.clone();
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(request, copy);
+        });
+        return response;
+      });
+    })
+  );
 });
