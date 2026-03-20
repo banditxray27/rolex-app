@@ -1,15 +1,17 @@
 {
-"name": "Bandit Xray Rolex Manual",
-"short_name": "Rolex",
-"start_url": "/rolex-app/",
-"display": "standalone",
-"background_color": "#f5f5f4",
-"theme_color": "#065f46",
-"icons": [
-{
-"src": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Rolex_logo.svg/512px-Rolex_logo.svg.png",
-"sizes": "512x512",
-"type": "image/png"
-}
-]
+  "name": "Bandit Xray Rolex Manual",
+  "short_name": "Rolex",
+  "start_url": "/rolex-app/",
+  "scope": "/rolex-app/",
+  "display": "standalone",
+  "background_color": "#f5f5f4",
+  "theme_color": "#065f46",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
 }
