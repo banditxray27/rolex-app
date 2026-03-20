@@ -1,6 +1,6 @@
 {
   "name": "Bandit Xray Rolex Manual",
-  "short_name": "Rolex",
+  "short_name": "Rolex Manual",
   "start_url": "/rolex-app/",
   "scope": "/rolex-app/",
   "display": "standalone",
