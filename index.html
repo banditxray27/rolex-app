@@ -124,20 +124,159 @@
       font-size:18px;
     }
     @keyframes pulseSecret {
-      0% { opacity:.72; text-shadow:0 0 2px rgba(248,113,113,.20); }
-      50% { opacity:1; text-shadow:0 0 12px rgba(248,113,113,.55); }
-      100% { opacity:.72; text-shadow:0 0 2px rgba(248,113,113,.20); }
+      0% { opacity:.78; text-shadow:0 0 6px rgba(248,113,113,.40), 0 0 14px rgba(248,113,113,.22); transform:scale(1); }
+      50% { opacity:1; text-shadow:0 0 18px rgba(248,113,113,.95), 0 0 34px rgba(248,113,113,.62), 0 0 56px rgba(248,113,113,.34); transform:scale(1.02); }
+      100% { opacity:.78; text-shadow:0 0 6px rgba(248,113,113,.40), 0 0 14px rgba(248,113,113,.22); transform:scale(1); }
     }
     .secret-pulse{
-      animation:pulseSecret 1.8s ease-in-out infinite;
+      animation:pulseSecret 1.15s ease-in-out infinite;
+      will-change:transform,opacity,text-shadow;
+    }
+    
+    .elite-hero-card{
+      position:relative;
+      overflow:hidden;
+      border:1px solid rgba(248,113,113,.28);
+      box-shadow:0 14px 34px rgba(0,0,0,.08), 0 0 0 1px rgba(248,113,113,.10) inset;
+      background:
+        radial-gradient(circle at top right, rgba(248,113,113,.10), transparent 34%),
+        linear-gradient(180deg, rgba(255,250,250,.98), rgba(255,255,255,1));
+    }
+    .elite-hero-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        repeating-linear-gradient(
+          180deg,
+          rgba(248,113,113,.00) 0px,
+          rgba(248,113,113,.00) 10px,
+          rgba(248,113,113,.035) 11px,
+          rgba(248,113,113,.00) 12px
+        );
+      pointer-events:none;
+      opacity:.8;
+    }
+    .elite-hero-card::after{
+      content:"CLASSIFIED • INDUSTRY ONLY • RESTRICTED";
+      position:absolute;
+      right:-54px;
+      top:18px;
+      transform:rotate(22deg);
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.28em;
+      color:rgba(248,113,113,.17);
+      pointer-events:none;
+      white-space:nowrap;
+    }
+    .hero-copy{
+      position:relative;
+      z-index:1;
+    }
+    .classified-wrap{
+      margin-top:8px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(248,113,113,.22);
+      background:linear-gradient(180deg, rgba(255,245,245,.92), rgba(255,250,250,.78));
+      box-shadow:0 6px 18px rgba(248,113,113,.08);
+      display:inline-block;
+    }
+    .security-chips{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .security-chip{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(248,113,113,.24);
+      background:rgba(255,245,245,.92);
+      color:#b91c1c;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      box-shadow:0 4px 12px rgba(248,113,113,.08);
+    }
+    .security-dot{
+      width:7px;
+      height:7px;
+      border-radius:999px;
+      background:#f87171;
+      box-shadow:0 0 10px rgba(248,113,113,.85);
+      flex:0 0 auto;
     }
     @media (max-width: 900px){
+      .app-watermark::before,
+      .app-watermark::after{font-size:18px;letter-spacing:.22em}
+
+      .classified-line{font-size:18px}
+      .classified-sub{font-size:16px}
+      .security-chip{font-size:10px}
+      .elite-hero-card::after{font-size:9px; right:-62px; top:26px}
+    }
+
+
+    .app-watermark{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      overflow:hidden;
+      opacity:1;
+    }
+    .app-watermark::before,
+    .app-watermark::after{
+      content:"CLASSIFIED  •  INDUSTRY ONLY  •  SECRET";
+      position:absolute;
+      left:-10%;
+      width:140%;
+      text-align:center;
+      font-size:28px;
+      font-weight:900;
+      letter-spacing:.34em;
+      color:rgba(248,113,113,.075);
+      transform:rotate(-18deg);
+      white-space:nowrap;
+    }
+    .app-watermark::before{ top:24%; }
+    .app-watermark::after{ top:66%; }
+    .wrap{
+      position:relative;
+      z-index:1;
+    }
+    .watermark-card{
+      position:relative;
+      overflow:hidden;
+    }
+    .watermark-card::before{
+      content:"SECRET";
+      position:absolute;
+      right:10px;
+      bottom:8px;
+      font-size:30px;
+      font-weight:900;
+      letter-spacing:.28em;
+      color:rgba(248,113,113,.055);
+      pointer-events:none;
+      transform:rotate(-18deg);
+      white-space:nowrap;
+    }
+
+@media (max-width: 900px){
       .row-2,.row-main,.grid-3,.grid-2{grid-template-columns:1fr}
       .topbar{align-items:flex-start}
     }
   </style>
 </head>
 <body>
+<div class="app-watermark"></div>
 <div class="wrap">
   <div class="card sticky" id="installCard" style="margin-bottom:16px">
     <div class="topbar">
@@ -150,14 +289,21 @@
   </div>
 
   <div class="row row-2">
-    <div class="card">
+    <div class="card watermark-card elite-hero-card">
       <div class="hero">
         <div class="icon">👑</div>
-        <div>
+        <div class="hero-copy">
           <div style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#065f46;font-weight:bold">Bandit Xray</div>
           <h1>Rolex Master Field Manual 2026</h1>
-          <div class="classified-line">INDUSTRY ONLY TOOL</div>
-          <div class="classified-line classified-sub secret-pulse">CLASSIFIED AS ****SECRET****</div>
+          <div class="classified-wrap">
+            <div class="classified-line">INDUSTRY ONLY TOOL</div>
+            <div class="classified-line classified-sub secret-pulse">CLASSIFIED ****SECRET****</div>
+          </div>
+          <div class="security-chips">
+            <span class="security-chip"><span class="security-dot"></span>Restricted access</span>
+            <span class="security-chip"><span class="security-dot"></span>Dealer intelligence</span>
+            <span class="security-chip"><span class="security-dot"></span>Internal use only</span>
+          </div>
         </div>
       </div>
       <div class="section">
@@ -166,7 +312,7 @@
       <div id="searchResults" class="section"></div>
     </div>
 
-    <div class="card">
+    <div class="card watermark-card">
       <div class="topbar">
         <h3>Saved Items</h3>
         <button class="btn secondary" id="clearSavedBtn">Clear</button>
@@ -176,7 +322,7 @@
     </div>
   </div>
 
-  <div class="card section">
+  <div class="card watermark-card section">
     <h3>Intelligence System</h3>
     <div class="row row-main section">
       <div class="grid grid-2">
@@ -1000,7 +1146,7 @@ function renderBestFactoryOutput(rows, query, family){
       <div class="small section">Showing ${limited.length} match${limited.length === 1 ? '' : 'es'}${query ? ` for “${esc(query)}”` : ''}${family && family !== 'All models' ? ` in ${esc(family)}` : ''}.</div>
     </div>
     ${limited.map(item => `
-      <div class="card section">
+      <div class="card watermark-card section">
         <div class="topbar">
           <div>
             <div class="small muted">${esc(item.family)}</div>
@@ -1023,7 +1169,7 @@ function renderBestFactoryPanel(){
   const modelOptions = ['All models', ...bestFactoryFamilies];
   document.getElementById('panel-best').innerHTML = `
     <div class="row row-main">
-      <div class="card">
+      <div class="card watermark-card">
         <h3>Best Factory Guide</h3>
         <div class="muted section">Type a Rolex model or ref and get a quick factory recommendation from the guide dataset. This stays separate from your code-mapping intelligence.</div>
         <div class="grid grid-2 section">
@@ -1044,7 +1190,7 @@ function renderBestFactoryPanel(){
         </div>
         <div class="list-item section">CF is always treated as Clean. EWF / BTF stays combined in this guide.</div>
       </div>
-      <div class="card">
+      <div class="card watermark-card">
         <h3>Top Recommendation</h3>
         <div id="bestFactoryOutput" class="section"></div>
       </div>
@@ -1307,7 +1453,7 @@ function renderCodesPanel(){
   document.getElementById('panel-codes').innerHTML = `
     <div class="grid grid-2">
       ${modelData.map(m => `
-        <div class="card">
+        <div class="card watermark-card">
           <h3>${esc(m.model)}</h3>
           ${m.references.map(r => `
             <div class="result section">
@@ -1330,7 +1476,7 @@ function renderSerialsPanel(){
   document.getElementById('panel-serials').innerHTML = `
     <div class="grid grid-2">
       ${modelData.map(m => `
-        <div class="card">
+        <div class="card watermark-card">
           <h3>${esc(m.model)}</h3>
           ${m.references.map(r => `
             <div class="result section">
@@ -1359,7 +1505,7 @@ function renderCombosPanel(){
   document.getElementById('panel-combos').innerHTML = `
     <div class="grid grid-2">
       ${combos.map(item => `
-        <div class="card">
+        <div class="card watermark-card">
           <div class="topbar">
             <div>
               <div class="small muted">${esc(item.model)} • ${esc(item.ref)} • ${esc(item.factory)}</div>
@@ -1377,7 +1523,7 @@ function renderModelsPanel(){
   document.getElementById('panel-models').innerHTML = `
     <div class="grid grid-2">
       ${modelData.map(m => `
-        <div class="card">
+        <div class="card watermark-card">
           <div class="topbar">
             <h3>${esc(m.model)}</h3>
             <span class="badge dark">Instant tell: ${esc(m.tell)}</span>
@@ -1406,7 +1552,7 @@ function renderQCPanel(){
   document.getElementById('panel-qc').innerHTML = `
     <div class="grid grid-3">
       ${qcSystem.map(item => `
-        <div class="card">
+        <div class="card watermark-card">
           <div class="topbar">
             <h3>${esc(item.title)}</h3>
             <span class="badge dark">${esc(item.weight)}</span>
@@ -1430,19 +1576,19 @@ function renderWorkflowPanel(){
   ];
   document.getElementById('panel-workflow').innerHTML = `
     <div class="row row-main">
-      <div class="card">
+      <div class="card watermark-card">
         <h3>Pro QC Workflow</h3>
         ${steps.map(step => `<div class="list-item section">${esc(step)}</div>`).join('')}
       </div>
       <div class="grid">
-        <div class="card">
+        <div class="card watermark-card">
           <h3>Trust Most</h3>
           <div class="list-item section">Model-specific tell</div>
           <div class="list-item">Dial print</div>
           <div class="list-item">Case shape</div>
           <div class="list-item">Reference correctness</div>
         </div>
-        <div class="card">
+        <div class="card watermark-card">
           <h3>Trust Less</h3>
           <div class="list-item section">Clasp codes alone</div>
           <div class="list-item">Serials alone</div>
@@ -1458,7 +1604,7 @@ function renderIntelPanel(){
   if (!currentIntel) {
     document.getElementById('panel-intel').innerHTML = `
       <div class="row row-main">
-        <div class="card">
+        <div class="card watermark-card">
           <h3>Ranked Factory Output</h3>
           <div class="result section" style="text-align:center;padding:24px">
             <div style="font-size:18px;font-weight:bold;color:#065f46;margin-bottom:8px">Waiting for input…</div>
@@ -1466,13 +1612,13 @@ function renderIntelPanel(){
           </div>
         </div>
         <div class="grid">
-          <div class="card">
+          <div class="card watermark-card">
             <h3>Decision Rule</h3>
             <div class="list-item section">Reference-aware matching is now part of the score.</div>
             <div class="list-item">Visual profile can override weak code matches.</div>
             <div class="list-item">Shared-code models like Daytona need strongest visual QC.</div>
           </div>
-          <div class="card">
+          <div class="card watermark-card">
             <h3>Factory Profiles</h3>
             ${Object.entries(factoryProfiles).map(([factory, profile]) => `
               <div class="list-item section">
@@ -1490,7 +1636,7 @@ function renderIntelPanel(){
   const ranked = currentIntel.ranked || [];
   document.getElementById('panel-intel').innerHTML = `
     <div class="row row-main">
-      <div class="card">
+      <div class="card watermark-card">
         <h3>Ranked Factory Output</h3>
         ${ranked.map(row => `
           <div class="result section">
@@ -1506,13 +1652,13 @@ function renderIntelPanel(){
         `).join('')}
       </div>
       <div class="grid">
-        <div class="card">
+        <div class="card watermark-card">
           <h3>Decision Rule</h3>
           <div class="list-item section">Reference-aware matching is now part of the score.</div>
           <div class="list-item">Visual profile can override weak code matches.</div>
           <div class="list-item">Shared-code models like Daytona need strongest visual QC.</div>
         </div>
-        <div class="card">
+        <div class="card watermark-card">
           <h3>Factory Profiles</h3>
           ${Object.entries(factoryProfiles).map(([factory, profile]) => `
             <div class="list-item section">
@@ -1530,7 +1676,7 @@ function renderScamPanel(){
   if (!currentIntel) {
     document.getElementById('panel-scam').innerHTML = `
       <div class="row row-main">
-        <div class="card">
+        <div class="card watermark-card">
           <h3>Scam Detection Output</h3>
           <div class="result section" style="text-align:center;padding:24px">
             <div style="font-size:18px;font-weight:bold;color:#065f46;margin-bottom:8px">Waiting for input…</div>
@@ -1538,14 +1684,14 @@ function renderScamPanel(){
           </div>
         </div>
         <div class="grid">
-          <div class="card">
+          <div class="card watermark-card">
             <h3>Automatic Red Flags</h3>
             <div class="list-item section">Selected model/reference does not support the code you entered.</div>
             <div class="list-item">Seller claim and mapped signals disagree.</div>
             <div class="list-item">Shared Daytona clusters used as proof.</div>
             <div class="list-item">Low-tier or overlap-heavy clasp used alone.</div>
           </div>
-          <div class="card">
+          <div class="card watermark-card">
             <h3>Core Rule</h3>
             <div class="list-item section">Codes support the story. Visuals confirm the watch.</div>
           </div>
@@ -1561,7 +1707,7 @@ function renderScamPanel(){
   });
   document.getElementById('panel-scam').innerHTML = `
     <div class="row row-main">
-      <div class="card">
+      <div class="card watermark-card">
         <h3>Scam Detection Output</h3>
         ${flags.length ? flags.map(flag => `
           <div class="result section ${flag.level==="high"?"bad":flag.level==="medium"?"warn":""}">
@@ -1574,14 +1720,14 @@ function renderScamPanel(){
         `).join('') : `<div class="result good section">No obvious scam signals detected from current inputs. Keep verifying visuals and seller consistency.</div>`}
       </div>
       <div class="grid">
-        <div class="card">
+        <div class="card watermark-card">
           <h3>Automatic Red Flags</h3>
           <div class="list-item section">Selected model/reference does not support the code you entered.</div>
           <div class="list-item">Seller claim and mapped signals disagree.</div>
           <div class="list-item">Shared Daytona clusters used as proof.</div>
           <div class="list-item">Low-tier or overlap-heavy clasp used alone.</div>
         </div>
-        <div class="card">
+        <div class="card watermark-card">
           <h3>Core Rule</h3>
           <div class="list-item section">Codes support the story. Visuals confirm the watch.</div>
         </div>
@@ -1592,7 +1738,7 @@ function renderScamPanel(){
 function renderTreePanel(){
   document.getElementById('panel-tree').innerHTML = `
     <div class="row row-main">
-      <div class="card">
+      <div class="card watermark-card">
         <h3>Decision Tree Input</h3>
         <div class="grid grid-2 section">
           <div><div class="small muted">Model</div><select id="treeModel">${modelData.map(m => `<option>${esc(m.model)}</option>`).join('')}</select></div>
@@ -1604,7 +1750,7 @@ function renderTreePanel(){
         </div>
         <button class="btn" id="runDecisionTreeBtn">Run decision tree</button>
       </div>
-      <div class="card">
+      <div class="card watermark-card">
         <h3>Decision Output</h3>
         <div id="treeOutput" class="section"></div>
       </div>
@@ -1630,12 +1776,12 @@ function runDecisionTree(){
 function renderAutoPanel(){
   document.getElementById('panel-auto').innerHTML = `
     <div class="row row-main">
-      <div class="card">
+      <div class="card watermark-card">
         <h3>Auto Scan Input</h3>
         <input id="autoInput" class="search section" placeholder="Paste messy text like: Datejust 126234 R86Z 1RD seller says VSF" />
         <button class="btn section" id="runAutoScanBtn">Scan</button>
       </div>
-      <div class="card">
+      <div class="card watermark-card">
         <h3>Scan Result</h3>
         <div id="autoResult" class="section muted">Run a scan to see results</div>
       </div>
@@ -1679,7 +1825,7 @@ function renderVisionPanel(){
   document.getElementById('panel-vision').innerHTML = `
     <div class="row row-main">
       <div class="grid">
-        <div class="card">
+        <div class="card watermark-card">
           <h3>Screenshot / Photo OCR</h3>
           <input id="imgUpload" type="file" accept="image/*" class="section" />
           <div id="ocrStatus" class="list-item section">OCR idle</div>
@@ -1690,7 +1836,7 @@ function renderVisionPanel(){
           </div>
         </div>
 
-        <div class="card">
+        <div class="card watermark-card">
           <h3>Live Camera Read</h3>
           <div class="video-wrap">
             <video id="video" autoplay muted playsinline></video>
@@ -1744,11 +1890,11 @@ function renderVisionPanel(){
       </div>
 
       <div class="grid">
-        <div class="card">
+        <div class="card watermark-card">
           <h3>Vision Result</h3>
           <div id="visionResult" class="small muted">Upload an image or start the camera to extract live codes and serials.</div>
         </div>
-        <div class="card">
+        <div class="card watermark-card">
           <h3>Detection Tips</h3>
           <div class="list-item section">Fill the box with one engraving line only.</div>
           <div class="list-item">Freeze frame is best for polished clasp surfaces.</div>
@@ -1905,12 +2051,12 @@ function bindVisionEvents(){
 function renderLearnPanel(){
   document.getElementById('panel-learn').innerHTML = `
     <div class="row row-main">
-      <div class="card">
+      <div class="card watermark-card">
         <h3>Learning Mode</h3>
         <div class="list-item section">Save cases as you review watches. Over time this builds your own reference stack of repeated patterns and seller behavior.</div>
         <div class="list-item">This version stores learning cases locally in your browser.</div>
       </div>
-      <div class="card">
+      <div class="card watermark-card">
         <h3>Saved Cases</h3>
         ${learnedCases.length ? learnedCases.map(c => `
           <div class="list-item section">
@@ -1930,12 +2076,12 @@ function renderLearnPanel(){
 function renderUpdatePanel(){
   document.getElementById('panel-update').innerHTML = `
     <div class="row row-main">
-      <div class="card">
+      <div class="card watermark-card">
         <h3>Manual Update Notes</h3>
         <textarea id="updateText" placeholder="Paste your own notes here. This panel now stores notes only because the database is model-aware in code."></textarea>
         <div class="section"><button class="btn" id="applyUpdateBtn">Save Note</button></div>
       </div>
-      <div class="card">
+      <div class="card watermark-card">
         <h3>Update Log</h3>
         <div id="updateLog">
           ${updateLog.length ? updateLog.map(log => `<div class="list-item section">${esc(log)}</div>`).join('') : '<div class="muted">No updates yet</div>'}
