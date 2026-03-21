@@ -197,6 +197,7 @@
   <div id="panel-vision" class="panel"></div>
   <div id="panel-learn" class="panel"></div>
   <div id="panel-update" class="panel"></div>
+  <div id="panel-best" class="panel"></div>
 </div>
 
 <script>
@@ -449,6 +450,84 @@ const factoryProfiles = {
 };
 
 const factoryList = ["VSF","Clean","ARF","GMF / BP","TW+","EWF / BTF","QF"];
+
+const bestFactoryGuideData = [
+  { family:"Submariner", ref:"126610LN / 126610LV / 126619LB", movement:"3235 Clone", best:["VSF","ARF","ZF"], notes:"Current 41mm date Submariner ranking from the guide." },
+  { family:"Submariner", ref:"124060", movement:"3230 Clone", best:["VSF","ARF","ZF"], notes:"No-date current Submariner." },
+  { family:"Submariner", ref:"114060", movement:"3130 Clone", best:["VSF","GMF","BP"], notes:"Older no-date ranking in the guide." },
+  { family:"Submariner", ref:"116610LN / 116610LV / 116619LB", movement:"3135 Clone", best:["VSF","ZF","GMF"], notes:"Legacy 40mm date Submariner." },
+  { family:"Submariner", ref:"16610LN / 16610LV", movement:"3135 Clone", best:["ARF","TMF","TC v6"], notes:"Vintage-style 5-digit Submariner entry." },
+
+  { family:"Daytona", ref:"All 116XXX Daytona models", movement:"4130 Clone", best:["VSF","EWF / BTF","QF"], notes:"General 116XXX steel Daytona ranking. PDF lists BTF; app keeps EWF / BTF combined." },
+  { family:"Daytona", ref:"116520", movement:"4130 Clone", best:["Clean","VSF","EWF / BTF"], notes:"Guide shows 3CF first; app normalizes CF to Clean." },
+  { family:"Daytona", ref:"All 116XXX gold Daytona models", movement:"4130 Clone", best:["QF","VSF","EWF / BTF"], notes:"Gold 116XXX ranking." },
+  { family:"Daytona", ref:"126500 steel", movement:"4131 Clone", best:["EWF / BTF","APSF","QF"], notes:"Current steel 126500 ranking." },
+  { family:"Daytona", ref:"126XXX gold non-weighted", movement:"4131 Clone", best:["VSF"], notes:"Guide lists VSF weighted / VSF wording; keep as VSF-only recommendation here." },
+  { family:"Daytona", ref:"126XXX gold weighted", movement:"4131 Clone", best:["APSF","ARF"], notes:"Weighted gold 126XXX ranking." },
+  { family:"Daytona", ref:"126XXX platinum", movement:"4131 Clone", best:["APSF","QF","VSF"], notes:"Platinum 126XXX ranking." },
+  { family:"Daytona", ref:"126529 Le Mans", movement:"4132 Clone", best:["APSF","QF","VSF"], notes:"Le Mans specific ranking." },
+  { family:"Daytona", ref:"Cheaper high-quality Daytonas", movement:"4801 Chinese", best:["VSF"], notes:"Budget-value Daytona note from the guide." },
+
+  { family:"GMT-Master II", ref:"126710 BLRO / 116710 BLRO Pepsi", movement:"3285 / 3186 Clone", best:["VSF","ARF"], notes:"Pepsi ranking." },
+  { family:"GMT-Master II", ref:"126710 BLNR / 116710 BLNR Batman", movement:"3285 / 3186 Clone", best:["VSF","ARF"], notes:"Batman ranking." },
+  { family:"GMT-Master II", ref:"116710LN", movement:"3186 Clone", best:["ARF","QF"], notes:"Black bezel GMT-Master II." },
+  { family:"GMT-Master II", ref:"VTNR Sprite", movement:"3285 Clone", best:["ARF","QF"], notes:"Sprite ranking." },
+  { family:"GMT-Master II", ref:"Root Beer", movement:"3285 Clone", best:["C+ Factory","VSF"], notes:"Root Beer ranking from the guide." },
+  { family:"GMT-Master II", ref:"126713GRNR Bruce Wayne", movement:"3285 Clone", best:["ARF"], notes:"Guide only clearly supports ARF here." },
+
+  { family:"GMT-Master II", ref:"16710 / 16750 / 16700 Pepsi", movement:"3186 Clone", best:["BPF"], notes:"Vintage GMT-Master II / GMT coverage." },
+  { family:"GMT-Master II", ref:"6542 Pepsi", movement:"2836 Asian", best:["RBF"], notes:"Guide notes RBF might no longer be produced." },
+
+  { family:"Explorer", ref:"124270 / 124723", movement:"3230 Clone", best:["Clean","VSF","GMF"], notes:"36mm Explorer and two-tone reference grouping." },
+  { family:"Explorer", ref:"214270", movement:"3132 Clone", best:["BPF","VF","VSF"], notes:"39mm Explorer ranking." },
+  { family:"Explorer", ref:"224270", movement:"3230 Clone", best:["ARF","QF"], notes:"40mm Explorer ranking." },
+
+  { family:"Explorer II", ref:"226570", movement:"3285 Clone", best:["C+ Factory","GMF","Clean"], notes:"Current Explorer II ranking." },
+  { family:"Explorer II", ref:"216570", movement:"3187 Clone", best:["C+"], notes:"Guide notes date window position issue." },
+
+  { family:"Air-King", ref:"116900", movement:"3131 Clone", best:["GMF","QF"], notes:"Older Air-King ranking." },
+  { family:"Air-King", ref:"126900", movement:"3230 Clone", best:["JVSF"], notes:"Current Air-King ranking in the guide." },
+
+  { family:"Milgauss", ref:"116400 Blue dial", movement:"3131 Clone", best:["VSF","GSF"], notes:"Milgauss blue dial ranking." },
+  { family:"Milgauss", ref:"116400 Black dial", movement:"2836 Asian", best:["VSF","GSF"], notes:"Milgauss black dial ranking." },
+  { family:"Milgauss", ref:"Label Noir Tourbillon", movement:"Tourbillon", best:["JBF"], notes:"Special Milgauss Label Noir entry." },
+
+  { family:"Yacht-Master", ref:"226659 42mm white / yellow gold", movement:"3235 Clone", best:["TEDF (weighted)","GMF"], notes:"Guide includes weighted recommendation." },
+  { family:"Yacht-Master", ref:"226659 Falcon Eye", movement:"3235 Clone VR", best:["Clean"], notes:"Falcon Eye ranking." },
+  { family:"Yacht-Master", ref:"116622 40mm", movement:"3135 Clone", best:["VSF","IPF"], notes:"116622 ranking." },
+  { family:"Yacht-Master", ref:"126622 40mm", movement:"3235 Clone", best:["VSF","Clean"], notes:"126622 ranking." },
+  { family:"Yacht-Master", ref:"116655 40mm", movement:"3135 Clone", best:["VSF","Clean"], notes:"Everose Oysterflex 116655." },
+  { family:"Yacht-Master", ref:"126655 40mm", movement:"3235 Clone", best:["VSF","Clean"], notes:"126655 ranking." },
+  { family:"Yacht-Master", ref:"268622 37mm", movement:"Asian 2671", best:["VF","Clean Plus"], notes:"37mm YM ranking." },
+  { family:"Yacht-Master", ref:"226627 Titanium 42mm", movement:"3235 Clone", best:["A+ Factory","QF"], notes:"Titanium YM ranking from the guide." },
+
+  { family:"Datejust", ref:"All 28mm models", movement:"Asian 2671", best:["A+ Factory"], notes:"Datejust 28 ranking in the guide." },
+  { family:"Datejust", ref:"All 31mm models", movement:"Asian 2671", best:["A+ Factory"], notes:"Datejust 31 ranking in the guide." },
+  { family:"Datejust", ref:"36mm best case shape / dial", movement:"3235 Clone", best:["Clean","ARF","GMF"], notes:"Guide separates case/dial leadership from movement/crystal leadership." },
+  { family:"Datejust", ref:"36mm best movement / crystal", movement:"3235 Clone", best:["VSF","GMF","Clean"], notes:"Use VSF if movement and crystal matter more than case shape." },
+  { family:"Datejust", ref:"36mm most dial variants", movement:"3135 Clone", best:["ARF"], notes:"Guide note on variety." },
+  { family:"Datejust", ref:"36mm all other dial variants not by VSF", movement:"2824 / 2836 Asian", best:["GMF"], notes:"Lower-cost variant coverage." },
+  { family:"Datejust", ref:"41mm models", movement:"3235 Clone", best:["VSF","ARF","Clean"], notes:"Datejust 41 ranking." },
+
+  { family:"Day-Date", ref:"40mm premium tungsten heavy", movement:"3255 Clone", best:["QF Tungsten","GMF"], notes:"Premium weighted Day-Date ranking." },
+  { family:"Day-Date", ref:"40mm mid-tier tungsten value", movement:"3255 Clone", best:["KF Tungsten"], notes:"Value weighted Day-Date ranking." },
+  { family:"Day-Date", ref:"36mm models", movement:"2836 Asian", best:["ZF v2 Tungsten","ZF","GMF"], notes:"36mm Day-Date ranking." },
+  { family:"Day-Date", ref:"All gold weighted models", movement:"Custom", best:["GMF"], notes:"General weighted gold note from the guide." },
+
+  { family:"Sky-Dweller", ref:"All models", movement:"Custom", best:["THBF","QF"], notes:"Sky-Dweller ranking in the guide." },
+
+  { family:"Oyster Perpetual", ref:"All models", movement:"3230 Clone", best:["VSF","ARF"], notes:"Guide-wide Oyster Perpetual ranking." },
+
+  { family:"Sea-Dweller", ref:"126600", movement:"3235 Clone", best:["VSF","ARF"], notes:"Sea-Dweller 126600 ranking." },
+  { family:"Sea-Dweller", ref:"126603", movement:"3235 Clone", best:["VSF","ARF"], notes:"Two-tone Sea-Dweller ranking." },
+  { family:"Sea-Dweller", ref:"16600", movement:"Asian 2824", best:["BPF"], notes:"Vintage Sea-Dweller ranking." },
+
+  { family:"Cellini", ref:"Rose Gold Moonphase", movement:"2824 Asian Moon", best:["EWF"], notes:"Cellini Moonphase ranking." },
+  { family:"Cellini", ref:"Time Only", movement:"2824 Asian", best:["KZF"], notes:"Cellini time-only ranking." },
+  { family:"Cellini", ref:"Dual Time", movement:"Low Beat", best:["KZF"], notes:"Cellini Dual Time ranking." }
+];
+
+const bestFactoryFamilies = [...new Set(bestFactoryGuideData.map(x => x.family))].sort();
 
 const lowTierClaspCodes = ["D12","MA11","T10","S9","CL1","EO6","DE6","PJ4"];
 const sharedCodes = ["5HF","7CD","LV66","OXJ2","H88F","W5Y","F6U","1NQ","2K6J"];
@@ -837,6 +916,126 @@ function extractTextCandidates(text){
   return { parsed, ranked, flags, tokenHints: strong.topTokens };
 }
 
+
+function normalizeGuideText(text){
+  return normalizeOCRText(text)
+    .replace(/MASTER\s*II/g, 'MASTERII')
+    .replace(/MASTER\s+II/g, 'MASTERII')
+    .replace(/DAY\s*DATE/g, 'DAYDATE')
+    .replace(/SEA\s*DWELLER/g, 'SEADWELLER')
+    .replace(/SKY\s*DWELLER/g, 'SKYDWELLER')
+    .replace(/YACHT\s*MASTER/g, 'YACHTMASTER')
+    .replace(/AIR\s*KING/g, 'AIRKING')
+    .replace(/OYSTER\s*PERPETUAL/g, 'OYSTERPERPETUAL')
+    .replace(/EXPLORER\s+II/g, 'EXPLORERII')
+    .replace(/C\+\s*FACTORY/g, 'C+ FACTORY');
+}
+
+function guideSearchHaystack(item){
+  return normalizeGuideText([item.family, item.ref, item.movement, ...(item.best || []), item.notes || ''].join(' '));
+}
+
+function getBestFactoryMatches(query, family){
+  const q = normalizeGuideText(query || '');
+  let rows = bestFactoryGuideData.slice();
+
+  if (family && family !== 'All models') rows = rows.filter(r => r.family === family);
+
+  if (!q) return rows;
+
+  const tokens = q.split(/[^A-Z0-9+]+/).filter(Boolean);
+  return rows.map(row => {
+    const hay = guideSearchHaystack(row);
+    let score = 0;
+    tokens.forEach(token => {
+      if (hay.includes(token)) score += token.length >= 4 ? 3 : 1;
+      if (normalizeGuideText(row.family).includes(token)) score += 4;
+      if (normalizeGuideText(row.ref).includes(token)) score += 3;
+    });
+    return { row, score };
+  }).filter(x => x.score > 0).sort((a,b) => b.score - a.score).map(x => x.row);
+}
+
+function renderBestFactoryOutput(rows, query, family){
+  const out = document.getElementById('bestFactoryOutput');
+  if (!out) return;
+  if (!rows.length) {
+    out.innerHTML = `
+      <div class="result warn">
+        <div style="font-weight:bold">No best-factory match found</div>
+        <div class="small section">Try a broader model like Submariner, Datejust, GMT, Daytona, Explorer, Yacht-Master, Air-King, Milgauss, Sea-Dweller, Sky-Dweller, Oyster Perpetual, or Cellini.</div>
+      </div>
+    `;
+    return;
+  }
+
+  const limited = rows.slice(0, 8);
+  out.innerHTML = `
+    <div class="result good">
+      <div style="font-weight:bold">Recommendation results</div>
+      <div class="small section">Showing ${limited.length} match${limited.length === 1 ? '' : 'es'}${query ? ` for “${esc(query)}”` : ''}${family && family !== 'All models' ? ` in ${esc(family)}` : ''}.</div>
+    </div>
+    ${limited.map(item => `
+      <div class="card section">
+        <div class="topbar">
+          <div>
+            <div class="small muted">${esc(item.family)}</div>
+            <div style="font-size:22px;font-weight:bold;color:#065f46">${esc(item.ref)}</div>
+          </div>
+          <span class="badge dark">${esc(item.movement)}</span>
+        </div>
+        <div class="section">
+          <span class="badge">Best: ${esc(item.best[0] || 'Unknown')}</span>
+          ${item.best[1] ? `<span class="badge amber">2nd: ${esc(item.best[1])}</span>` : ''}
+          ${item.best[2] ? `<span class="badge red">3rd: ${esc(item.best[2])}</span>` : ''}
+        </div>
+        ${item.notes ? `<div class="list-item section">${esc(item.notes)}</div>` : ''}
+      </div>
+    `).join('')}
+  `;
+}
+
+function renderBestFactoryPanel(){
+  const modelOptions = ['All models', ...bestFactoryFamilies];
+  document.getElementById('panel-best').innerHTML = `
+    <div class="row row-main">
+      <div class="card">
+        <h3>Best Factory Guide</h3>
+        <div class="muted section">Type a Rolex model or ref and get a quick factory recommendation from the guide dataset. This stays separate from your code-mapping intelligence.</div>
+        <div class="grid grid-2 section">
+          <div>
+            <div class="small muted">Model family</div>
+            <select id="bestFactoryFamily">
+              ${modelOptions.map(x => `<option>${esc(x)}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <div class="small muted">Lookup</div>
+            <input id="bestFactoryQuery" class="search" placeholder="Examples: Submariner 126610, GMT Pepsi, Explorer 224270, Cellini Moonphase" />
+          </div>
+        </div>
+        <div class="camera-actions section">
+          <button class="btn" id="runBestFactoryBtn">Get recommendation</button>
+          <button class="btn secondary" id="bestFactoryFillBtn">Use selected model</button>
+        </div>
+        <div class="list-item section">CF is always treated as Clean. EWF / BTF stays combined in this guide.</div>
+      </div>
+      <div class="card">
+        <h3>Top Recommendation</h3>
+        <div id="bestFactoryOutput" class="section"></div>
+      </div>
+    </div>
+  `;
+  const defaultRows = getBestFactoryMatches('', 'All models').slice(0, 3);
+  renderBestFactoryOutput(defaultRows, '', 'All models');
+}
+
+function runBestFactoryGuide(){
+  const family = document.getElementById('bestFactoryFamily')?.value || 'All models';
+  const query = document.getElementById('bestFactoryQuery')?.value || '';
+  const rows = getBestFactoryMatches(query, family);
+  renderBestFactoryOutput(rows, query, family);
+}
 function preprocessCanvas(srcCanvas){
   const out = document.createElement('canvas');
   out.width = srcCanvas.width * 2;
@@ -1631,6 +1830,7 @@ function applyUpdate(){
   updateLog = updateLog.slice(0, 50);
   saveLS();
   renderUpdatePanel();
+  renderBestFactoryPanel();
 }
 
 function saveCurrentCase(){
@@ -1659,7 +1859,7 @@ function saveCurrentCase(){
 }
 
 function initTabs(){
-  const tabs = ['codes','serials','combos','models','qc','workflow','intel','scam','tree','auto','vision','learn','update'];
+  const tabs = ['codes','serials','combos','models','qc','workflow','intel','scam','tree','auto','vision','learn','update','best'];
   document.getElementById('tabs').innerHTML = tabs.map((t,i) =>
     `<button class="tab ${i===0?'active':''}" data-tab="${t}">${t[0].toUpperCase()+t.slice(1)}</button>`
   ).join('');
@@ -1747,6 +1947,17 @@ function bindGlobalEvents(){
     if (e.target.id === 'runDecisionTreeBtn') return runDecisionTree();
     if (e.target.id === 'runAutoScanBtn') return runAutoScan();
     if (e.target.id === 'applyUpdateBtn') return applyUpdate();
+    if (e.target.id === 'runBestFactoryBtn') return runBestFactoryGuide();
+    if (e.target.id === 'bestFactoryFillBtn') {
+      const selectedModel = document.getElementById('modelInput')?.value || '';
+      const familyMap = { 'GMT-Master II':'GMT-Master II', 'Sea-Dweller':'Sea-Dweller', 'Air-King':'Air-King', 'Yacht-Master':'Yacht-Master', 'Explorer II':'Explorer II', 'Explorer':'Explorer', 'Oyster Perpetual':'Oyster Perpetual', 'Datejust':'Datejust', 'Submariner':'Submariner', 'Daytona':'Daytona' };
+      const family = familyMap[selectedModel] || 'All models';
+      const familyEl = document.getElementById('bestFactoryFamily');
+      const queryEl = document.getElementById('bestFactoryQuery');
+      if (familyEl) familyEl.value = family;
+      if (queryEl) queryEl.value = selectedModel;
+      return runBestFactoryGuide();
+    }
   });
 
   document.addEventListener('visibilitychange', () => {
@@ -1755,6 +1966,10 @@ function bindGlobalEvents(){
 
   window.addEventListener('pagehide', stopCamera);
   window.addEventListener('beforeunload', stopCamera);
+  document.addEventListener('input', (e) => {
+    if (e.target?.id === 'bestFactoryQuery') runBestFactoryGuide();
+    if (e.target?.id === 'bestFactoryFamily') runBestFactoryGuide();
+  });
 }
 
 function renderAll(){
@@ -1772,6 +1987,7 @@ function renderAll(){
   renderVisionPanel();
   renderLearnPanel();
   renderUpdatePanel();
+  renderBestFactoryPanel();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
