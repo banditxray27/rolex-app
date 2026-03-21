@@ -93,6 +93,20 @@
       padding:10px;border-radius:12px;background:#fafaf9;border:1px solid var(--border);margin-bottom:8px
     }
     .saved-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+
+    .confidence-tier{
+      display:inline-block;
+      margin-bottom:10px;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .confidence-tier.low{background:#fee2e2;color:#b91c1c}
+    .confidence-tier.medium{background:#fef3c7;color:#b45309}
+    .confidence-tier.high{background:#dcfce7;color:#15803d}
     .video-wrap{position:relative;width:100%;border-radius:16px;overflow:hidden;background:#000}
     video{width:100%;aspect-ratio:16/9;background:#000;display:block;object-fit:cover}
     .scan-box{
@@ -1284,47 +1298,82 @@ function claspMatches(input, candidate){
 }
 
 function getScoreBreakdown({model,reference,serial,clasp,visualFactory}){
-  const weights = inferModelWeight(model || modelData[0].model);
-  const scores = Object.fromEntries(factoryList.map(f => [f,0]));
-  const reasons = Object.fromEntries(factoryList.map(f => [f,[]]));
   const effectiveReference = !reference || reference === 'No selection' ? 'All references' : reference;
-  const rows = getEntriesForModelAndRef(model, effectiveReference);
   const upperSerial = normalizeToken(serial);
   const upperClasp = normalizeToken(clasp);
 
-  rows.forEach(row => {
-    if (scores[row.factory] === undefined) scores[row.factory] = 0;
-    if (!effectiveReference || effectiveReference === 'All references') {
-      scores[row.factory] += weights.ref;
-      reasons[row.factory].push(model ? `Factory exists in selected model dataset (+${weights.ref})` : `Factory exists in full dataset scan (+${weights.ref})`);
-    } else {
-      scores[row.factory] += weights.ref;
-      reasons[row.factory].push(`Reference matches ${row.ref} (+${weights.ref})`);
-    }
+  const hasModel = !!model;
+  const hasSerial = !!upperSerial;
+  const hasClasp = !!upperClasp;
+  const hasVisual = !!visualFactory && visualFactory !== "none";
+  const signalCount = [hasModel, hasSerial, hasClasp, hasVisual].filter(Boolean).length;
 
-    if (upperSerial && row.serials.some(s => serialMatches(upperSerial, s))) {
+  const rows = hasModel
+    ? getEntriesForModelAndRef(model, effectiveReference)
+    : getAllEntries();
+
+  const weights = inferModelWeight(model || modelData[0].model);
+  const scores = Object.fromEntries(factoryList.map(f => [f,0]));
+  const reasons = Object.fromEntries(factoryList.map(f => [f,[]]));
+  const matchedFactories = new Set();
+  const factoryMatchRefs = Object.fromEntries(factoryList.map(f => [f,new Set()]));
+
+  if (!rows.length) {
+    return [{
+      factory: "Undetermined",
+      score: 0,
+      reasons: ["No mapped rows available for the current selection."]
+    }];
+  }
+
+  if (hasModel) {
+    const presentFactories = [...new Set(rows.map(r => r.factory))];
+    presentFactories.forEach(factory => {
+      const base = effectiveReference === 'All references' ? 6 : 10;
+      scores[factory] += base;
+      reasons[factory].push(
+        effectiveReference === 'All references'
+          ? `Model selected: ${model} (+${base})`
+          : `Reference selected: ${effectiveReference} (+${base})`
+      );
+    });
+  }
+
+  rows.forEach(row => {
+    let rowMatched = false;
+
+    if (hasSerial && row.serials.some(s => serialMatches(upperSerial, s))) {
       scores[row.factory] += weights.serial;
       reasons[row.factory].push(`Serial pattern matches ${row.factory} on ${row.ref} (+${weights.serial})`);
+      rowMatched = true;
     }
 
-    if (upperClasp && row.clasps.some(c => claspMatches(upperClasp, c))) {
+    if (hasClasp && row.clasps.some(c => claspMatches(upperClasp, c))) {
       scores[row.factory] += weights.clasp;
       reasons[row.factory].push(`Clasp code maps to ${row.factory} on ${row.ref} (+${weights.clasp})`);
+      rowMatched = true;
     }
 
-    if (upperSerial && upperClasp) {
+    if (hasSerial && hasClasp) {
       const serialHit = row.serials.some(s => serialMatches(upperSerial, s));
       const claspHit = row.clasps.some(c => claspMatches(upperClasp, c));
       if (serialHit && claspHit) {
         scores[row.factory] += weights.combo;
         reasons[row.factory].push(`Serial + clasp combo align on the same reference (+${weights.combo})`);
+        rowMatched = true;
       }
+    }
+
+    if (rowMatched) {
+      matchedFactories.add(row.factory);
+      factoryMatchRefs[row.factory].add(row.ref);
     }
   });
 
-  if (visualFactory && visualFactory !== "none" && scores[visualFactory] !== undefined) {
+  if (hasVisual && scores[visualFactory] !== undefined) {
     scores[visualFactory] += weights.visual;
     reasons[visualFactory].push(`Visual profile leans ${visualFactory} (+${weights.visual})`);
+    matchedFactories.add(visualFactory);
   }
 
   if (model === "Daytona" && (upperSerial.includes("LV66") || upperSerial.includes("OXJ2") || upperSerial.includes("H88F"))) {
@@ -1345,14 +1394,53 @@ function getScoreBreakdown({model,reference,serial,clasp,visualFactory}){
     });
   }
 
-  return Object.entries(scores)
+  const positiveEntries = Object.entries(scores).filter(([, score]) => score > 0);
+  if (!positiveEntries.length) {
+    return [{
+      factory: "Undetermined",
+      score: 0,
+      reasons: ["No reliable mapped match found from the current input."]
+    }];
+  }
+
+  const total = positiveEntries.reduce((sum, [, score]) => sum + score, 0) || 1;
+  let ranked = positiveEntries
     .map(([factory, score]) => ({
       factory,
-      score: Math.min(score, 100),
+      score: Math.round((score / total) * 100),
       reasons: reasons[factory] || []
     }))
     .sort((a,b) => b.score - a.score);
+
+  const confidenceCap = signalCount <= 1 ? 45 : signalCount === 2 ? 70 : signalCount === 3 ? 85 : 100;
+  ranked = ranked.map((row, index) => {
+    let score = row.score;
+    if (score > confidenceCap) score = confidenceCap;
+    if (!hasModel && signalCount <= 2 && (factoryMatchRefs[row.factory]?.size || 0) <= 1 && index === 0) {
+      score = Math.min(score, 55);
+    }
+    return { ...row, score };
+  });
+
+  if (ranked.length > 1) {
+    const top = ranked[0];
+    const second = ranked[1];
+    if (top.score - second.score < 8) {
+      ranked[0] = {
+        ...top,
+        reasons: [...top.reasons, "Top result is close to another factory, so certainty is limited."]
+      };
+      ranked[0].score = Math.min(ranked[0].score, 60);
+    }
+  }
+
+  return ranked.length ? ranked : [{
+    factory: "Undetermined",
+    score: 0,
+    reasons: ["More input is required for a reliable inference."]
+  }];
 }
+
 
 function getScamSignals({model,reference,serial,clasp,visualFactory,ranked,sellerClaim}){
   const flags = [];
@@ -1845,6 +1933,21 @@ function updateReferenceOptions(){
   if (options.includes(current)) refSel.value = current;
 }
 
+
+function getConfidenceTier(score){
+  if (score >= 70) return { label: "High confidence", cls: "high", color: "#16a34a" };
+  if (score >= 50) return { label: "Medium confidence", cls: "medium", color: "#f59e0b" };
+  return { label: "Low confidence", cls: "low", color: "#ff3b3b" };
+}
+
+function renderTopConfidenceTier(score){
+  const topReasons = document.getElementById('topReasons');
+  if (!topReasons) return;
+  const tier = getConfidenceTier(score);
+  const badge = `<div id="confidenceTier" class="confidence-tier ${tier.cls}">${tier.label}</div>`;
+  topReasons.innerHTML = badge + topReasons.innerHTML;
+}
+
 function updateIntelligence(){
   const model = document.getElementById('modelInput').value || null;
   const reference = document.getElementById('referenceInput').value;
@@ -1869,7 +1972,7 @@ function updateIntelligence(){
 
     const bar = document.getElementById('topBar');
     bar.style.width = "0%";
-    bar.style.background = "#111827";
+    bar.style.background = "#ff3b3b";
 
     document.getElementById('topReasons').innerHTML = `
       <div class="list-item" style="text-align:center;padding:18px">
@@ -1886,6 +1989,7 @@ function updateIntelligence(){
 
   const ranked = getScoreBreakdown({model, reference, serial, clasp, visualFactory});
   const top = ranked[0] || {factory:"No result", score:0, reasons:[]};
+  const tier = getConfidenceTier(top.score || 0);
 
   document.getElementById('topFactory').textContent = top.factory;
   const topScore = document.getElementById('topScore');
@@ -1894,11 +1998,17 @@ function updateIntelligence(){
 
   const bar = document.getElementById('topBar');
   bar.style.width = `${top.score}%`;
-  bar.style.background = theme === "simple" ? "#111827" : (top.score >= 75 ? "#047857" : top.score >= 45 ? "#b45309" : "#b91c1c");
+  if (theme === "simple") {
+    bar.style.background = "#111827";
+  } else {
+    bar.style.background = tier.color;
+  }
 
   document.getElementById('topReasons').innerHTML = top.reasons.length
     ? top.reasons.map(r => `<div class="list-item">${esc(r)}</div>`).join('')
     : `<div class="list-item">Add serial, clasp, or visual lean to generate a result.</div>`;
+
+  renderTopConfidenceTier(top.score || 0);
 
   currentIntel = {model, reference, serial, clasp, visualFactory, sellerClaim, ranked, top};
   renderIntelPanel();
