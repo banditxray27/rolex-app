@@ -17,247 +17,100 @@
       --amber:#b45309;
       --border:#e5e7eb;
     }
-
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-
     body{
       margin:0;
       font-family:Arial,Helvetica,sans-serif;
       background:linear-gradient(#f5f5f4,#fff,#f5f5f4);
       color:#111827;
     }
-
     .wrap{max-width:1200px;margin:0 auto;padding:16px}
     .card{
       background:var(--card);
       border:1px solid rgba(6,95,70,.1);
       border-radius:22px;
       padding:18px;
-      box-shadow:0 8px 24px rgba(0,0,0,.06);
+      box-shadow:0 8px 24px rgba(0,0,0,.06)
     }
-
     .row{display:grid;gap:16px}
     .row-2{grid-template-columns:1.7fr 1fr}
     .row-main{grid-template-columns:1.1fr 1.2fr}
-
     .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
     .tab{
-      padding:10px 14px;
-      border-radius:16px;
-      border:1px solid var(--border);
-      background:#fff;
-      cursor:pointer;
-      font-size:14px;
+      padding:10px 14px;border-radius:16px;border:1px solid var(--border);
+      background:#fff;cursor:pointer;font-size:14px
     }
-    .tab.active{
-      background:var(--green);
-      color:#fff;
-      border-color:var(--green);
-    }
-
+    .tab.active{background:var(--green);color:#fff;border-color:var(--green)}
     .panel{display:none}
     .panel.active{display:block}
-
     h1,h2,h3{margin:0}
     .muted{color:var(--muted);font-size:14px}
-
     .badge{
-      display:inline-block;
-      padding:6px 10px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:bold;
-      background:#ecfdf5;
-      color:#065f46;
-      margin:4px;
+      display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;
+      font-weight:bold;background:#ecfdf5;color:#065f46;margin:4px
     }
     .badge.dark{background:#111827;color:#fff}
     .badge.red{background:#fee2e2;color:#991b1b}
     .badge.amber{background:#fef3c7;color:#92400e}
-
     .pill{
-      display:inline-block;
-      padding:8px 10px;
-      border-radius:999px;
-      background:#f3f4f6;
-      margin:4px;
-      font-size:13px;
+      display:inline-block;padding:8px 10px;border-radius:999px;
+      background:#f3f4f6;margin:4px;font-size:13px
     }
-
-    .search, select, textarea, input[type="file"], input[type="range"]{
-      width:100%;
-      padding:14px;
-      border:1px solid #d1d5db;
-      border-radius:16px;
-      font-size:16px;
-      background:#fff;
-      color:#111827;
+    .search, select, textarea, input[type="file"]{
+      width:100%;padding:14px;border:1px solid #d1d5db;border-radius:16px;
+      font-size:16px;background:#fff;color:#111827
     }
-
-    textarea{
-      min-height:150px;
-      resize:vertical;
-      font-family:inherit;
-    }
-
+    textarea{min-height:150px;resize:vertical;font-family:inherit}
     .grid{display:grid;gap:14px}
     .grid-3{grid-template-columns:repeat(3,1fr)}
     .grid-2{grid-template-columns:repeat(2,1fr)}
-
     .small{font-size:13px}
-
     .btn{
-      background:var(--green);
-      color:#fff;
-      border:none;
-      border-radius:14px;
-      padding:12px 16px;
-      cursor:pointer;
-      font-weight:bold;
-      font-size:14px;
+      background:var(--green);color:#fff;border:none;border-radius:14px;
+      padding:12px 16px;cursor:pointer;font-weight:bold;font-size:14px
     }
-    .btn.secondary{
-      background:#fff;
-      color:#111827;
-      border:1px solid var(--border);
-    }
+    .btn.secondary{background:#fff;color:#111827;border:1px solid var(--border)}
     .btn:disabled{opacity:.55;cursor:not-allowed}
-
     .section{margin-top:16px}
     .result{
-      border:1px solid var(--border);
-      border-radius:16px;
-      padding:14px;
-      background:#fafaf9;
+      border:1px solid var(--border);border-radius:16px;padding:14px;background:#fafaf9
     }
     .good{background:#ecfdf5;color:#065f46}
     .bad{background:#fef2f2;color:#991b1b}
     .warn{background:#fffbeb;color:#92400e}
-
-    .progress{
-      height:10px;
-      background:#e5e7eb;
-      border-radius:999px;
-      overflow:hidden;
-    }
+    .progress{height:10px;background:#e5e7eb;border-radius:999px;overflow:hidden}
     .bar{height:100%;background:var(--green)}
-
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-    }
-
-    .hero{
-      display:flex;
-      gap:14px;
-      align-items:center;
-    }
-
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .hero{display:flex;gap:14px;align-items:center}
     .icon{
-      width:60px;
-      height:60px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:999px;
-      border:4px solid #065f46;
-      background:#064e3b;
-      color:#fff;
-      font-size:28px;
-      flex:0 0 auto;
+      width:60px;height:60px;display:flex;align-items:center;justify-content:center;
+      border-radius:999px;border:4px solid #065f46;background:#064e3b;color:#fff;
+      font-size:28px;flex:0 0 auto
     }
-
     .hidden{display:none !important}
-
     .list-item{
-      padding:10px;
-      border-radius:12px;
-      background:#fafaf9;
-      border:1px solid var(--border);
-      margin-bottom:8px;
+      padding:10px;border-radius:12px;background:#fafaf9;border:1px solid var(--border);margin-bottom:8px
     }
-
-    .saved-actions{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-top:8px;
-    }
-
-    .video-wrap{
-      position:relative;
-      width:100%;
-      border-radius:16px;
-      overflow:hidden;
-      background:#000;
-    }
-
-    video{
-      width:100%;
-      aspect-ratio:16/9;
-      background:#000;
-      display:block;
-      object-fit:cover;
-    }
-
+    .saved-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .video-wrap{position:relative;width:100%;border-radius:16px;overflow:hidden;background:#000}
+    video{width:100%;aspect-ratio:16/9;background:#000;display:block;object-fit:cover}
     .scan-box{
-      position:absolute;
-      left:15%;
-      top:36%;
-      width:70%;
-      height:24%;
-      border:2px solid rgba(255,255,255,.95);
-      border-radius:14px;
-      box-shadow:0 0 0 9999px rgba(0,0,0,.30);
-      pointer-events:none;
+      position:absolute;left:15%;top:36%;width:70%;height:24%;
+      border:2px solid rgba(255,255,255,.95);border-radius:14px;
+      box-shadow:0 0 0 9999px rgba(0,0,0,.30);pointer-events:none
     }
-
     .scan-label{
-      position:absolute;
-      left:50%;
-      bottom:10px;
-      transform:translateX(-50%);
-      background:rgba(0,0,0,.65);
-      color:#fff;
-      font-size:12px;
-      padding:6px 10px;
-      border-radius:999px;
-      pointer-events:none;
-      white-space:nowrap;
+      position:absolute;left:50%;bottom:10px;transform:translateX(-50%);
+      background:rgba(0,0,0,.65);color:#fff;font-size:12px;padding:6px 10px;
+      border-radius:999px;pointer-events:none;white-space:nowrap
     }
-
-    .sticky{
-      position:sticky;
-      top:0;
-      z-index:10;
-    }
-
-    .camera-actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
+    .sticky{position:sticky;top:0;z-index:10}
+    .camera-actions{display:flex;gap:10px;flex-wrap:wrap}
     .mono{
       font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-      word-break:break-word;
+      word-break:break-word
     }
-
-    .meter{
-      display:grid;
-      gap:8px;
-    }
-
-    .inline-kv{
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      align-items:center;
-    }
-
     @media (max-width: 900px){
       .row-2,.row-main,.grid-3,.grid-2{grid-template-columns:1fr}
       .topbar{align-items:flex-start}
@@ -283,11 +136,11 @@
         <div>
           <div style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#065f46;font-weight:bold">Bandit Xray</div>
           <h1>Rolex Master Field Manual 2026</h1>
-          <div class="muted">Searchable database, inference engine, scam detector, decision tree, update system, and improved OCR camera tools.</div>
+          <div class="muted">Model-aware database, inference engine, scam detector, decision tree, update system, and OCR camera tools.</div>
         </div>
       </div>
       <div class="section">
-        <input id="searchBox" class="search" placeholder="Search clasp code, serial, combo, model, or factory…" />
+        <input id="searchBox" class="search" placeholder="Search model, ref, serial, clasp, or factory…" />
       </div>
       <div id="searchResults" class="section"></div>
     </div>
@@ -307,11 +160,12 @@
     <div class="row row-main section">
       <div class="grid grid-2">
         <div><div class="small muted">Model</div><select id="modelInput"></select></div>
+        <div><div class="small muted">Reference</div><select id="referenceInput"></select></div>
         <div><div class="small muted">Visual profile leans</div><select id="visualFactory"></select></div>
         <div><div class="small muted">Seller claims</div><select id="sellerClaim"></select></div>
         <div><div class="small muted">Confidence theme</div><select id="confidenceTheme"><option value="dynamic">Dynamic risk colors</option><option value="simple">Simple monochrome</option></select></div>
-        <div style="grid-column:1/-1"><div class="small muted">Serial pattern</div><input id="serialInput" class="search mono" placeholder="Example: 6R12V6, S19, R86Z, LV66…" /></div>
-        <div style="grid-column:1/-1"><div class="small muted">Clasp code</div><input id="claspInput" class="search mono" placeholder="Example: 1LD, 7GJ, 4RL…" /></div>
+        <div style="grid-column:1/-1"><div class="small muted">Serial pattern</div><input id="serialInput" class="search mono" placeholder="Example: 6R****V6, Z10Y, OXJ2, Q66T…" /></div>
+        <div style="grid-column:1/-1"><div class="small muted">Clasp code</div><input id="claspInput" class="search mono" placeholder="Example: 1LD, 7GJ, TL11, A8L…" /></div>
       </div>
       <div class="result">
         <div class="topbar">
@@ -346,69 +200,259 @@
 </div>
 
 <script>
-const claspData = {
-  VSF: ["8PQ","6SH","7GJ","1LQ","H7Z","TL11","U7T","K6G","705","W5T","UZ2","3VV","P2K","1RD"],
-  Clean: ["1LD","ORB","ORV","1NQ","F6U","F80","5ZR","6WP","4JK","1PD","E4F","E4P","T2A","5ZS"],
-  ARF: ["4RL","5HF","7CD","9AX","CL10","EO6"],
-  Noob: ["ST9","C4R","5NF","OP8","T1G","PJ3","PJ4","71H","Y8C"],
-  "GMF / BP": ["5XZ","7QE","N9N","4AZ","7GT","DE6","OP10","453"],
-  "EWF / BTF": ["2EM","5LX","W5Y","U1N"],
-  Mixed: ["7UL","2WP","R5Y","X9X","3XU","RP9","H5X","CL1","MA11","D12","T10","S9"]
-};
-
-const serialData = {
-  VSF: ["S19","S29","S39","Q66","Q66T","K25","K28","R8","R9","R86Z","5R04W","5R06W","Z10Y","H13J","X3Y6","2R8S","2R9X","T11Y"],
-  Clean: ["L6V","L6V6","Y2L","Y2L3","Y2L6","F6U","XN77","6R****V6","Z59T","5UU0","274R","031E","686R","2K6J","N1K9","8H6W"],
-  ARF: ["A9","A9A","N6","N8","E5N","V3","V5"],
-  Noob: ["F520","F5XX","D9","D10","PJ3","PJ4","G0","G1"],
-  "GMF / BP": ["49GC","7MC5","X273","G3","G4","B1","B2"],
-  Mixed: ["LV66","OXJ2","H88F","V4"]
-};
-
-const combos = [
-  { factory: "VSF", combo: "S19 + 7GJ", confidence: 88 },
-  { factory: "VSF", combo: "Q66 + 1LQ", confidence: 91 },
-  { factory: "VSF", combo: "R86Z + P2K", confidence: 84 },
-  { factory: "VSF", combo: "T11Y + U7T", confidence: 80 },
-  { factory: "Clean", combo: "6R****V6 + 1LD", confidence: 95 },
-  { factory: "Clean", combo: "Z59T + ORV", confidence: 83 },
-  { factory: "Clean", combo: "N1K9 + 5ZS", confidence: 78 },
-  { factory: "Clean", combo: "8H6W + 5ZR", confidence: 82 },
-  { factory: "ARF", combo: "A9 + 4RL", confidence: 89 },
-  { factory: "ARF", combo: "LV66 + 7CD", confidence: 62 },
-  { factory: "Noob", combo: "F520 + ST9", confidence: 90 },
-  { factory: "GMF / BP", combo: "49GC + 7QE", confidence: 79 }
-];
-
-const models = [
-  {name:"Daytona",tell:"Subdial spacing",rep:["Subdials too close","Dial looks compressed"],gen:["Balanced spacing","Open, even symmetry"],codeNotes:["LV66 is mixed and weaker","7CD leans ARF/BTF context-sensitive","5NF appears in Noob lineage"]},
-  {name:"GMT-Master II",tell:"Hand stack",rep:["Incorrect hand order","Bezel transition slightly off"],gen:["Proper hand layering","Clean bezel split"],codeNotes:["71H appears in Noob CHS history","ORV can appear on newer Clean-adjacent batches"]},
-  {name:"Submariner",tell:"Cyclops + bezel engraving",rep:["Weak date magnification","Shallow bezel cuts"],gen:["Strong cyclops","Deep crisp engraving"],codeNotes:["1LQ/H7Z lean VSF","1LD leans Clean","U1N appears on EWF-linked bracelets"]},
-  {name:"Datejust",tell:"Dial text + cyclops",rep:["Thicker font","Print inconsistency"],gen:["Razor-sharp print","Perfect spacing"],codeNotes:["6R****V6 + F6U strongly suggests Clean family","R86Z + P2K leans VSF","49GC + 7QE can point GMF"]},
-  {name:"Explorer / OP",tell:"Dial print + case shape",rep:["Soft text","Less refined case lines"],gen:["Minimal but razor sharp","Balanced lugs"],codeNotes:["8H6W + 5ZR leans Clean Explorer","T11Y + U7T leans VSF OP"]}
+const modelData = [
+  {
+    model: "Oyster Perpetual",
+    references: [
+      { ref: "36 - 126000", entries: [
+        { factory:"Clean", serials:["N1K9"], clasps:["5ZS"] },
+        { factory:"VSF", serials:["T11Y"], clasps:["U7T"] }
+      ]},
+      { ref: "41 - 124300", entries: [
+        { factory:"Clean", serials:["2ZQ8"], clasps:["U9G"] },
+        { factory:"VSF", serials:["Z10Y"], clasps:["989"] }
+      ]}
+    ],
+    tell:"Dial print + case shape",
+    rep:["Soft dial print","Uneven marker placement","Case shape less balanced"],
+    gen:["Sharp minimal print","Balanced case proportions","Clean handset finishing"],
+    codeNotes:["124300 Clean uses U9G in this dataset","124300 VSF adds Z10Y + 989","Separate OP from Explorer in QC"],
+    highTierFactories:["Clean","VSF"]
+  },
+  {
+    model: "Datejust",
+    references: [
+      { ref: "36 - 116234", entries: [
+        { factory:"ARF", serials:["55D1"], clasps:["C0C"] }
+      ]},
+      { ref: "36 - 126234", entries: [
+        { factory:"Clean", serials:["6R87Y","5L67K","1PK5"], clasps:["F6U","Z5D"] },
+        { factory:"VSF", serials:["5X12","R86Z"], clasps:["P2K","1RD","K6G","705"] },
+        { factory:"GMF / BP", serials:["49GC"], clasps:["7QE"] }
+      ]},
+      { ref: "41 - 126334", entries: [
+        { factory:"Clean", serials:["Z59T","6RV6","6AV6","1PK5"], clasps:["ORV"] },
+        { factory:"VSF", serials:["5X1A","5XO9","5XO8","5R06W","Z66E"], clasps:["ORV","K6G","K5G"] }
+      ]}
+    ],
+    tell:"Dial text + cyclops",
+    rep:["Thicker font","Date magnification weak","Print inconsistency"],
+    gen:["Razor-sharp print","Strong cyclops","Balanced bezel/case finishing"],
+    codeNotes:["Datejust has the deepest spread in this dataset","6R/5L clusters appear often on Clean","VSF Datejust often overlaps with K6G/705/1RD"],
+    highTierFactories:["Clean","VSF","ARF"]
+  },
+  {
+    model: "Explorer",
+    references: [
+      { ref: "36 - 124270", entries: [
+        { factory:"Clean", serials:["8H6W"], clasps:["5ZR"] },
+        { factory:"VSF", serials:["5R0W","M15X"], clasps:["TL11","H5X"] }
+      ]},
+      { ref: "39 - 214270", entries: [
+        { factory:"Clean", serials:["34Y6"], clasps:["R3L"] }
+      ]},
+      { ref: "40 - 224270", entries: [
+        { factory:"Clean", serials:["E5J7"], clasps:["K6V"] },
+        { factory:"VSF", serials:["H13J"], clasps:["U7T"] }
+      ]}
+    ],
+    tell:"Dial print + case shape",
+    rep:["Soft 3-6-9 print","Less refined case lines","Weak brushing balance"],
+    gen:["Crisp 3-6-9 dial","Balanced lugs","Strong simple finishing"],
+    codeNotes:["Explorer is now separate from Oyster Perpetual","124270 VSF adds TL11 and H5X","214270/224270 broaden Explorer coverage"],
+    highTierFactories:["Clean","VSF"]
+  },
+  {
+    model: "Submariner",
+    references: [
+      { ref: "40 - 116610LN/LV", entries: [
+        { factory:"Clean", serials:["R6V6"], clasps:["5HF"] },
+        { factory:"VSF", serials:["5RO8","K25Y","S19V","S29V","S39V","K28S","Q66T"], clasps:["7GJ"] }
+      ]},
+      { ref: "40 - 114060", entries: [
+        { factory:"Clean", serials:["6RV6","49W9"], clasps:["5HF"] },
+        { factory:"VSF", serials:["A01X","K25Y","5X1O","5X11","5W12"], clasps:["7GJ"] }
+      ]},
+      { ref: "41 - 126610LN/LV", entries: [
+        { factory:"Clean", serials:["6RV6","XN77"], clasps:["F80","1LD"] },
+        { factory:"VSF", serials:["5RO9","5X1O","5XO8","2R8S","Q66T","2R9X"], clasps:["3VV","1LQ"] }
+      ]},
+      { ref: "41 - 124060", entries: [
+        { factory:"Clean", serials:["6RV6"], clasps:["F80"] },
+        { factory:"VSF", serials:["5X12","5W11","5X1O","5XO9","5XO8","5RO9","5RO8","Q66T"], clasps:["3VV","7GJ"] }
+      ]}
+    ],
+    tell:"Cyclops + bezel engraving",
+    rep:["Weak date magnification","Shallow bezel cuts","Case shape softer"],
+    gen:["Strong cyclops","Deep bezel engraving","Solid overall proportions"],
+    codeNotes:["Submariner remains one of the strongest mapped model groups","1LD/F80 are key Clean 126610/124060 signals","7GJ/1LQ/3VV matter most with good visuals"],
+    highTierFactories:["Clean","VSF"]
+  },
+  {
+    model: "Air-King",
+    references: [
+      { ref: "126900", entries: [
+        { factory:"Clean", serials:["5UU0"], clasps:["6WP"] },
+        { factory:"VSF", serials:["1QK1"], clasps:["UZ2"] },
+        { factory:"GMF / BP", serials:["7MC5"], clasps:["N9N"] }
+      ]}
+    ],
+    tell:"Dial layout + crown guards",
+    rep:["Busy dial looks off-balance","Weak minute track","Case shape less sharp"],
+    gen:["Balanced busy dial","Crisp green/yellow print","Sharper crown guard profile"],
+    codeNotes:["126900 now fully included","6WP / UZ2 / N9N are key Air-King dataset clasps"],
+    highTierFactories:["Clean","VSF"]
+  },
+  {
+    model: "Yacht-Master",
+    references: [
+      { ref: "42 - 226659 / 226658", entries: [
+        { factory:"Clean", serials:["W478"], clasps:["1PD"] },
+        { factory:"VSF", serials:["8G62"], clasps:["W5T"] }
+      ]},
+      { ref: "42 - 226627", entries: [
+        { factory:"TW+", serials:["FB1A"], clasps:["Y8C"] },
+        { factory:"Clean", serials:["274R"], clasps:["4JK"] }
+      ]},
+      { ref: "40 - 126622", entries: [
+        { factory:"Clean", serials:["031E","686R"], clasps:["E4F","E4P"] },
+        { factory:"VSF", serials:["X3Y6"], clasps:["2WP"] }
+      ]}
+    ],
+    tell:"Bezel texture + case finish",
+    rep:["Bezel finish too rough or too flat","Dial text lacks refinement"],
+    gen:["Distinctive bezel texture","Balanced sporty-polished finish","Strong handset alignment"],
+    codeNotes:["YM now includes 40mm and 42mm refs","1PD/4JK/E4F/E4P/2WP all matter by reference"],
+    highTierFactories:["Clean","VSF"]
+  },
+  {
+    model: "Sea-Dweller",
+    references: [
+      { ref: "126600", entries: [
+        { factory:"Clean", serials:["2K6J"], clasps:["1PD"] },
+        { factory:"VSF", serials:["2K6J"], clasps:["7QE"] }
+      ]}
+    ],
+    tell:"Case thickness + dial print",
+    rep:["Case profile wrong","Dial print lacks depth"],
+    gen:["Purposeful thick case","Sharp dial","Balanced red text if applicable"],
+    codeNotes:["Sea-Dweller has a smaller mapped set","2K6J appears on both CF and VSF so clasp matters more here"],
+    highTierFactories:["Clean","VSF"]
+  },
+  {
+    model: "Explorer II",
+    references: [
+      { ref: "226570", entries: [
+        { factory:"Clean", serials:["J8L9"], clasps:["8GY"] },
+        { factory:"GMF / BP", serials:["X273"], clasps:["4AZ","N9N"] }
+      ]}
+    ],
+    tell:"Orange hand + dial balance",
+    rep:["Hand proportions off","Bezel engraving weak","Dial balance feels wrong"],
+    gen:["Correct orange hand feel","Crisp bezel engravings","Balanced maxi dial"],
+    codeNotes:["Explorer II now fully separated from Explorer","8GY and X273/4AZ are key map points"],
+    highTierFactories:["Clean","GMF / BP"]
+  },
+  {
+    model: "GMT-Master",
+    references: [
+      { ref: "116710LN / 126710 BLNR / BLRO / VTNR / GRNR", entries: [
+        { factory:"Clean", serials:["Y2L3","L2L6","L6V6","Y2L6"], clasps:["1NQ","F6U"] },
+        { factory:"ARF", serials:["L6V6"], clasps:["F6U"] },
+        { factory:"VSF", serials:["5X1O","Y2L3"], clasps:["1NQ","A9A","F6U"] }
+      ]},
+      { ref: "126718GRNR", entries: [
+        { factory:"Clean", serials:["R8Y8"], clasps:["A8L"] }
+      ]},
+      { ref: "126713GRNR", entries: [
+        { factory:"Clean", serials:["L6V6","Y2L3"], clasps:["A6L"] }
+      ]}
+    ],
+    tell:"Hand stack + bezel transition",
+    rep:["Incorrect hand order","Bezel transition slightly off","Case shape can be softer"],
+    gen:["Proper hand layering","Crisp bezel split","Balanced GMT case profile"],
+    codeNotes:["GMT now includes LN/BLNR/BLRO/VTNR/GRNR data","A8L and A6L add GRNR coverage","1NQ/F6U remain core Clean GMT signals"],
+    highTierFactories:["Clean","VSF","ARF"]
+  },
+  {
+    model: "Daytona",
+    references: [
+      { ref: "116520", entries: [
+        { factory:"Clean", serials:["216W","LV66"], clasps:["7CD"] }
+      ]},
+      { ref: "116500", entries: [
+        { factory:"Clean", serials:["LV66"], clasps:["7CD"] },
+        { factory:"VSF", serials:["Q66T","OXJ2","LV66","H88F"], clasps:["7CD","3XU","W5Y","RP9"] },
+        { factory:"EWF / BTF", serials:["V4P5","V5P5"], clasps:["W5Y"] }
+      ]},
+      { ref: "126500", entries: [
+        { factory:"Clean", serials:["OXJ2"], clasps:["M5X"] },
+        { factory:"VSF", serials:["5X11","5W12","5X1O","Q66T","OXJ2","LV66","H88F"], clasps:["7CD","3XU","W5Y","RP9","M5X"] }
+      ]},
+      { ref: "116503", entries: [
+        { factory:"Clean", serials:["216W"], clasps:["7CD"] },
+        { factory:"EWF / BTF", serials:["V3P5"], clasps:["W5Y"] }
+      ]},
+      { ref: "116506", entries: [
+        { factory:"Clean", serials:["8RY8","OXJ2"], clasps:["0WH"] },
+        { factory:"EWF / BTF", serials:["J558"], clasps:["W5Y"] }
+      ]},
+      { ref: "126503", entries: [
+        { factory:"Clean", serials:[], clasps:["W7R"] }
+      ]},
+      { ref: "126518", entries: [
+        { factory:"Clean", serials:["OXJ2"], clasps:["7CD"] }
+      ]},
+      { ref: "126515", entries: [
+        { factory:"Clean", serials:["OXJ2"], clasps:["7CD"] }
+      ]},
+      { ref: "126519", entries: [
+        { factory:"Clean", serials:["OXJ2"], clasps:["7CD"] },
+        { factory:"VSF", serials:["H88F","W18T","5R12"], clasps:["7CD"] }
+      ]},
+      { ref: "126529", entries: [
+        { factory:"QF", serials:["VS96"], clasps:["N9C","T1G"] }
+      ]},
+      { ref: "126506", entries: [
+        { factory:"Clean", serials:["OXJ2"], clasps:["O7H"] },
+        { factory:"VSF", serials:["H88F","W18T"], clasps:["V8S"] },
+        { factory:"QF", serials:["VS96"], clasps:["VSP"] }
+      ]},
+      { ref: "126509", entries: [
+        { factory:"VSF", serials:["W18T"], clasps:["5NX"] }
+      ]}
+    ],
+    tell:"Subdial spacing",
+    rep:["Subdials too close","Dial looks compressed","Bezel text can feel off"],
+    gen:["Balanced spacing","Open, even symmetry","Refined dial layout"],
+    codeNotes:["Daytona is highly shared and needs strongest visual QC","LV66/OXJ2/H88F repeat across multiple factories","Never trust Daytona codes alone"],
+    highTierFactories:["Clean","VSF","EWF / BTF","QF"]
+  }
 ];
 
 const qcSystem = [
   { title:"Dial Print", good:"Sharp, clean, even", bad:"Fuzzy, thick, uneven", weight:"Highest" },
   { title:"Case Shape", good:"Balanced lugs and crown guards", bad:"Fat guards, soft lines", weight:"High" },
-  { title:"SEL Fit", good:"Tight and seamless", bad:"Visible gaps or looseness", weight:"High" },
-  { title:"Lume", good:"Even, long-lasting", bad:"Uneven, fades quickly", weight:"Medium" },
-  { title:"Rehaut", good:"Usually aligned and deep", bad:"Off-center or shallow", weight:"Low" }
+  { title:"SEL Fit / Bracelet", good:"Tight and seamless", bad:"Visible gaps or looseness", weight:"High" },
+  { title:"Bezel / Model Tell", good:"Reference-specific details align", bad:"Wrong proportions or weak engraving", weight:"High" },
+  { title:"Rehaut / Extras", good:"Supportive only", bad:"Do not over-trust", weight:"Low" }
 ];
 
 const factoryProfiles = {
-  VSF:{strengths:["Best movement reputation","Strong cyclops/crystal","Consistent serial clusters"], cautions:["Case can look softer than Clean","Bracelet may overlap with ARF-supplied parts"]},
-  Clean:{strengths:["Sharp case shape","Strong bezel and overall finishing","6R****V6 is the strongest recurring serial signal"], cautions:["Can be copied by fake Clean sellers","Some bracelets overlap with ARF supply"]},
-  ARF:{strengths:["Bracelet feel","Strong clasp identity on some batches"], cautions:["Not all 5HF watches are ARF","Often seen as component supplier"]},
-  Noob:{strengths:["Older lineage easier to map","ST9/F520 combo is strong"], cautions:["Revived Noob naming is inconsistent","Legacy codes can overlap"]},
-  "GMF / BP":{strengths:["Useful mid-tier mapping","49GC + 7QE combo is notable"], cautions:["Less standardized than VSF/Clean","Finishing cues matter more"]},
-  "EWF / BTF":{strengths:["Some useful clasp identifiers like U1N/W5Y"], cautions:["Model context matters heavily","Daytona/BTF codes are less reliable alone"]}
+  "VSF":{strengths:["Strong movement reputation","Good crystal/cyclops reputation","Many mapped serial clusters"], cautions:["Can overlap with shared bracelet supply","Model context matters"]},
+  "Clean":{strengths:["Sharp case shape","Strong bezel and finishing","Broad model coverage in this dataset"], cautions:["Popular and often copied","Some code overlap with others"]},
+  "ARF":{strengths:["Bracelet feel","Useful legacy Datejust/GMT identifiers"], cautions:["Smaller model coverage here","Often overlaps via bracelet parts"]},
+  "GMF / BP":{strengths:["Useful mid-tier map points","Explorer II and Datejust signals"], cautions:["Less standardized than Clean/VSF","Visual QC matters more"]},
+  "TW+":{strengths:["Useful for specific YM titanium mapping"], cautions:["Very limited coverage in this app"]},
+  "EWF / BTF":{strengths:["Useful Daytona-specific mapping"], cautions:["Highly model-specific and shared on Daytona"]},
+  "QF":{strengths:["Useful precious-metal Daytona mapping"], cautions:["Small dataset, must verify visually"]}
 };
 
+const factoryList = ["VSF","Clean","ARF","GMF / BP","TW+","EWF / BTF","QF"];
+
 const lowTierClaspCodes = ["D12","MA11","T10","S9","CL1","EO6","DE6","PJ4"];
-const highTierPopularCodes = ["1LD","ORB","ORV","1NQ","8PQ","7GJ","1LQ"];
-const sharedCodes = ["5HF","EO6","DE6","PJ4","7CD","LV66"];
-const factoryList = ["VSF","Clean","ARF","Noob","GMF / BP","EWF / BTF"];
+const sharedCodes = ["5HF","7CD","LV66","OXJ2","H88F","W5Y","F6U","1NQ","2K6J"];
+const highTierPopularCodes = ["1LD","ORV","1NQ","7GJ","1LQ","F80","F6U","7CD"];
 
 const DEFAULT_STATE = {
   savedItems: [],
@@ -431,22 +475,14 @@ let cameraStream = null;
 let cameraInterval = null;
 let ocrBusy = false;
 let currentIntel = null;
-let tesseractReady = false;
 let tesseractLoadPromise = null;
 let currentTab = 'codes';
-let stableRead = { text: '', count: 0 };
-let visionSettings = {
-  intervalMs: 4200,
-  zoom: 2
-};
+let stableRead = { text:'', count:0 };
+let visionSettings = { intervalMs: 4200, zoom: 2 };
 
 function esc(s){
   return String(s).replace(/[&<>"']/g, m => ({
-    '&':'&amp;',
-    '<':'&lt;',
-    '>':'&gt;',
-    '"':'&quot;',
-    "'":'&#39;'
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
   }[m]));
 }
 
@@ -473,7 +509,7 @@ function saveLS(){
   localStorage.setItem(LS_KEYS.visionSettings, JSON.stringify(visionSettings));
 }
 
-function debounce(fn, delay = 180){
+function debounce(fn, delay = 160){
   let t = null;
   return (...args) => {
     clearTimeout(t);
@@ -481,12 +517,48 @@ function debounce(fn, delay = 180){
   };
 }
 
+function normalizeToken(token){
+  return String(token || '').toUpperCase().replace(/[^A-Z0-9]/g,'');
+}
+
+function getAllEntries(){
+  return modelData.flatMap(model =>
+    model.references.flatMap(reference =>
+      reference.entries.map(entry => ({
+        model: model.model,
+        ref: reference.ref,
+        factory: entry.factory,
+        serials: (entry.serials || []).map(normalizeToken),
+        clasps: (entry.clasps || []).map(normalizeToken)
+      }))
+    )
+  );
+}
+
+function getModelByName(name){
+  return modelData.find(m => m.model === name) || modelData[0];
+}
+
+function getReferencesForModel(modelName){
+  return getModelByName(modelName).references.map(r => r.ref);
+}
+
+function getEntriesForModel(modelName){
+  return getAllEntries().filter(e => e.model === modelName);
+}
+
+function getEntriesForModelAndRef(modelName, refName){
+  const rows = getEntriesForModel(modelName);
+  if (!refName || refName === 'All references') return rows;
+  return rows.filter(e => e.ref === refName);
+}
+
 function inferModelWeight(model){
-  if(model==="Daytona") return {visual:50,serial:20,clasp:15,combo:15};
-  if(model==="GMT-Master II") return {visual:45,serial:20,clasp:15,combo:20};
-  if(model==="Submariner") return {visual:40,serial:25,clasp:20,combo:15};
-  if(model==="Datejust") return {visual:35,serial:30,clasp:20,combo:15};
-  return {visual:40,serial:25,clasp:20,combo:15};
+  if(model==="Daytona") return {visual:45,serial:20,clasp:15,ref:10,combo:10};
+  if(model==="GMT-Master") return {visual:40,serial:20,clasp:20,ref:10,combo:10};
+  if(model==="Submariner") return {visual:40,serial:25,clasp:20,ref:10,combo:5};
+  if(model==="Datejust") return {visual:35,serial:25,clasp:25,ref:10,combo:5};
+  return {visual:40,serial:25,clasp:20,ref:10,combo:5};
 }
 
 function confidenceClass(score, theme){
@@ -496,103 +568,137 @@ function confidenceClass(score, theme){
   return "red";
 }
 
-function getScoreBreakdown({model,serial,clasp,visualFactory}){
-  const scores = Object.fromEntries(factoryList.map(f => [f, 0]));
-  const reasons = Object.fromEntries(factoryList.map(f => [f, []]));
-  const weights = inferModelWeight(model || "Submariner");
-  const upperSerial = (serial || "").toUpperCase().trim();
-  const upperClasp = (clasp || "").toUpperCase().trim();
+function referenceMatches(inputRef, candidateRef){
+  if (!inputRef || inputRef === 'All references') return true;
+  return inputRef === candidateRef;
+}
+
+function serialMatches(input, candidate){
+  const a = normalizeToken(input);
+  const b = normalizeToken(candidate);
+  if (!a || !b) return false;
+  return a.includes(b) || b.includes(a);
+}
+
+function claspMatches(input, candidate){
+  return normalizeToken(input) === normalizeToken(candidate);
+}
+
+function getScoreBreakdown({model,reference,serial,clasp,visualFactory}){
+  const weights = inferModelWeight(model || modelData[0].model);
+  const scores = Object.fromEntries(factoryList.map(f => [f,0]));
+  const reasons = Object.fromEntries(factoryList.map(f => [f,[]]));
+  const rows = getEntriesForModelAndRef(model, reference);
+  const upperSerial = normalizeToken(serial);
+  const upperClasp = normalizeToken(clasp);
+
+  rows.forEach(row => {
+    if (scores[row.factory] === undefined) scores[row.factory] = 0;
+    if (!reference || reference === 'All references') {
+      scores[row.factory] += weights.ref;
+      reasons[row.factory].push(`Factory exists in selected model dataset (+${weights.ref})`);
+    } else {
+      scores[row.factory] += weights.ref;
+      reasons[row.factory].push(`Reference matches ${row.ref} (+${weights.ref})`);
+    }
+
+    if (upperSerial && row.serials.some(s => serialMatches(upperSerial, s))) {
+      scores[row.factory] += weights.serial;
+      reasons[row.factory].push(`Serial pattern matches ${row.factory} on ${row.ref} (+${weights.serial})`);
+    }
+
+    if (upperClasp && row.clasps.some(c => claspMatches(upperClasp, c))) {
+      scores[row.factory] += weights.clasp;
+      reasons[row.factory].push(`Clasp code maps to ${row.factory} on ${row.ref} (+${weights.clasp})`);
+    }
+
+    if (upperSerial && upperClasp) {
+      const serialHit = row.serials.some(s => serialMatches(upperSerial, s));
+      const claspHit = row.clasps.some(c => claspMatches(upperClasp, c));
+      if (serialHit && claspHit) {
+        scores[row.factory] += weights.combo;
+        reasons[row.factory].push(`Serial + clasp combo align on the same reference (+${weights.combo})`);
+      }
+    }
+  });
 
   if (visualFactory && visualFactory !== "none" && scores[visualFactory] !== undefined) {
     scores[visualFactory] += weights.visual;
     reasons[visualFactory].push(`Visual profile leans ${visualFactory} (+${weights.visual})`);
   }
 
-  Object.entries(serialData).forEach(([factory, list]) => {
-    if (upperSerial && list.some(x => upperSerial.includes(x.replace(/\*+/g, "")))) {
-      if (scores[factory] !== undefined) {
-        scores[factory] += weights.serial;
-        reasons[factory].push(`Serial pattern matches ${factory} (+${weights.serial})`);
-      }
-    }
-  });
-
-  Object.entries(claspData).forEach(([factory, list]) => {
-    if (upperClasp && list.includes(upperClasp)) {
-      if (scores[factory] !== undefined) {
-        scores[factory] += weights.clasp;
-        reasons[factory].push(`Clasp code maps to ${factory} (+${weights.clasp})`);
-      }
-    }
-  });
-
-  combos.forEach(item => {
-    const [comboSerial, comboClasp] = item.combo.split(" + ");
-    const needle = comboSerial.replace(/\*+/g, "");
-    if (upperSerial && upperClasp && upperSerial.includes(needle) && upperClasp === comboClasp.toUpperCase() && scores[item.factory] !== undefined) {
-      scores[item.factory] += weights.combo;
-      reasons[item.factory].push(`Known combo match: ${item.combo} (+${weights.combo})`);
-    }
-  });
-
-  if ((model || "") === "Daytona" && upperSerial.includes("LV66")) {
-    ["VSF","Clean","EWF / BTF"].forEach(f => {
+  if (model === "Daytona" && (upperSerial.includes("LV66") || upperSerial.includes("OXJ2") || upperSerial.includes("H88F"))) {
+    ["Clean","VSF","EWF / BTF"].forEach(f => {
       if (scores[f] !== undefined) {
         scores[f] = Math.max(0, scores[f] - 8);
-        reasons[f].push("LV66 is mixed/shared on Daytona, lowering confidence (-8)");
+        reasons[f].push("Shared Daytona serial cluster lowers certainty (-8)");
       }
     });
   }
 
   if (upperClasp === "5HF") {
-    ["ARF","Clean","VSF"].forEach(f => {
+    ["Clean","VSF","ARF"].forEach(f => {
       if (scores[f] !== undefined) {
         scores[f] += 4;
-        reasons[f].push("5HF can reflect shared bracelet supply, weak multi-factory signal (+4)");
+        reasons[f].push("5HF is shared / legacy and weakens certainty (+4)");
       }
     });
   }
 
-  return factoryList.map(factory => ({
-    factory,
-    score: Math.min(scores[factory], 100),
-    reasons: reasons[factory]
-  })).sort((a,b) => b.score - a.score);
+  return Object.entries(scores)
+    .map(([factory, score]) => ({
+      factory,
+      score: Math.min(score, 100),
+      reasons: reasons[factory] || []
+    }))
+    .sort((a,b) => b.score - a.score);
 }
 
-function getScamSignals({model,serial,clasp,visualFactory,ranked,sellerClaim}){
+function getScamSignals({model,reference,serial,clasp,visualFactory,ranked,sellerClaim}){
   const flags = [];
-  const upperSerial = (serial || "").toUpperCase().trim();
-  const upperClasp = (clasp || "").toUpperCase().trim();
+  const upperSerial = normalizeToken(serial);
+  const upperClasp = normalizeToken(clasp);
   const top = ranked?.[0];
-  const serialMapped = Object.values(serialData).some(list =>
-    list.some(x => upperSerial.includes(x.replace(/\*+/g, "")))
-  );
+  const rows = getEntriesForModelAndRef(model, reference);
+  const serialMapped = rows.some(r => r.serials.some(s => serialMatches(upperSerial, s)));
+  const claspMapped = rows.some(r => r.clasps.some(c => claspMatches(upperClasp, c)));
 
   if (upperClasp && lowTierClaspCodes.includes(upperClasp)) {
-    flags.push({ level:"high", title:"Low-tier clasp code", detail:`${upperClasp} is commonly associated with low-tier, aftermarket, or budget bracelet usage.` });
+    flags.push({level:"high", title:"Low-tier clasp code", detail:`${upperClasp} is commonly linked to lower-tier or aftermarket bracelet usage.`});
   }
+
   if (upperSerial && !serialMapped && upperSerial.length >= 2) {
-    flags.push({ level:"medium", title:"Unmapped serial pattern", detail:"This serial cluster is not in the known mapped dataset and may indicate a low-tier or random engraving batch." });
+    flags.push({level:"medium", title:"Unmapped serial pattern", detail:"This serial cluster is not mapped for the selected model/reference in the current dataset."});
   }
+
+  if (upperClasp && !claspMapped) {
+    flags.push({level:"medium", title:"Unmapped clasp for selected model", detail:"This clasp is not mapped for the selected model/reference in the current dataset."});
+  }
+
   if (visualFactory && visualFactory !== "none" && top?.factory && visualFactory !== top.factory && top.score >= 40) {
-    flags.push({ level:"high", title:"Visual/code conflict", detail:`Visual profile leans ${visualFactory}, but codes lean ${top.factory}. This can indicate a hybrid build or fake factory claim.` });
+    flags.push({level:"high", title:"Visual/code conflict", detail:`Visual profile leans ${visualFactory}, but mapped signals lean ${top.factory}. Possible hybrid build or fake factory claim.`});
   }
-  if (upperClasp && highTierPopularCodes.includes(upperClasp)) {
-    flags.push({ level:"low", title:"Popular high-tier code", detail:"This clasp is widely copied. Visual confirmation is still mandatory." });
-  }
-  if ((model || "") === "Daytona" && upperSerial.includes("LV66")) {
-    flags.push({ level:"medium", title:"Shared Daytona serial cluster", detail:"LV66 appears across multiple factories, so serial confidence is reduced on Daytona." });
-  }
+
   if (upperClasp && sharedCodes.includes(upperClasp)) {
-    flags.push({ level:"medium", title:"Shared or legacy bracelet code", detail:`${upperClasp} may reflect bracelet overlap, legacy tooling, or aftermarket components rather than a clean factory ID.` });
+    flags.push({level:"medium", title:"Shared or legacy signal", detail:`${upperClasp} appears in shared or overlap-heavy contexts and should not be trusted alone.`});
   }
+
+  if (model === "Daytona" && (upperSerial.includes("LV66") || upperSerial.includes("OXJ2") || upperSerial.includes("H88F"))) {
+    flags.push({level:"medium", title:"Shared Daytona cluster", detail:"Daytona serial clusters like LV66, OXJ2, and H88F are reused across multiple factories in this dataset."});
+  }
+
+  if (upperClasp && highTierPopularCodes.includes(upperClasp)) {
+    flags.push({level:"low", title:"Popular copied code", detail:"This clasp appears on sought-after higher-tier builds and is commonly copied. Visual QC remains critical."});
+  }
+
   if (sellerClaim && sellerClaim !== "none" && top?.factory && sellerClaim !== top.factory && top.score >= 45) {
-    flags.unshift({ level:"high", title:"Seller claim mismatch", detail:`Seller claims ${sellerClaim}, but current signals lean ${top.factory}. Possible fake factory labeling or bait-and-switch risk.` });
+    flags.unshift({level:"high", title:"Seller claim mismatch", detail:`Seller claims ${sellerClaim}, but current mapped signals lean ${top.factory}.`});
   }
+
   if (top?.score < 35 && (upperSerial || upperClasp)) {
-    flags.push({ level:"medium", title:"Weak mapping confidence", detail:"Known data does not strongly support a single factory. Treat seller claims cautiously." });
+    flags.push({level:"medium", title:"Weak mapping confidence", detail:"Known model/reference data does not strongly support a single factory."});
   }
+
   return flags;
 }
 
@@ -602,7 +708,7 @@ function getDecisionTreeOutput({model,strongestTell,dialQuality,caseQuality,seri
     if (strongestTell === "bad") outcomes.push("Daytona subdial spacing fails → high counterfeit risk regardless of code.");
     else outcomes.push("Daytona subdial spacing passes → continue to dial/case validation.");
   }
-  if (model === "GMT-Master II") {
+  if (model === "GMT-Master") {
     if (strongestTell === "bad") outcomes.push("GMT hand stack/bezel split fails → likely wrong movement tier or low-tier build.");
     else outcomes.push("GMT hand stack looks good → continue to serial/clasp support.");
   }
@@ -610,17 +716,21 @@ function getDecisionTreeOutput({model,strongestTell,dialQuality,caseQuality,seri
     if (strongestTell === "bad") outcomes.push(`${model} primary tell fails → downgrade any high-tier seller claim.`);
     else outcomes.push(`${model} primary tell looks good → check dial and bracelet before trusting codes.`);
   }
-  if (dialQuality === "bad") outcomes.push("Dial print fails → treat as strongest visual red flag.");
-  else if (dialQuality === "mid") outcomes.push("Dial print is only mid-tier → possible GMF/BP/EWF range or hybrid build.");
+  if (!["Submariner","Datejust","GMT-Master","Daytona"].includes(model)) {
+    if (strongestTell === "bad") outcomes.push(`${model} main visual tell fails → downgrade any code-based confidence.`);
+    else outcomes.push(`${model} main visual tell looks acceptable → continue with code support only as secondary evidence.`);
+  }
+  if (dialQuality === "bad") outcomes.push("Dial print fails → treat as a major visual red flag.");
+  else if (dialQuality === "mid") outcomes.push("Dial print is only mid-tier → possible mixed or mid-tier build.");
   else outcomes.push("Dial print looks strong → supports higher-tier possibility.");
   if (caseQuality === "bad") outcomes.push("Case shape/guards fail → likely low or mid-tier case source.");
   else if (caseQuality === "mid") outcomes.push("Case shape is acceptable but not sharp → could be mid-tier or mixed build.");
-  else outcomes.push("Case shape is sharp → supports Clean/VSF-class finishing.");
-  if (!serialMapped) outcomes.push("Serial is unmapped → do not trust serial as proof of factory.");
+  else outcomes.push("Case shape is sharp → supports stronger finishing.");
+  if (!serialMapped) outcomes.push("Serial is unmapped for this model/reference → do not trust serial as proof.");
   else outcomes.push("Serial cluster is mapped → use only as supporting evidence, not proof.");
-  if (claspTier === "low") outcomes.push("Clasp falls into low-tier/legacy bucket → strong scam or aftermarket bracelet risk.");
-  else if (claspTier === "mixed") outcomes.push("Clasp is shared/legacy → useful only with strong visuals.");
-  else if (claspTier === "high") outcomes.push("Clasp is in high-tier set → still verify visuals because popular codes are copied.");
+  if (claspTier === "low") outcomes.push("Clasp falls into low-tier/legacy bucket → strong aftermarket or scam risk.");
+  else if (claspTier === "mixed") outcomes.push("Clasp is shared or overlap-heavy → useful only with strong visuals.");
+  else outcomes.push("Clasp is in a stronger mapped bucket → still verify visuals because copied codes exist.");
   if (sellerClaim !== "none" && visualFactory !== "none" && sellerClaim !== visualFactory) outcomes.push(`Seller claim (${sellerClaim}) conflicts with visual lean (${visualFactory}) → possible fake factory labeling.`);
   let verdict = "Proceed cautiously";
   if (outcomes.some(x => x.includes("high counterfeit risk")) || claspTier === "low" || dialQuality === "bad") verdict = "High scam risk";
@@ -629,35 +739,51 @@ function getDecisionTreeOutput({model,strongestTell,dialQuality,caseQuality,seri
 }
 
 function parseAutoScan(input){
-  const text = (input || "").toUpperCase();
-  const modelNeedles = ["SUB","SUBMARINER","DAYTONA","GMT","GMT-MASTER","DATEJUST","DJ","EXPLORER","OP","OYSTER"];
-  const factories = ["VSF","CLEAN","ARF","NOOB","GMF","BP","EWF","BTF"];
+  const text = normalizeToken(String(input || '').replace(/\s+/g,' '));
+  const rawUpper = String(input || '').toUpperCase();
   let model = "";
-
-  modelNeedles.forEach(m => {
-    if (text.includes(m)) {
-      if (m.startsWith("SUB")) model = "Submariner";
-      else if (m.startsWith("DAY")) model = "Daytona";
-      else if (m.startsWith("GMT")) model = "GMT-Master II";
-      else if (m.startsWith("DATE") || m === "DJ") model = "Datejust";
-      else model = "Explorer / OP";
+  modelData.forEach(m => {
+    if (rawUpper.includes(m.model.toUpperCase().replace(/-/g,'-')) || rawUpper.includes(m.model.toUpperCase().split(' ')[0])) {
+      model = m.model;
     }
   });
-
-  let serial = "";
-  let clasp = "";
-  const flatClasp = Object.values(claspData).flat();
-  const tokens = text.split(/[^A-Z0-9]/).filter(Boolean);
-
-  tokens.forEach(t => {
-    if (!clasp && flatClasp.includes(t)) clasp = t;
-    if (!serial && t.length >= 2 && t.length <= 10 && /[0-9]/.test(t)) serial = t;
-  });
+  if (!model) {
+    if (rawUpper.includes("GMT")) model = "GMT-Master";
+    else if (rawUpper.includes("DAYTONA")) model = "Daytona";
+    else if (rawUpper.includes("DATEJUST")) model = "Datejust";
+    else if (rawUpper.includes("SUB")) model = "Submariner";
+    else if (rawUpper.includes("EXPLORER II")) model = "Explorer II";
+    else if (rawUpper.includes("EXPLORER")) model = "Explorer";
+    else if (rawUpper.includes("OP") || rawUpper.includes("OYSTER PERPETUAL")) model = "Oyster Perpetual";
+    else if (rawUpper.includes("AIR-KING")) model = "Air-King";
+    else if (rawUpper.includes("YACHT")) model = "Yacht-Master";
+    else if (rawUpper.includes("SEA-DWELLER")) model = "Sea-Dweller";
+  }
 
   let seller = "none";
-  factories.forEach(f => {
-    if (text.includes(f)) seller = f === "CLEAN" ? "Clean" : f;
+  factoryList.forEach(f => { if (rawUpper.includes(f.toUpperCase().replace(/ \/ /g,' '))) seller = f; });
+  if (rawUpper.includes("CF")) seller = "Clean";
+  if (rawUpper.includes("GMF") || rawUpper.includes("BP")) seller = "GMF / BP";
+  if (rawUpper.includes("BTF") || rawUpper.includes("EWF")) seller = "EWF / BTF";
+
+  const modelRows = model ? getEntriesForModel(model) : getAllEntries();
+  const tokens = rawUpper.split(/[^A-Z0-9]/).filter(Boolean).map(normalizeToken);
+  let clasp = "";
+  let serial = "";
+
+  tokens.forEach(t => {
+    if (!clasp && modelRows.some(r => r.clasps.includes(t))) clasp = t;
+    if (!serial && modelRows.some(r => r.serials.some(s => serialMatches(t, s)))) serial = t;
   });
+
+  if (!clasp) {
+    const allClasps = [...new Set(modelRows.flatMap(r => r.clasps))];
+    clasp = tokens.find(t => allClasps.includes(t)) || "";
+  }
+
+  if (!serial) {
+    serial = tokens.find(t => /[A-Z]/.test(t) && /\d/.test(t) && t.length >= 2 && t.length <= 10) || "";
+  }
 
   return {model, serial, clasp, seller};
 }
@@ -665,24 +791,22 @@ function parseAutoScan(input){
 function rolexTokenScore(token){
   if (!token) return 0;
   let score = 0;
-  const t = token.toUpperCase();
-
+  const t = normalizeToken(token);
+  const allRows = getAllEntries();
   if (/^[A-Z0-9]{2,10}$/.test(t)) score += 1;
   if (/[A-Z]/.test(t) && /\d/.test(t)) score += 2;
   if (/^[A-Z0-9]{3}$/.test(t)) score += 3;
   if (/^[A-Z0-9]{4,8}$/.test(t)) score += 2;
-  if (Object.values(claspData).flat().includes(t)) score += 8;
-  if (Object.values(serialData).flat().some(x => t.includes(x.replace(/\*+/g, "")))) score += 7;
+  if (allRows.some(r => r.clasps.includes(t))) score += 8;
+  if (allRows.some(r => r.serials.some(s => serialMatches(t, s)))) score += 7;
   if (sharedCodes.includes(t)) score += 4;
-  if (/^(S19|Q66|R86Z|T11Y|1LD|7GJ|1LQ|4RL|5HF|ST9|49GC|7QE|LV66|Z59T|N1K9|8H6W)$/i.test(t)) score += 6;
   return score;
 }
 
 function extractStrongCandidates(text){
-  const upper = (text || "").toUpperCase();
+  const upper = String(text || "").toUpperCase();
   const tokens = upper.split(/[^A-Z0-9]/).filter(Boolean);
-  const uniq = [...new Set(tokens)];
-
+  const uniq = [...new Set(tokens)].map(normalizeToken);
   const sorted = uniq
     .map(token => ({ token, score: rolexTokenScore(token) }))
     .filter(x => x.score > 0)
@@ -690,91 +814,53 @@ function extractStrongCandidates(text){
 
   const top = sorted.slice(0, 12).map(x => x.token);
   const parsed = parseAutoScan(top.join(" "));
-
-  if (!parsed.clasp) {
-    const allClasp = Object.values(claspData).flat();
-    const found = top.find(t => allClasp.includes(t));
-    if (found) parsed.clasp = found;
-  }
-
-  if (!parsed.serial) {
-    const found = top.find(t => /[A-Z]/.test(t) && /\d/.test(t) && t.length >= 2 && t.length <= 10);
-    if (found) parsed.serial = found;
-  }
-
   return { parsed, rankedTokens: sorted, topTokens: top };
 }
 
 function extractTextCandidates(text){
   const strong = extractStrongCandidates(text);
   const parsed = strong.parsed;
-  const ranked = getScoreBreakdown({ model: parsed.model || "Submariner", serial: parsed.serial, clasp: parsed.clasp, visualFactory: "" });
-  const flags = getScamSignals({ model: parsed.model || "Submariner", serial: parsed.serial, clasp: parsed.clasp, visualFactory: "none", ranked, sellerClaim: parsed.seller });
+  const ranked = getScoreBreakdown({
+    model: parsed.model || modelData[0].model,
+    reference: "All references",
+    serial: parsed.serial,
+    clasp: parsed.clasp,
+    visualFactory: ""
+  });
+  const flags = getScamSignals({
+    model: parsed.model || modelData[0].model,
+    reference: "All references",
+    serial: parsed.serial,
+    clasp: parsed.clasp,
+    visualFactory: "none",
+    ranked,
+    sellerClaim: parsed.seller
+  });
   return { parsed, ranked, flags, tokenHints: strong.topTokens };
 }
 
 function preprocessCanvas(srcCanvas){
   const out = document.createElement('canvas');
-  const w = srcCanvas.width;
-  const h = srcCanvas.height;
-  out.width = w * 2;
-  out.height = h * 2;
-
+  out.width = srcCanvas.width * 2;
+  out.height = srcCanvas.height * 2;
   const octx = out.getContext('2d');
   octx.imageSmoothingEnabled = false;
   octx.drawImage(srcCanvas, 0, 0, out.width, out.height);
 
   const img = octx.getImageData(0,0,out.width,out.height);
   const d = img.data;
-
   for (let i = 0; i < d.length; i += 4) {
-    const r = d[i], g = d[i+1], b = d[i+2];
-    let gray = 0.299*r + 0.587*g + 0.114*b;
-    gray = gray * 1.18;
+    let gray = 0.299*d[i] + 0.587*d[i+1] + 0.114*d[i+2];
+    gray *= 1.18;
     const boosted = gray > 165 ? 255 : gray < 95 ? 0 : gray;
     d[i] = d[i+1] = d[i+2] = boosted;
   }
-
-  octx.putImageData(img, 0, 0);
-  sharpenCanvas(out);
+  octx.putImageData(img,0,0);
   return out;
 }
 
-function sharpenCanvas(canvas){
-  const ctx = canvas.getContext('2d');
-  const { width, height } = canvas;
-  const src = ctx.getImageData(0, 0, width, height);
-  const dst = ctx.createImageData(width, height);
-  const s = src.data;
-  const d = dst.data;
-  const weights = [0,-1,0,-1,5,-1,0,-1,0];
-
-  for (let y = 1; y < height - 1; y++) {
-    for (let x = 1; x < width - 1; x++) {
-      let r = 0, g = 0, b = 0;
-      let k = 0;
-      for (let ky = -1; ky <= 1; ky++) {
-        for (let kx = -1; kx <= 1; kx++) {
-          const idx = ((y + ky) * width + (x + kx)) * 4;
-          const wt = weights[k++];
-          r += s[idx] * wt;
-          g += s[idx + 1] * wt;
-          b += s[idx + 2] * wt;
-        }
-      }
-      const outIdx = (y * width + x) * 4;
-      d[outIdx] = Math.max(0, Math.min(255, r));
-      d[outIdx + 1] = Math.max(0, Math.min(255, g));
-      d[outIdx + 2] = Math.max(0, Math.min(255, b));
-      d[outIdx + 3] = 255;
-    }
-  }
-
-  ctx.putImageData(dst, 0, 0);
-}
-
 function normalizeOCRText(text){
-  return (text || "")
+  return String(text || "")
     .toUpperCase()
     .replace(/[|]/g, 'I')
     .replace(/[§$]/g, 'S')
@@ -789,40 +875,24 @@ function updateOCRStatus(message){
 }
 
 async function ensureTesseract(){
-  if (window.Tesseract) {
-    tesseractReady = true;
-    return;
-  }
-
+  if (window.Tesseract) return;
   if (tesseractLoadPromise) return tesseractLoadPromise;
-
   updateOCRStatus('Loading OCR…');
-
   tesseractLoadPromise = new Promise((resolve, reject) => {
     const script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
-    script.onload = () => {
-      tesseractReady = true;
-      updateOCRStatus('OCR ready');
-      resolve();
-    };
-    script.onerror = () => {
-      updateOCRStatus('OCR failed to load');
-      reject(new Error('Failed to load Tesseract'));
-    };
+    script.onload = () => { updateOCRStatus('OCR ready'); resolve(); };
+    script.onerror = () => { updateOCRStatus('OCR failed to load'); reject(new Error('Failed to load Tesseract')); };
     document.head.appendChild(script);
   });
-
   return tesseractLoadPromise;
 }
 
 function renderOCRResult(res, resultId, textId, rawText){
   const textEl = document.getElementById(textId);
   if (textEl) textEl.textContent = rawText || 'No text detected';
-
   const resultEl = document.getElementById(resultId);
   if (!resultEl) return;
-
   resultEl.innerHTML = `
     <div class="result">
       <div><b>Model:</b> ${esc(res.parsed.model || "Unknown")}</div>
@@ -840,15 +910,10 @@ async function doOCR(source, resultId, textId){
   if (ocrBusy) return null;
   ocrBusy = true;
   updateOCRStatus('Reading…');
-
   try{
     await ensureTesseract();
     const prepared = source instanceof HTMLCanvasElement ? preprocessCanvas(source) : source;
-
-    const { data } = await window.Tesseract.recognize(prepared, 'eng', {
-      tessedit_pageseg_mode: 6
-    });
-
+    const { data } = await window.Tesseract.recognize(prepared, 'eng', { tessedit_pageseg_mode: 6 });
     const text = normalizeOCRText(data.text || '');
     const res = extractTextCandidates(text);
     renderOCRResult(res, resultId, textId, text || 'No text detected');
@@ -862,43 +927,38 @@ async function doOCR(source, resultId, textId){
   }
 }
 
+function buildSearchIndex(){
+  return getAllEntries().flatMap(row => [
+    ...row.clasps.map(code => ({ type:"Clasp", key:code, value:`${row.model} • ${row.ref} • ${row.factory}` })),
+    ...row.serials.map(code => ({ type:"Serial", key:code, value:`${row.model} • ${row.ref} • ${row.factory}` }))
+  ]).concat(
+    modelData.map(m => ({ type:"Model", key:m.model, value:m.tell })),
+    modelData.flatMap(m => m.references.map(r => ({ type:"Reference", key:r.ref, value:m.model })))
+  );
+}
+
 function renderSearchResults(q){
   const out = document.getElementById('searchResults');
-  const query = (q || '').trim().toLowerCase();
-
-  const searchIndex = [
-    ...Object.entries(claspData).flatMap(([factory, codes]) => codes.map(code => ({ type:"Clasp", key:code, value:factory }))),
-    ...Object.entries(serialData).flatMap(([factory, codes]) => codes.map(code => ({ type:"Serial", key:code, value:factory }))),
-    ...combos.map(c => ({ type:"Combo", key:c.combo, value:`${c.factory} (${c.confidence}%)` })),
-    ...models.map(m => ({ type:"Model", key:m.name, value:m.tell }))
-  ];
-
+  const query = String(q || '').trim().toLowerCase();
   if (!query) { out.innerHTML = ''; return; }
-
-  const results = searchIndex.filter(item =>
+  const results = buildSearchIndex().filter(item =>
     item.key.toLowerCase().includes(query) || item.value.toLowerCase().includes(query)
-  ).slice(0,50);
+  ).slice(0,60);
 
-  out.innerHTML = results.length ? results.map((item, idx) => `
+  out.innerHTML = results.length ? results.map(item => `
     <div class="list-item" style="display:flex;justify-content:space-between;gap:10px;align-items:center">
       <div>
         <div class="small muted">${esc(item.type)}</div>
         <div style="font-weight:bold">${esc(item.key)}</div>
         <div class="small">${esc(item.value)}</div>
       </div>
-      <button
-        class="btn secondary save-search-btn"
-        data-type="${esc(item.type)}"
-        data-key="${esc(item.key)}"
-        data-value="${esc(item.value)}"
-        data-idx="${idx}"
-      >Save</button>
+      <button class="btn secondary save-search-btn" data-type="${esc(item.type)}" data-key="${esc(item.key)}" data-value="${esc(item.value)}">Save</button>
     </div>
   `).join('') : `<div class="muted">No matches found.</div>`;
 }
 
 function saveSearchItem(item){
-  const id = `${item.type}:${item.key}`;
+  const id = `${item.type}:${item.key}:${item.value}`;
   if (!savedItems.some(x => x.id === id)) {
     savedItems.unshift({...item, id});
     savedItems = savedItems.slice(0, 100);
@@ -929,132 +989,180 @@ function renderSaved(){
 
 function populateSelects(){
   const modelSel = document.getElementById('modelInput');
+  const refSel = document.getElementById('referenceInput');
   const visualSel = document.getElementById('visualFactory');
   const sellerSel = document.getElementById('sellerClaim');
 
-  modelSel.innerHTML = models.map(m => `<option>${esc(m.name)}</option>`).join('');
+  modelSel.innerHTML = modelData.map(m => `<option>${esc(m.model)}</option>`).join('');
+  refSel.innerHTML = `<option>All references</option>` + getReferencesForModel(modelData[0].model).map(r => `<option>${esc(r)}</option>`).join('');
   visualSel.innerHTML = `<option value="none">No selection</option>` + factoryList.map(f => `<option>${esc(f)}</option>`).join('');
   sellerSel.innerHTML = `<option value="none">No selection</option>` + factoryList.map(f => `<option>${esc(f)}</option>`).join('');
 }
 
+function updateReferenceOptions(){
+  const model = document.getElementById('modelInput').value;
+  const refSel = document.getElementById('referenceInput');
+  const current = refSel.value;
+  const options = ["All references", ...getReferencesForModel(model)];
+  refSel.innerHTML = options.map(r => `<option>${esc(r)}</option>`).join('');
+  if (options.includes(current)) refSel.value = current;
+}
+
 function updateIntelligence(){
   const model = document.getElementById('modelInput').value;
-  const serial = document.getElementById('serialInput').value.toUpperCase().trim();
-  const clasp = document.getElementById('claspInput').value.toUpperCase().trim();
+  const reference = document.getElementById('referenceInput').value;
+  const serial = document.getElementById('serialInput').value;
+  const clasp = document.getElementById('claspInput').value;
   const visualFactory = document.getElementById('visualFactory').value;
   const sellerClaim = document.getElementById('sellerClaim').value;
   const theme = document.getElementById('confidenceTheme').value;
 
-  const ranked = getScoreBreakdown({model, serial, clasp, visualFactory});
+  const ranked = getScoreBreakdown({model, reference, serial, clasp, visualFactory});
   const top = ranked[0] || {factory:"No result", score:0, reasons:[]};
 
   document.getElementById('topFactory').textContent = top.factory;
-
   const topScore = document.getElementById('topScore');
   topScore.textContent = `${top.score}%`;
   topScore.className = `badge ${confidenceClass(top.score, theme)}`;
 
   const bar = document.getElementById('topBar');
   bar.style.width = `${top.score}%`;
-  bar.style.background = theme === "simple"
-    ? "#111827"
-    : (top.score >= 75 ? "#047857" : top.score >= 45 ? "#b45309" : "#b91c1c");
+  bar.style.background = theme === "simple" ? "#111827" : (top.score >= 75 ? "#047857" : top.score >= 45 ? "#b45309" : "#b91c1c");
 
   document.getElementById('topReasons').innerHTML = top.reasons.length
     ? top.reasons.map(r => `<div class="list-item">${esc(r)}</div>`).join('')
-    : `<div class="list-item">Add a model, serial, clasp, or visual lean to generate a result.</div>`;
+    : `<div class="list-item">Add serial, clasp, or visual lean to generate a result.</div>`;
 
-  currentIntel = {model, serial, clasp, visualFactory, sellerClaim, ranked, top};
+  currentIntel = {model, reference, serial, clasp, visualFactory, sellerClaim, ranked, top};
   renderIntelPanel();
   renderScamPanel();
 }
 
 function renderCodesPanel(){
-  document.getElementById('panel-codes').innerHTML =
-    `<div class="grid grid-3">${Object.entries(claspData).map(([factory, codes]) => `
-      <div class="card">
-        <h3>${esc(factory)}</h3>
-        <div class="section">${codes.map(c => `<span class="badge mono">${esc(c)}</span>`).join('')}</div>
-      </div>
-    `).join('')}</div>`;
+  document.getElementById('panel-codes').innerHTML = `
+    <div class="grid grid-2">
+      ${modelData.map(m => `
+        <div class="card">
+          <h3>${esc(m.model)}</h3>
+          ${m.references.map(r => `
+            <div class="result section">
+              <div style="font-weight:bold">${esc(r.ref)}</div>
+              ${r.entries.map(e => `
+                <div class="list-item section">
+                  <div class="small muted">${esc(e.factory)}</div>
+                  <div>${e.clasps.length ? e.clasps.map(c => `<span class="badge mono">${esc(c)}</span>`).join('') : '<span class="muted">No clasp listed</span>'}</div>
+                </div>
+              `).join('')}
+            </div>
+          `).join('')}
+        </div>
+      `).join('')}
+    </div>
+  `;
 }
 
 function renderSerialsPanel(){
-  document.getElementById('panel-serials').innerHTML =
-    `<div class="grid grid-3">${Object.entries(serialData).map(([factory, codes]) => `
-      <div class="card">
-        <h3>${esc(factory)}</h3>
-        <div class="section">${codes.map(c => `<span class="pill mono">${esc(c)}</span>`).join('')}</div>
-      </div>
-    `).join('')}</div>`;
+  document.getElementById('panel-serials').innerHTML = `
+    <div class="grid grid-2">
+      ${modelData.map(m => `
+        <div class="card">
+          <h3>${esc(m.model)}</h3>
+          ${m.references.map(r => `
+            <div class="result section">
+              <div style="font-weight:bold">${esc(r.ref)}</div>
+              ${r.entries.map(e => `
+                <div class="list-item section">
+                  <div class="small muted">${esc(e.factory)}</div>
+                  <div>${e.serials.length ? e.serials.map(s => `<span class="pill mono">${esc(s)}</span>`).join('') : '<span class="muted">No serial listed</span>'}</div>
+                </div>
+              `).join('')}
+            </div>
+          `).join('')}
+        </div>
+      `).join('')}
+    </div>
+  `;
 }
 
 function renderCombosPanel(){
   const theme = document.getElementById('confidenceTheme')?.value || 'dynamic';
-  document.getElementById('panel-combos').innerHTML =
-    `<div class="grid grid-2">${combos.map(item => `
-      <div class="card">
-        <div class="topbar">
-          <div>
-            <div class="small muted">${esc(item.factory)}</div>
-            <div style="font-size:22px;font-weight:bold;color:#065f46" class="mono">${esc(item.combo)}</div>
+  const combos = getAllEntries().flatMap(r =>
+    r.serials.flatMap(s => r.clasps.map(c => ({
+      model:r.model, ref:r.ref, factory:r.factory, combo:`${s} + ${c}`
+    })))
+  );
+  document.getElementById('panel-combos').innerHTML = `
+    <div class="grid grid-2">
+      ${combos.map(item => `
+        <div class="card">
+          <div class="topbar">
+            <div>
+              <div class="small muted">${esc(item.model)} • ${esc(item.ref)} • ${esc(item.factory)}</div>
+              <div style="font-size:20px;font-weight:bold;color:#065f46" class="mono">${esc(item.combo)}</div>
+            </div>
+            <span class="badge ${confidenceClass(85, theme)}">Mapped</span>
           </div>
-          <span class="badge ${confidenceClass(item.confidence, theme)}">${item.confidence}%</span>
         </div>
-      </div>
-    `).join('')}</div>`;
+      `).join('')}
+    </div>
+  `;
 }
 
 function renderModelsPanel(){
-  document.getElementById('panel-models').innerHTML =
-    `<div class="grid grid-2">${models.map(m => `
-      <div class="card">
-        <div class="topbar">
-          <h3>${esc(m.name)}</h3>
-          <span class="badge dark">Instant tell: ${esc(m.tell)}</span>
-        </div>
-        <div class="grid grid-2 section">
-          <div class="result bad">
-            <div style="font-weight:bold;margin-bottom:8px">REP tells</div>
-            ${m.rep.map(x => `<div>• ${esc(x)}</div>`).join('')}
+  document.getElementById('panel-models').innerHTML = `
+    <div class="grid grid-2">
+      ${modelData.map(m => `
+        <div class="card">
+          <div class="topbar">
+            <h3>${esc(m.model)}</h3>
+            <span class="badge dark">Instant tell: ${esc(m.tell)}</span>
           </div>
-          <div class="result good">
-            <div style="font-weight:bold;margin-bottom:8px">GEN signs</div>
-            ${m.gen.map(x => `<div>• ${esc(x)}</div>`).join('')}
+          <div class="grid grid-2 section">
+            <div class="result bad">
+              <div style="font-weight:bold;margin-bottom:8px">REP tells</div>
+              ${m.rep.map(x => `<div>• ${esc(x)}</div>`).join('')}
+            </div>
+            <div class="result good">
+              <div style="font-weight:bold;margin-bottom:8px">GEN signs</div>
+              ${m.gen.map(x => `<div>• ${esc(x)}</div>`).join('')}
+            </div>
+          </div>
+          <div class="result section">
+            <div style="font-weight:bold;margin-bottom:8px">Code notes</div>
+            ${m.codeNotes.map(x => `<div>• ${esc(x)}</div>`).join('')}
           </div>
         </div>
-        <div class="result section">
-          <div style="font-weight:bold;margin-bottom:8px">Code notes</div>
-          ${m.codeNotes.map(x => `<div>• ${esc(x)}</div>`).join('')}
-        </div>
-      </div>
-    `).join('')}</div>`;
+      `).join('')}
+    </div>
+  `;
 }
 
 function renderQCPanel(){
-  document.getElementById('panel-qc').innerHTML =
-    `<div class="grid grid-3">${qcSystem.map(item => `
-      <div class="card">
-        <div class="topbar">
-          <h3>${esc(item.title)}</h3>
-          <span class="badge dark">${esc(item.weight)}</span>
+  document.getElementById('panel-qc').innerHTML = `
+    <div class="grid grid-3">
+      ${qcSystem.map(item => `
+        <div class="card">
+          <div class="topbar">
+            <h3>${esc(item.title)}</h3>
+            <span class="badge dark">${esc(item.weight)}</span>
+          </div>
+          <div class="result good section"><b>GEN:</b> ${esc(item.good)}</div>
+          <div class="result bad section"><b>REP:</b> ${esc(item.bad)}</div>
         </div>
-        <div class="result good section"><b>GEN:</b> ${esc(item.good)}</div>
-        <div class="result bad section"><b>REP:</b> ${esc(item.bad)}</div>
-      </div>
-    `).join('')}</div>`;
+      `).join('')}
+    </div>
+  `;
 }
 
 function renderWorkflowPanel(){
   const steps = [
     "1. Identify the model first.",
-    "2. Apply the instant tell: Daytona=subdials, GMT=hand stack, Sub/Datejust=cyclops.",
-    "3. Check dial print and spacing.",
-    "4. Check case shape and crown guards.",
-    "5. Check SEL fit and bracelet finishing.",
-    "6. Only then use serial clusters and clasp as support."
+    "2. Select the closest reference before trusting any code match.",
+    "3. Apply the model’s instant tell.",
+    "4. Check dial print and case shape.",
+    "5. Use serial and clasp only as supporting evidence.",
+    "6. Treat Daytona and shared-code models with extra caution."
   ];
-
   document.getElementById('panel-workflow').innerHTML = `
     <div class="row row-main">
       <div class="card">
@@ -1064,25 +1172,24 @@ function renderWorkflowPanel(){
       <div class="grid">
         <div class="card">
           <h3>Trust Most</h3>
-          <div class="list-item section">Dial print</div>
+          <div class="list-item section">Model-specific tell</div>
+          <div class="list-item">Dial print</div>
           <div class="list-item">Case shape</div>
-          <div class="list-item">Model-specific tell</div>
-          <div class="list-item">Movement, if known</div>
+          <div class="list-item">Reference correctness</div>
         </div>
         <div class="card">
           <h3>Trust Less</h3>
           <div class="list-item section">Clasp codes alone</div>
           <div class="list-item">Serials alone</div>
-          <div class="list-item">Rehaut alone</div>
+          <div class="list-item">Shared Daytona clusters</div>
         </div>
       </div>
     </div>`;
 }
 
 function renderIntelPanel(){
-  const ranked = currentIntel?.ranked || getScoreBreakdown({model:"Submariner"});
+  const ranked = currentIntel?.ranked || getScoreBreakdown({model:modelData[0].model,reference:"All references"});
   const theme = document.getElementById('confidenceTheme')?.value || 'dynamic';
-
   document.getElementById('panel-intel').innerHTML = `
     <div class="row row-main">
       <div class="card">
@@ -1103,9 +1210,9 @@ function renderIntelPanel(){
       <div class="grid">
         <div class="card">
           <h3>Decision Rule</h3>
-          <div class="list-item section">If model tell + visual profile + serial cluster all align, confidence rises sharply.</div>
-          <div class="list-item">If clasp matches but visual profile conflicts, treat as possible parts overlap or bait-and-switch.</div>
-          <div class="list-item">If Daytona uses LV66, lower code confidence and prioritize dial/case analysis.</div>
+          <div class="list-item section">Reference-aware matching is now part of the score.</div>
+          <div class="list-item">Visual profile can override weak code matches.</div>
+          <div class="list-item">Shared-code models like Daytona need strongest visual QC.</div>
         </div>
         <div class="card">
           <h3>Factory Profiles</h3>
@@ -1123,23 +1230,14 @@ function renderIntelPanel(){
 
 function renderScamPanel(){
   const s = currentIntel || {
-    model:"Submariner",
-    serial:"",
-    clasp:"",
-    visualFactory:"none",
-    sellerClaim:"none",
-    ranked:getScoreBreakdown({model:"Submariner"})
+    model:modelData[0].model, reference:"All references", serial:"", clasp:"",
+    visualFactory:"none", sellerClaim:"none",
+    ranked:getScoreBreakdown({model:modelData[0].model,reference:"All references"})
   };
-
   const flags = getScamSignals({
-    model:s.model,
-    serial:s.serial,
-    clasp:s.clasp,
-    visualFactory:s.visualFactory,
-    ranked:s.ranked,
-    sellerClaim:s.sellerClaim
+    model:s.model, reference:s.reference, serial:s.serial, clasp:s.clasp,
+    visualFactory:s.visualFactory, ranked:s.ranked, sellerClaim:s.sellerClaim
   });
-
   document.getElementById('panel-scam').innerHTML = `
     <div class="row row-main">
       <div class="card">
@@ -1157,14 +1255,14 @@ function renderScamPanel(){
       <div class="grid">
         <div class="card">
           <h3>Automatic Red Flags</h3>
-          <div class="list-item section">Low-tier clasp codes like D12, MA11, T10, S9, CL1.</div>
-          <div class="list-item">Seller claims a top factory but visuals and mapped codes disagree.</div>
-          <div class="list-item">Random serial with no mapped cluster plus weak finishing.</div>
-          <div class="list-item">Shared/legacy bracelet codes used as sole proof of factory.</div>
+          <div class="list-item section">Selected model/reference does not support the code you entered.</div>
+          <div class="list-item">Seller claim and mapped signals disagree.</div>
+          <div class="list-item">Shared Daytona clusters used as proof.</div>
+          <div class="list-item">Low-tier or overlap-heavy clasp used alone.</div>
         </div>
         <div class="card">
           <h3>Core Rule</h3>
-          <div class="list-item section">Codes tell you what the watch claims to be. Visuals tell you what it actually is.</div>
+          <div class="list-item section">Codes support the story. Visuals confirm the watch.</div>
         </div>
       </div>
     </div>`;
@@ -1176,7 +1274,7 @@ function renderTreePanel(){
       <div class="card">
         <h3>Decision Tree Input</h3>
         <div class="grid grid-2 section">
-          <div><div class="small muted">Model</div><select id="treeModel">${models.map(m => `<option>${esc(m.name)}</option>`).join('')}</select></div>
+          <div><div class="small muted">Model</div><select id="treeModel">${modelData.map(m => `<option>${esc(m.model)}</option>`).join('')}</select></div>
           <div><div class="small muted">Primary tell</div><select id="treeStrongestTell"><option value="good">Looks good</option><option value="mid">Unclear / mid</option><option value="bad">Looks bad</option></select></div>
           <div><div class="small muted">Dial quality</div><select id="treeDialQuality"><option value="good">Sharp / good</option><option value="mid">Average / mid</option><option value="bad">Weak / bad</option></select></div>
           <div><div class="small muted">Case quality</div><select id="treeCaseQuality"><option value="good">Sharp / good</option><option value="mid">Average / mid</option><option value="bad">Weak / bad</option></select></div>
@@ -1203,7 +1301,6 @@ function runDecisionTree(){
     sellerClaim: document.getElementById('sellerClaim').value,
     visualFactory: document.getElementById('visualFactory').value
   });
-
   document.getElementById('treeOutput').innerHTML =
     `<div class="result ${res.verdict==="High scam risk"?"bad":res.verdict==="Likely acceptable, keep verifying"?"good":"warn"}" style="font-weight:bold">${esc(res.verdict)}</div>` +
     res.outcomes.map(item => `<div class="list-item section">${esc(item)}</div>`).join('');
@@ -1214,7 +1311,7 @@ function renderAutoPanel(){
     <div class="row row-main">
       <div class="card">
         <h3>Auto Scan Input</h3>
-        <input id="autoInput" class="search section" placeholder="Paste messy text like: Sub 6R12V6 1LD seller says VSF" />
+        <input id="autoInput" class="search section" placeholder="Paste messy text like: Datejust 126234 R86Z 1RD seller says VSF" />
         <button class="btn section" id="runAutoScanBtn">Scan</button>
       </div>
       <div class="card">
@@ -1227,20 +1324,21 @@ function renderAutoPanel(){
 function runAutoScan(){
   const parsed = parseAutoScan(document.getElementById('autoInput').value);
   const ranked = getScoreBreakdown({
-    model: parsed.model || "Submariner",
+    model: parsed.model || modelData[0].model,
+    reference: "All references",
     serial: parsed.serial,
     clasp: parsed.clasp,
     visualFactory: ""
   });
   const flags = getScamSignals({
-    model: parsed.model || "Submariner",
+    model: parsed.model || modelData[0].model,
+    reference: "All references",
     serial: parsed.serial,
     clasp: parsed.clasp,
     visualFactory: "none",
     ranked,
     sellerClaim: parsed.seller
   });
-
   document.getElementById('autoResult').innerHTML = `
     <div class="result">
       <div><b>Model:</b> ${esc(parsed.model || "Unknown")}</div>
@@ -1278,7 +1376,6 @@ function renderVisionPanel(){
             <div class="scan-box"></div>
             <div class="scan-label">Keep engraving inside box</div>
           </div>
-
           <canvas id="canvas" class="hidden"></canvas>
           <canvas id="freezePreview" class="hidden"></canvas>
 
@@ -1330,17 +1427,14 @@ function renderVisionPanel(){
           <h3>Vision Result</h3>
           <div id="visionResult" class="small muted">Upload an image or start the camera to extract live codes and serials.</div>
         </div>
-
         <div class="card">
           <h3>Detection Tips</h3>
-          <div class="list-item section">Tilt slightly to kill reflections, then straighten once letters appear.</div>
-          <div class="list-item">Move closer until engraving fills most of the scan box.</div>
-          <div class="list-item">Freeze frame is best for polished clasps and rehaut-like reflections.</div>
-          <div class="list-item">If live text flickers, switch scan speed to Accurate.</div>
+          <div class="list-item section">Fill the box with one engraving line only.</div>
+          <div class="list-item">Freeze frame is best for polished clasp surfaces.</div>
+          <div class="list-item">Use the Intelligence System after OCR and choose the correct model/reference.</div>
         </div>
       </div>
     </div>`;
-
   bindVisionEvents();
   const intervalSel = document.getElementById('scanIntervalSelect');
   const zoomSel = document.getElementById('cameraZoomSelect');
@@ -1349,21 +1443,17 @@ function renderVisionPanel(){
 }
 
 function stopCamera(){
-  if (cameraInterval) {
-    clearInterval(cameraInterval);
-    cameraInterval = null;
-  }
-  if (cameraStream) {
-    cameraStream.getTracks().forEach(t => t.stop());
-    cameraStream = null;
-  }
+  if (cameraInterval) clearInterval(cameraInterval);
+  cameraInterval = null;
+  if (cameraStream) cameraStream.getTracks().forEach(t => t.stop());
+  cameraStream = null;
   const video = document.getElementById('video');
   if (video) video.srcObject = null;
+  stableRead = { text:'', count:0 };
   const stability = document.getElementById('stabilityText');
   if (stability) stability.textContent = 'Stopped';
   const badge = document.getElementById('stableBadge');
   if (badge) badge.textContent = '0 stable';
-  stableRead = { text:'', count:0 };
   updateOCRStatus('Camera stopped');
 }
 
@@ -1371,21 +1461,15 @@ async function applyTrackPreferences(track){
   try{
     const capabilities = track.getCapabilities ? track.getCapabilities() : {};
     const constraints = {};
-
     if (capabilities.focusMode && capabilities.focusMode.includes('continuous')) {
       constraints.advanced = [{ focusMode: 'continuous' }];
     }
     if (capabilities.zoom) {
-      const targetZoom = Number(visionSettings.zoom || 2);
-      const min = capabilities.zoom.min || 1;
-      const max = capabilities.zoom.max || targetZoom;
-      const z = Math.max(min, Math.min(max, targetZoom));
+      const target = Number(visionSettings.zoom || 2);
+      const z = Math.max(capabilities.zoom.min || 1, Math.min(capabilities.zoom.max || target, target));
       constraints.advanced = (constraints.advanced || []).concat([{ zoom: z }]);
     }
-
-    if (Object.keys(constraints).length) {
-      await track.applyConstraints(constraints);
-    }
+    if (Object.keys(constraints).length) await track.applyConstraints(constraints);
   } catch {}
 }
 
@@ -1404,38 +1488,23 @@ function getCenterCrop(canvas){
 function updateStability(text){
   const clean = normalizeOCRText(text);
   if (!clean || clean === 'NO TEXT DETECTED') return;
-
-  if (clean === stableRead.text) {
-    stableRead.count += 1;
-  } else {
-    stableRead.text = clean;
-    stableRead.count = 1;
-  }
-
+  if (clean === stableRead.text) stableRead.count += 1;
+  else { stableRead.text = clean; stableRead.count = 1; }
   const badge = document.getElementById('stableBadge');
   if (badge) badge.textContent = `${stableRead.count} stable`;
-
   const stability = document.getElementById('stabilityText');
   if (!stability) return;
-
-  if (stableRead.count >= 3) stability.textContent = 'Strong repeated read';
-  else if (stableRead.count === 2) stability.textContent = 'Likely valid repeated read';
-  else stability.textContent = 'New read detected';
+  stability.textContent = stableRead.count >= 3 ? 'Strong repeated read' : stableRead.count === 2 ? 'Likely valid repeated read' : 'New read detected';
 }
 
 async function liveScanPass(){
   if (ocrBusy || document.hidden || currentTab !== 'vision') return;
-
   const video = document.getElementById('video');
   const canvas = document.getElementById('canvas');
   if (!video || !canvas || !video.videoWidth) return;
-
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
-
-  const ctx = canvas.getContext('2d');
-  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
+  canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
   const cropped = getCenterCrop(canvas);
   const result = await doOCR(cropped, 'visionResult', 'liveText');
   if (result?.text) updateStability(result.text);
@@ -1444,27 +1513,17 @@ async function liveScanPass(){
 async function startCamera(){
   try{
     await ensureTesseract();
-
-    const constraints = {
+    cameraStream = await navigator.mediaDevices.getUserMedia({
       audio:false,
-      video:{
-        facingMode:{ ideal:'environment' },
-        width:{ ideal:1920 },
-        height:{ ideal:1080 }
-      }
-    };
-
-    cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
+      video:{ facingMode:{ ideal:'environment' }, width:{ ideal:1920 }, height:{ ideal:1080 } }
+    });
     const video = document.getElementById('video');
     video.srcObject = cameraStream;
     await video.play();
-
     const track = cameraStream.getVideoTracks()[0];
     if (track) await applyTrackPreferences(track);
-
     stableRead = { text:'', count:0 };
     updateOCRStatus('Camera active');
-
     cameraInterval = setInterval(liveScanPass, Number(visionSettings.intervalMs) || 4200);
   } catch(e){
     updateOCRStatus('Camera unavailable or permission denied');
@@ -1474,16 +1533,13 @@ async function startCamera(){
 async function freezeCameraFrame(){
   const video = document.getElementById('video');
   if (!video || !video.videoWidth) return;
-
   const preview = document.getElementById('freezePreview');
   preview.width = video.videoWidth;
   preview.height = video.videoHeight;
   preview.getContext('2d').drawImage(video, 0, 0, preview.width, preview.height);
-
   const cropped = getCenterCrop(preview);
   const stability = document.getElementById('stabilityText');
   if (stability) stability.textContent = 'Frozen frame captured';
-
   const result = await doOCR(cropped, 'visionResult', 'liveText');
   if (result?.text) updateStability(result.text);
 }
@@ -1496,39 +1552,33 @@ function bindVisionEvents(){
   const intervalSel = document.getElementById('scanIntervalSelect');
   const zoomSel = document.getElementById('cameraZoomSelect');
 
-  if (upload) {
-    upload.addEventListener('change', async (e) => {
-      const file = e.target.files?.[0];
-      if (!file) return;
-      await doOCR(file, 'visionResult', 'imageText');
-    });
-  }
+  if (upload) upload.addEventListener('change', async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    await doOCR(file, 'visionResult', 'imageText');
+  });
 
   if (startBtn) startBtn.onclick = startCamera;
   if (freezeBtn) freezeBtn.onclick = freezeCameraFrame;
   if (stopBtn) stopBtn.onclick = stopCamera;
 
-  if (intervalSel) {
-    intervalSel.onchange = () => {
-      visionSettings.intervalMs = Number(intervalSel.value);
-      saveLS();
-      if (cameraInterval) {
-        clearInterval(cameraInterval);
-        cameraInterval = setInterval(liveScanPass, Number(visionSettings.intervalMs) || 4200);
-      }
-    };
-  }
+  if (intervalSel) intervalSel.onchange = () => {
+    visionSettings.intervalMs = Number(intervalSel.value);
+    saveLS();
+    if (cameraInterval) {
+      clearInterval(cameraInterval);
+      cameraInterval = setInterval(liveScanPass, Number(visionSettings.intervalMs) || 4200);
+    }
+  };
 
-  if (zoomSel) {
-    zoomSel.onchange = async () => {
-      visionSettings.zoom = Number(zoomSel.value);
-      saveLS();
-      if (cameraStream) {
-        const track = cameraStream.getVideoTracks()[0];
-        if (track) await applyTrackPreferences(track);
-      }
-    };
-  }
+  if (zoomSel) zoomSel.onchange = async () => {
+    visionSettings.zoom = Number(zoomSel.value);
+    saveLS();
+    if (cameraStream) {
+      const track = cameraStream.getVideoTracks()[0];
+      if (track) await applyTrackPreferences(track);
+    }
+  };
 }
 
 function renderLearnPanel(){
@@ -1536,7 +1586,7 @@ function renderLearnPanel(){
     <div class="row row-main">
       <div class="card">
         <h3>Learning Mode</h3>
-        <div class="list-item section">Save cases as you review watches. Over time this builds your own reference stack of likely patterns, risk levels, and repeated seller behavior.</div>
+        <div class="list-item section">Save cases as you review watches. Over time this builds your own reference stack of repeated patterns and seller behavior.</div>
         <div class="list-item">This version stores learning cases locally in your browser.</div>
       </div>
       <div class="card">
@@ -1544,6 +1594,7 @@ function renderLearnPanel(){
         ${learnedCases.length ? learnedCases.map(c => `
           <div class="list-item section">
             <div style="font-weight:bold;color:#065f46">${esc(c.model)}</div>
+            <div class="small">Reference: ${esc(c.reference || "All references")}</div>
             <div class="small">Serial: <span class="mono">${esc(c.serial || "None")}</span></div>
             <div class="small">Clasp: <span class="mono">${esc(c.clasp || "None")}</span></div>
             <div class="small">Inferred: ${esc(c.inferred)}</div>
@@ -1559,11 +1610,9 @@ function renderUpdatePanel(){
   document.getElementById('panel-update').innerHTML = `
     <div class="row row-main">
       <div class="card">
-        <h3>Paste Update Data</h3>
-        <textarea id="updateText" placeholder="Example:
-VSF: ABC DEF
-CLEAN: XYZ"></textarea>
-        <div class="section"><button class="btn" id="applyUpdateBtn">Apply Update</button></div>
+        <h3>Manual Update Notes</h3>
+        <textarea id="updateText" placeholder="Paste your own notes here. This panel now stores notes only because the database is model-aware in code."></textarea>
+        <div class="section"><button class="btn" id="applyUpdateBtn">Save Note</button></div>
       </div>
       <div class="card">
         <h3>Update Log</h3>
@@ -1574,74 +1623,28 @@ CLEAN: XYZ"></textarea>
     </div>`;
 }
 
-function normalizeFactoryKey(rawKey){
-  const key = rawKey.trim().toUpperCase();
-  const map = {
-    'CLEAN': 'Clean',
-    'VSF': 'VSF',
-    'ARF': 'ARF',
-    'NOOB': 'Noob',
-    'GMF': 'GMF / BP',
-    'BP': 'GMF / BP',
-    'GMF / BP': 'GMF / BP',
-    'EWF': 'EWF / BTF',
-    'BTF': 'EWF / BTF',
-    'EWF / BTF': 'EWF / BTF',
-    'MIXED': 'Mixed'
-  };
-  return map[key] || null;
-}
-
 function applyUpdate(){
-  const updateText = document.getElementById('updateText').value.toUpperCase();
-  let added = 0;
-
-  updateText.split(/\n+/).forEach(line => {
-    if (!line.includes(':')) return;
-    const [rawKey, rawValues] = line.split(':');
-    const mappedKey = normalizeFactoryKey(rawKey);
-    const codes = rawValues.split(/[, ]+/).filter(Boolean);
-    if (!mappedKey || !codes.length) return;
-
-    if (claspData[mappedKey]) {
-      codes.forEach(c => {
-        if (!claspData[mappedKey].includes(c)) {
-          claspData[mappedKey].push(c);
-          added++;
-        }
-      });
-    }
-
-    if (serialData[mappedKey]) {
-      codes.forEach(c => {
-        if (!serialData[mappedKey].includes(c)) {
-          serialData[mappedKey].push(c);
-          added++;
-        }
-      });
-    }
-  });
-
-  updateLog.unshift(`Added ${added} new entries`);
+  const note = document.getElementById('updateText').value.trim();
+  if (!note) return;
+  updateLog.unshift(note);
   updateLog = updateLog.slice(0, 50);
   saveLS();
-  renderCodesPanel();
-  renderSerialsPanel();
   renderUpdatePanel();
 }
 
 function saveCurrentCase(){
   if (!currentIntel?.top) return;
-
   learnedCases.unshift({
     id: Date.now(),
     model: currentIntel.model,
+    reference: currentIntel.reference,
     serial: currentIntel.serial,
     clasp: currentIntel.clasp,
     inferred: currentIntel.top.factory,
     confidence: currentIntel.top.score,
     scamFlags: getScamSignals({
       model: currentIntel.model,
+      reference: currentIntel.reference,
       serial: currentIntel.serial,
       clasp: currentIntel.clasp,
       visualFactory: currentIntel.visualFactory,
@@ -1649,7 +1652,6 @@ function saveCurrentCase(){
       sellerClaim: currentIntel.sellerClaim
     }).length
   });
-
   learnedCases = learnedCases.slice(0,20);
   saveLS();
   renderLearnPanel();
@@ -1660,22 +1662,15 @@ function initTabs(){
   document.getElementById('tabs').innerHTML = tabs.map((t,i) =>
     `<button class="tab ${i===0?'active':''}" data-tab="${t}">${t[0].toUpperCase()+t.slice(1)}</button>`
   ).join('');
-
   document.querySelectorAll('.tab').forEach(btn => {
     btn.onclick = async () => {
       document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
       btn.classList.add('active');
-
       document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-      const nextPanel = document.getElementById('panel-' + btn.dataset.tab);
-      if (nextPanel) nextPanel.classList.add('active');
-
+      document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
       currentTab = btn.dataset.tab;
-      if (currentTab !== 'vision') {
-        stopCamera();
-      } else {
-        try { await ensureTesseract(); } catch {}
-      }
+      if (currentTab !== 'vision') stopCamera();
+      else { try { await ensureTesseract(); } catch {} }
     };
   });
 }
@@ -1690,10 +1685,7 @@ function hideInstallUI(){
 function setupInstall(){
   const btn = document.getElementById('installBtn');
   const standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-  if (standalone) {
-    hideInstallUI();
-    return;
-  }
+  if (standalone) return hideInstallUI();
 
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
@@ -1713,25 +1705,23 @@ function setupInstall(){
 }
 
 function registerSW(){
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
-  }
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(() => {});
 }
 
 function bindGlobalEvents(){
-  const searchHandler = debounce(e => renderSearchResults(e.target.value), 120);
-  document.getElementById('searchBox').addEventListener('input', searchHandler);
-
-  document.getElementById('modelInput').addEventListener('change', updateIntelligence);
+  document.getElementById('searchBox').addEventListener('input', debounce(e => renderSearchResults(e.target.value), 120));
+  document.getElementById('modelInput').addEventListener('change', () => {
+    updateReferenceOptions();
+    updateIntelligence();
+  });
+  document.getElementById('referenceInput').addEventListener('change', updateIntelligence);
   document.getElementById('visualFactory').addEventListener('change', updateIntelligence);
   document.getElementById('sellerClaim').addEventListener('change', updateIntelligence);
-
   document.getElementById('confidenceTheme').addEventListener('change', () => {
     updateIntelligence();
     renderCombosPanel();
     renderIntelPanel();
   });
-
   document.getElementById('serialInput').addEventListener('input', debounce(updateIntelligence, 100));
   document.getElementById('claspInput').addEventListener('input', debounce(updateIntelligence, 100));
   document.getElementById('saveCaseBtn').onclick = saveCurrentCase;
@@ -1745,33 +1735,17 @@ function bindGlobalEvents(){
   document.addEventListener('click', (e) => {
     const saveBtn = e.target.closest('.save-search-btn');
     if (saveBtn) {
-      saveSearchItem({
-        type: saveBtn.dataset.type,
-        key: saveBtn.dataset.key,
-        value: saveBtn.dataset.value
-      });
+      saveSearchItem({ type: saveBtn.dataset.type, key: saveBtn.dataset.key, value: saveBtn.dataset.value });
       return;
     }
-
     const removeBtn = e.target.closest('.remove-saved-btn');
     if (removeBtn) {
       removeSavedItem(removeBtn.dataset.id);
       return;
     }
-
-    if (e.target.id === 'runDecisionTreeBtn') {
-      runDecisionTree();
-      return;
-    }
-
-    if (e.target.id === 'runAutoScanBtn') {
-      runAutoScan();
-      return;
-    }
-
-    if (e.target.id === 'applyUpdateBtn') {
-      applyUpdate();
-    }
+    if (e.target.id === 'runDecisionTreeBtn') return runDecisionTree();
+    if (e.target.id === 'runAutoScanBtn') return runAutoScan();
+    if (e.target.id === 'applyUpdateBtn') return applyUpdate();
   });
 
   document.addEventListener('visibilitychange', () => {
