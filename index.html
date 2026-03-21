@@ -734,7 +734,11 @@ function getDecisionTreeOutput({model,strongestTell,dialQuality,caseQuality,seri
 }
 
 function parseAutoScan(input){
-  const rawUpper = String(input || '').toUpperCase();
+  const rawUpper = String(input || '')
+    .toUpperCase()
+    .replace(/[Х]/g, 'X')
+    .replace(/C\s*F/g, 'CF')
+    .replace(/CLEAN\s*FACTORY/g, 'CLEAN');
   let model = "";
   modelData.forEach(m => {
     if (rawUpper.includes(m.model.toUpperCase().replace(/-/g,'-')) || rawUpper.includes(m.model.toUpperCase().split(' ')[0])) {
@@ -756,7 +760,7 @@ function parseAutoScan(input){
 
   let seller = "none";
   factoryList.forEach(f => { if (rawUpper.includes(f.toUpperCase().replace(/ \/ /g,' '))) seller = f; });
-  if (rawUpper.includes("CF")) seller = "Clean";
+  if (rawUpper.includes("CF") || rawUpper.includes("CLEAN")) seller = "Clean";
   if (rawUpper.includes("GMF") || rawUpper.includes("BP")) seller = "GMF / BP";
   if (rawUpper.includes("BTF") || rawUpper.includes("EWF")) seller = "EWF / BTF";
 
@@ -858,6 +862,9 @@ function normalizeOCRText(text){
     .toUpperCase()
     .replace(/[|]/g, 'I')
     .replace(/[§$]/g, 'S')
+    .replace(/[Х]/g, 'X')
+    .replace(/C\s*F/g, 'CF')
+    .replace(/CLEAN\s*FACTORY/g, 'CLEAN')
     .replace(/[\[\]\(\)]/g, '')
     .replace(/\s+/g, ' ')
     .trim();
