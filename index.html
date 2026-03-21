@@ -273,9 +273,249 @@
       .row-2,.row-main,.grid-3,.grid-2{grid-template-columns:1fr}
       .topbar{align-items:flex-start}
     }
-  </style>
+  
+
+/* BLACK OPS SPLASH */
+#splash{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at center, rgba(127,29,29,.16), transparent 30%),
+    linear-gradient(180deg, #010308 0%, #020617 55%, #000 100%);
+  color:#fca5a5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  z-index:9999;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+  letter-spacing:.22em;
+  overflow:hidden;
+}
+#splash::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    repeating-linear-gradient(
+      180deg,
+      rgba(255,255,255,.00) 0px,
+      rgba(255,255,255,.00) 2px,
+      rgba(248,113,113,.03) 3px,
+      rgba(255,255,255,.00) 4px
+    );
+  opacity:.6;
+  pointer-events:none;
+}
+#splash::after{
+  content:"CLASSIFIED • BLACK OPS • RESTRICTED • EYES ONLY • CLASSIFIED • BLACK OPS • RESTRICTED • EYES ONLY";
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) rotate(-26deg);
+  font-size:34px;
+  font-weight:900;
+  color:rgba(248,113,113,.07);
+  white-space:nowrap;
+  letter-spacing:.24em;
+  pointer-events:none;
+}
+.splash-grid{
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(248,113,113,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(248,113,113,.05) 1px, transparent 1px);
+  background-size:38px 38px;
+  mask-image:linear-gradient(to bottom, rgba(0,0,0,.6), rgba(0,0,0,.12));
+  opacity:.25;
+}
+.splash-vignette{
+  position:absolute;
+  inset:0;
+  box-shadow:inset 0 0 180px rgba(0,0,0,.95);
+  pointer-events:none;
+}
+.splash-scan{
+  position:absolute;
+  top:-10%;
+  left:0;
+  width:100%;
+  height:8px;
+  background:linear-gradient(90deg, transparent, rgba(252,165,165,.95), transparent);
+  box-shadow:0 0 20px rgba(248,113,113,.8), 0 0 40px rgba(248,113,113,.35);
+  animation:scan 1.15s linear infinite;
+}
+.splash-header{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  padding:24px 28px;
+  border:1px solid rgba(248,113,113,.20);
+  border-radius:20px;
+  background:linear-gradient(180deg, rgba(20,20,25,.64), rgba(5,5,8,.78));
+  box-shadow:0 0 0 1px rgba(248,113,113,.08) inset, 0 0 42px rgba(248,113,113,.09);
+  min-width:min(92vw, 780px);
+}
+.splash-kicker{
+  font-size:11px;
+  font-weight:800;
+  color:#fecaca;
+  opacity:.9;
+  margin-bottom:14px;
+}
+.splash-title{
+  font-size:28px;
+  font-weight:900;
+  margin-bottom:12px;
+  color:#fecaca;
+  text-transform:uppercase;
+  text-align:center;
+  animation:glow 1s infinite alternate;
+}
+.pulse-strong{
+  animation:glowStrong .42s infinite alternate;
+}
+.splash-sub{
+  font-size:13px;
+  opacity:.88;
+  color:#fca5a5;
+  margin-top:8px;
+}
+.splash-status{
+  margin-top:18px;
+  width:min(520px, 80vw);
+}
+.status-row{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
+  font-size:11px;
+  color:#fecaca;
+}
+.status-bar{
+  position:relative;
+  height:10px;
+  border-radius:999px;
+  overflow:hidden;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(248,113,113,.18);
+}
+.status-bar > span{
+  display:block;
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg, rgba(248,113,113,.55), rgba(252,165,165,1));
+  box-shadow:0 0 20px rgba(248,113,113,.8);
+  animation:loadBar 3.4s ease forwards;
+}
+.splash-footer{
+  margin-top:14px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.splash-pill{
+  font-size:10px;
+  font-weight:800;
+  color:#fecaca;
+  border:1px solid rgba(248,113,113,.22);
+  border-radius:999px;
+  padding:6px 10px;
+  background:rgba(127,29,29,.12);
+}
+.typing{
+  overflow:hidden;
+  white-space:nowrap;
+  border-right:2px solid #fca5a5;
+  width:0;
+  max-width:100%;
+  animation:typing 2s steps(30,end) forwards, blink .55s infinite;
+}
+.access-flash{
+  position:absolute;
+  bottom:9vh;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:2;
+  font-size:14px;
+  font-weight:900;
+  color:#bbf7d0;
+  letter-spacing:.28em;
+  opacity:0;
+  text-shadow:0 0 12px rgba(134,239,172,.65);
+  animation:accessFlash 1.1s ease forwards;
+  animation-delay:2.85s;
+}
+@keyframes glow{
+  from{ text-shadow:0 0 6px rgba(248,113,113,.35), 0 0 18px rgba(248,113,113,.18);}
+  to{ text-shadow:0 0 18px rgba(248,113,113,.95), 0 0 40px rgba(248,113,113,.45);}
+}
+@keyframes glowStrong{
+  0%{ opacity:.82; text-shadow:0 0 8px rgba(248,113,113,.55), 0 0 18px rgba(248,113,113,.24); transform:scale(1);}
+  100%{ opacity:1; text-shadow:0 0 18px rgba(248,113,113,1), 0 0 36px rgba(248,113,113,.72), 0 0 72px rgba(248,113,113,.34); transform:scale(1.03);}
+}
+@keyframes scan{
+  0%{top:-10%}
+  100%{top:110%}
+}
+@keyframes typing{
+  from{width:0}
+  to{width:100%}
+}
+@keyframes blink{
+  50%{border-color:transparent}
+}
+@keyframes loadBar{
+  0%{width:0%}
+  15%{width:16%}
+  38%{width:39%}
+  62%{width:66%}
+  84%{width:88%}
+  100%{width:100%}
+}
+@keyframes accessFlash{
+  0%{opacity:0; transform:translateX(-50%) scale(.95)}
+  20%{opacity:1; transform:translateX(-50%) scale(1)}
+  80%{opacity:1; transform:translateX(-50%) scale(1)}
+  100%{opacity:.12; transform:translateX(-50%) scale(1.03)}
+}
+
+
+</style>
 </head>
 <body>
+
+
+<div id="splash">
+  <div class="splash-grid"></div>
+  <div class="splash-vignette"></div>
+  <div class="splash-scan"></div>
+  <div class="splash-header">
+    <div class="splash-kicker">EYES ONLY • INTERNAL COMPARTMENT • LEVEL SIGMA</div>
+    <div class="splash-title">SECURE GOVERNMENT SYSTEM</div>
+    <div class="splash-title pulse-strong">****SECRET****</div>
+    <div class="splash-sub typing">INITIALIZING ENCRYPTED ROLEX INTELLIGENCE MODULE...</div>
+    <div class="splash-status">
+      <div class="status-row">
+        <span>AUTHENTICATION</span>
+        <span>PASS</span>
+      </div>
+      <div class="status-bar"><span></span></div>
+    </div>
+    <div class="splash-footer">
+      <span class="splash-pill">BLACK OPS CHANNEL</span>
+      <span class="splash-pill">COMPARTMENTALIZED</span>
+      <span class="splash-pill">LIVE ANALYSIS</span>
+    </div>
+  </div>
+  <div class="access-flash">ACCESS GRANTED</div>
+</div>
 <div class="app-watermark"></div>
 <div class="wrap">
   <div class="card sticky" id="installCard" style="margin-bottom:16px">
@@ -2268,5 +2508,19 @@ document.addEventListener('DOMContentLoaded', () => {
   updateIntelligence();
 });
 </script>
+
+<script>
+window.addEventListener('load', () => {
+  const splash = document.getElementById('splash');
+  setTimeout(() => {
+    splash.style.transition = "opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease";
+    splash.style.opacity = "0";
+    splash.style.transform = "scale(1.015)";
+    splash.style.filter = "blur(4px)";
+    setTimeout(() => splash.remove(), 820);
+  }, 4000);
+});
+</script>
+
 </body>
 </html>
