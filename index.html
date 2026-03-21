@@ -1223,15 +1223,42 @@ function updateReferenceOptions(){
 }
 
 function updateIntelligence(){
-  const model = document.getElementById('modelInput').value || '';
-  const reference = document.getElementById('referenceInput').value || 'No selection';
+  const model = document.getElementById('modelInput').value || null;
+  const reference = document.getElementById('referenceInput').value;
   const serial = document.getElementById('serialInput').value;
   const clasp = document.getElementById('claspInput').value;
   const visualFactory = document.getElementById('visualFactory').value;
   const sellerClaim = document.getElementById('sellerClaim').value;
   const theme = document.getElementById('confidenceTheme').value;
 
+  const hasInput =
+    model ||
+    (serial && serial.trim()) ||
+    (clasp && clasp.trim()) ||
+    (visualFactory && visualFactory !== "none") ||
+    (sellerClaim && sellerClaim !== "none");
+
+  if(!hasInput){
+    document.getElementById('topFactory').textContent = "No result";
+    const topScore = document.getElementById('topScore');
+    topScore.textContent = "0%";
+    topScore.className = "badge dark";
+
+    const bar = document.getElementById('topBar');
+    bar.style.width = "0%";
+
+    document.getElementById('topReasons').innerHTML =
+      `<div class="list-item" style="text-align:center;padding:18px"><div style="font-weight:bold;color:#065f46;margin-bottom:6px">Waiting for input…</div><div class="small muted">Select a model or add serial, clasp, visual, or seller data to generate an inference.</div></div>`;
+
+    currentIntel = null;
+    renderIntelPanel();
+    renderScamPanel();
+    return;
+  }
+
   const ranked = getScoreBreakdown({model, reference, serial, clasp, visualFactory});
+  const top = ranked[0] || {factory:"No result", score:0, reasons:[]};
+ getScoreBreakdown({model, reference, serial, clasp, visualFactory});
   const top = ranked[0] || {factory:"No result", score:0, reasons:[]};
 
   document.getElementById('topFactory').textContent = top.factory;
@@ -1402,8 +1429,41 @@ function renderWorkflowPanel(){
 }
 
 function renderIntelPanel(){
-  const ranked = currentIntel?.ranked || getScoreBreakdown({model:modelData[0].model,reference:"All references"});
   const theme = document.getElementById('confidenceTheme')?.value || 'dynamic';
+
+  if (!currentIntel) {
+    document.getElementById('panel-intel').innerHTML = `
+      <div class="row row-main">
+        <div class="card">
+          <h3>Ranked Factory Output</h3>
+          <div class="result section" style="text-align:center;padding:24px">
+            <div style="font-size:18px;font-weight:bold;color:#065f46;margin-bottom:8px">Waiting for input…</div>
+            <div class="small muted">Add a model, serial, clasp, visual profile, or seller claim to generate a ranked factory output.</div>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <h3>Decision Rule</h3>
+            <div class="list-item section">Reference-aware matching is now part of the score.</div>
+            <div class="list-item">Visual profile can override weak code matches.</div>
+            <div class="list-item">Shared-code models like Daytona need strongest visual QC.</div>
+          </div>
+          <div class="card">
+            <h3>Factory Profiles</h3>
+            ${Object.entries(factoryProfiles).map(([factory, profile]) => `
+              <div class="list-item section">
+                <div style="font-weight:bold;color:#065f46">${esc(factory)}</div>
+                <div class="small"><b>Strengths:</b> ${esc(profile.strengths.join(", "))}</div>
+                <div class="small"><b>Cautions:</b> ${esc(profile.cautions.join(", "))}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>`;
+    return;
+  }
+
+  const ranked = currentIntel.ranked || [];
   document.getElementById('panel-intel').innerHTML = `
     <div class="row row-main">
       <div class="card">
@@ -1443,11 +1503,34 @@ function renderIntelPanel(){
 }
 
 function renderScamPanel(){
-  const s = currentIntel || {
-    model:"", reference:"No selection", serial:"", clasp:"",
-    visualFactory:"none", sellerClaim:"none",
-    ranked:getScoreBreakdown({model:"",reference:"No selection"})
-  };
+  if (!currentIntel) {
+    document.getElementById('panel-scam').innerHTML = `
+      <div class="row row-main">
+        <div class="card">
+          <h3>Scam Detection Output</h3>
+          <div class="result section" style="text-align:center;padding:24px">
+            <div style="font-size:18px;font-weight:bold;color:#065f46;margin-bottom:8px">Waiting for input…</div>
+            <div class="small muted">Add watch details first to check for scam signals, code conflicts, or weak mappings.</div>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <h3>Automatic Red Flags</h3>
+            <div class="list-item section">Selected model/reference does not support the code you entered.</div>
+            <div class="list-item">Seller claim and mapped signals disagree.</div>
+            <div class="list-item">Shared Daytona clusters used as proof.</div>
+            <div class="list-item">Low-tier or overlap-heavy clasp used alone.</div>
+          </div>
+          <div class="card">
+            <h3>Core Rule</h3>
+            <div class="list-item section">Codes support the story. Visuals confirm the watch.</div>
+          </div>
+        </div>
+      </div>`;
+    return;
+  }
+
+  const s = currentIntel;
   const flags = getScamSignals({
     model:s.model, reference:s.reference, serial:s.serial, clasp:s.clasp,
     visualFactory:s.visualFactory, ranked:s.ranked, sellerClaim:s.sellerClaim
