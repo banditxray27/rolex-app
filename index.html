@@ -619,10 +619,12 @@ function getModelByName(name){
 }
 
 function getReferencesForModel(modelName){
+  if (!modelName) return [];
   return getModelByName(modelName).references.map(r => r.ref);
 }
 
 function getEntriesForModel(modelName){
+  if (!modelName) return getAllEntries();
   return getAllEntries().filter(e => e.model === modelName);
 }
 
@@ -662,15 +664,16 @@ function getScoreBreakdown({model,reference,serial,clasp,visualFactory}){
   const weights = inferModelWeight(model || modelData[0].model);
   const scores = Object.fromEntries(factoryList.map(f => [f,0]));
   const reasons = Object.fromEntries(factoryList.map(f => [f,[]]));
-  const rows = getEntriesForModelAndRef(model, reference);
+  const effectiveReference = !reference || reference === 'No selection' ? 'All references' : reference;
+  const rows = getEntriesForModelAndRef(model, effectiveReference);
   const upperSerial = normalizeToken(serial);
   const upperClasp = normalizeToken(clasp);
 
   rows.forEach(row => {
     if (scores[row.factory] === undefined) scores[row.factory] = 0;
-    if (!reference || reference === 'All references') {
+    if (!effectiveReference || effectiveReference === 'All references') {
       scores[row.factory] += weights.ref;
-      reasons[row.factory].push(`Factory exists in selected model dataset (+${weights.ref})`);
+      reasons[row.factory].push(model ? `Factory exists in selected model dataset (+${weights.ref})` : `Factory exists in full dataset scan (+${weights.ref})`);
     } else {
       scores[row.factory] += weights.ref;
       reasons[row.factory].push(`Reference matches ${row.ref} (+${weights.ref})`);
@@ -1193,8 +1196,12 @@ function populateSelects(){
   const visualSel = document.getElementById('visualFactory');
   const sellerSel = document.getElementById('sellerClaim');
 
-  modelSel.innerHTML = modelData.map(m => `<option>${esc(m.model)}</option>`).join('');
-  refSel.innerHTML = `<option>All references</option>` + getReferencesForModel(modelData[0].model).map(r => `<option>${esc(r)}</option>`).join('');
+  modelSel.innerHTML =
+    `<option value="">No selection</option>` +
+    modelData.map(m => `<option>${esc(m.model)}</option>`).join('');
+
+  refSel.innerHTML = `<option>No selection</option><option>All references</option>`;
+
   visualSel.innerHTML = `<option value="none">No selection</option>` + factoryList.map(f => `<option>${esc(f)}</option>`).join('');
   sellerSel.innerHTML = `<option value="none">No selection</option>` + factoryList.map(f => `<option>${esc(f)}</option>`).join('');
 }
@@ -1203,14 +1210,21 @@ function updateReferenceOptions(){
   const model = document.getElementById('modelInput').value;
   const refSel = document.getElementById('referenceInput');
   const current = refSel.value;
-  const options = ["All references", ...getReferencesForModel(model)];
+
+  if (!model) {
+    refSel.innerHTML = `<option>No selection</option><option>All references</option>`;
+    if (current === 'All references') refSel.value = 'All references';
+    return;
+  }
+
+  const options = ["No selection", "All references", ...getReferencesForModel(model)];
   refSel.innerHTML = options.map(r => `<option>${esc(r)}</option>`).join('');
   if (options.includes(current)) refSel.value = current;
 }
 
 function updateIntelligence(){
-  const model = document.getElementById('modelInput').value;
-  const reference = document.getElementById('referenceInput').value;
+  const model = document.getElementById('modelInput').value || '';
+  const reference = document.getElementById('referenceInput').value || 'No selection';
   const serial = document.getElementById('serialInput').value;
   const clasp = document.getElementById('claspInput').value;
   const visualFactory = document.getElementById('visualFactory').value;
@@ -1430,9 +1444,9 @@ function renderIntelPanel(){
 
 function renderScamPanel(){
   const s = currentIntel || {
-    model:modelData[0].model, reference:"All references", serial:"", clasp:"",
+    model:"", reference:"No selection", serial:"", clasp:"",
     visualFactory:"none", sellerClaim:"none",
-    ranked:getScoreBreakdown({model:modelData[0].model,reference:"All references"})
+    ranked:getScoreBreakdown({model:"",reference:"No selection"})
   };
   const flags = getScamSignals({
     model:s.model, reference:s.reference, serial:s.serial, clasp:s.clasp,
