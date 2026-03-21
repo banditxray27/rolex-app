@@ -488,6 +488,165 @@
 
 
 
+/* ACCESS SCREEN */
+#accessGate{
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  background:
+    radial-gradient(circle at top, rgba(248,113,113,.08), transparent 28%),
+    linear-gradient(180deg, #02040a 0%, #030712 52%, #000 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+#accessGate.hidden{
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .45s ease, transform .45s ease, filter .45s ease;
+  transform:scale(1.01);
+  filter:blur(3px);
+}
+.agent-code-bg{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  opacity:.34;
+}
+.agent-code-track{
+  position:absolute;
+  left:-20%;
+  width:140%;
+  white-space:nowrap;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.24em;
+  color:rgba(248,113,113,.34);
+  text-shadow:0 0 10px rgba(248,113,113,.12);
+  animation:agentSweep linear infinite;
+}
+.agent-code-track.track-1{ top:14%; animation-duration:18s; }
+.agent-code-track.track-2{ top:28%; animation-duration:22s; animation-direction:reverse; }
+.agent-code-track.track-3{ top:42%; animation-duration:16s; }
+.agent-code-track.track-4{ top:56%; animation-duration:24s; animation-direction:reverse; }
+.agent-code-track.track-5{ top:70%; animation-duration:19s; }
+.agent-code-track.track-6{ top:84%; animation-duration:26s; animation-direction:reverse; }
+
+@keyframes agentSweep{
+  0%{ transform:translateX(0); }
+  100%{ transform:translateX(-18%); }
+}
+
+.access-vignette{
+  position:absolute;
+  inset:0;
+  box-shadow:inset 0 0 180px rgba(0,0,0,.92);
+  pointer-events:none;
+}
+.access-panel{
+  position:relative;
+  z-index:2;
+  width:min(92vw, 560px);
+  padding:24px 22px;
+  border-radius:22px;
+  border:1px solid rgba(248,113,113,.22);
+  background:linear-gradient(180deg, rgba(10,10,14,.88), rgba(4,4,6,.92));
+  box-shadow:
+    0 0 0 1px rgba(248,113,113,.08) inset,
+    0 24px 60px rgba(0,0,0,.42),
+    0 0 38px rgba(248,113,113,.08);
+  text-align:center;
+}
+.access-kicker{
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.28em;
+  color:#fecaca;
+  opacity:.9;
+  margin-bottom:12px;
+}
+.access-title{
+  font-size:26px;
+  font-weight:900;
+  letter-spacing:.12em;
+  color:#fecaca;
+  margin-bottom:8px;
+  text-shadow:0 0 14px rgba(248,113,113,.18);
+}
+.access-sub{
+  font-size:13px;
+  color:#fca5a5;
+  opacity:.88;
+  margin-bottom:18px;
+}
+.access-input{
+  width:100%;
+  padding:16px 18px;
+  border-radius:16px;
+  border:1px solid rgba(248,113,113,.28);
+  background:rgba(0,0,0,.34);
+  color:#ffe4e6;
+  font-size:16px;
+  outline:none;
+  box-shadow:0 0 0 1px rgba(248,113,113,.04) inset;
+}
+.access-input::placeholder{
+  color:rgba(255,228,230,.45);
+  letter-spacing:.12em;
+}
+.access-input:focus{
+  border-color:rgba(252,165,165,.55);
+  box-shadow:0 0 0 3px rgba(248,113,113,.10), 0 0 18px rgba(248,113,113,.12);
+}
+.access-actions{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+.access-btn{
+  min-width:170px;
+}
+.access-hint{
+  margin-top:14px;
+  font-size:10px;
+  color:#fecaca;
+  opacity:.74;
+  letter-spacing:.10em;
+  line-height:1.35;
+}
+.access-status{
+  min-height:18px;
+  margin-top:10px;
+  font-size:12px;
+  color:#fda4af;
+  letter-spacing:.10em;
+}
+@media (max-width: 600px){
+  .agent-code-track{
+    font-size:10px;
+    letter-spacing:.16em;
+  }
+  .access-panel{
+    width:min(94vw, 560px);
+    padding:20px 16px;
+  }
+  .access-title{
+    font-size:20px;
+  }
+  .access-sub{
+    font-size:12px;
+  }
+  .access-hint{
+    letter-spacing:.08em;
+  }
+}
+
+
 @media (max-width: 600px){
   .splash-header{padding:16px}
   .splash-title{font-size:18px}
@@ -497,9 +656,56 @@
   .splash-status{width:90vw}
 }
 
+
+body.preboot .wrap{
+  opacity:0;
+  pointer-events:none;
+}
+body.preboot{
+  overflow:hidden;
+}
+
+
+.access-input.deny-flash{
+  border-color:rgba(252,165,165,.95);
+  box-shadow:0 0 0 3px rgba(248,113,113,.18), 0 0 24px rgba(248,113,113,.22);
+  animation:denyShake .22s linear 2;
+}
+@keyframes denyShake{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-4px)}
+  50%{transform:translateX(4px)}
+  75%{transform:translateX(-3px)}
+  100%{transform:translateX(0)}
+}
+
 </style>
 </head>
-<body>
+<body class="preboot">
+
+<div id="accessGate">
+  <div class="agent-code-bg" aria-hidden="true">
+    <div class="agent-code-track track-1">SIGMA • EYES ONLY • CF • CLEAN • VSF • GMT-MASTER II • ENCRYPTED • 126610 • 7GJ • 1NQ • 3VV • 6RV6 • FIELD ACCESS •</div>
+    <div class="agent-code-track track-2">RESTRICTED • BLACK CHANNEL • DAYTONA • OXJ2 • H88F • SUBMARINER • 124060 • DEALER INTEL • VERIFIED NODE •</div>
+    <div class="agent-code-track track-3">AUTH GRID • DATEJUST • CLEAN • VSF • 126234 • ORV • 1LD • AIR-KING • SEA-DWELLER • INTERNAL TRAFFIC •</div>
+    <div class="agent-code-track track-4">COMPARTMENTALIZED • EXPLORER • OYSTER PERPETUAL • GMF / BP • YACHT-MASTER • SIGNAL MAP • CODE TRACE •</div>
+    <div class="agent-code-track track-5">ZX-91A • ENCRYPT • ACCESS NODE • GMT-MASTER II • BLRO • BLNR • VTNR • GRNR • CLASSIFIED • SECRET •</div>
+    <div class="agent-code-track track-6">WATCH INTEL • SERIAL CLUSTER • CLASP MAP • VISUAL PROFILE • SCAM DETECTION • BLACK OPS CHANNEL •</div>
+  </div>
+  <div class="access-vignette"></div>
+  <div class="access-panel">
+    <div class="access-kicker">SECURE ACCESS TERMINAL</div>
+    <div class="access-title">AUTHORIZATION REQUIRED</div>
+    <div class="access-sub">Enter secure access code.</div>
+    <input id="accessInput" class="access-input" type="password" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="ENTER ACCESS CODE" />
+    <div class="access-actions">
+      <button id="accessBtn" class="btn access-btn">Access System</button>
+    </div>
+    <div id="accessStatus" class="access-status"></div>
+    <div class="access-hint">AUTHORIZED USE ONLY. ACTIVITY MAY BE MONITORED.</div>
+  </div>
+</div>
+
 
 
 <div id="splash">
@@ -2519,18 +2725,106 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+
+
 <script>
 window.addEventListener('load', () => {
   const splash = document.getElementById('splash');
-  setTimeout(() => {
-    splash.style.transition = "opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease";
-    splash.style.opacity = "0";
-    splash.style.transform = "scale(1.015)";
-    splash.style.filter = "blur(4px)";
-    setTimeout(() => splash.remove(), 820);
-  }, 4000);
+  const gate = document.getElementById('accessGate');
+  const input = document.getElementById('accessInput');
+  const button = document.getElementById('accessBtn');
+  const status = document.getElementById('accessStatus');
+  const body = document.body;
+
+  if (splash) {
+    splash.style.display = 'none';
+    splash.style.opacity = '1';
+    splash.style.transform = 'scale(1)';
+    splash.style.filter = 'none';
+  }
+
+  function playDeniedBeep(){
+    try{
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const now = audioCtx.currentTime;
+      const makeTone = (start, freq, duration) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(freq, start);
+        gain.gain.setValueAtTime(0.0001, start);
+        gain.gain.exponentialRampToValueAtTime(0.08, start + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(start);
+        osc.stop(start + duration + 0.02);
+      };
+      makeTone(now, 880, 0.12);
+      makeTone(now + 0.16, 740, 0.14);
+    }catch(e){}
+  }
+
+  function finishBoot(){
+    if (!splash) return;
+    setTimeout(() => {
+      splash.style.transition = "opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease";
+      splash.style.opacity = "0";
+      splash.style.transform = "scale(1.015)";
+      splash.style.filter = "blur(4px)";
+      setTimeout(() => {
+        splash.remove();
+        body.classList.remove('preboot');
+      }, 820);
+    }, 4000);
+  }
+
+  function showSplashThenApp(){
+    if (!gate || !splash) return;
+    gate.classList.add('hidden');
+    setTimeout(() => {
+      gate.remove();
+      splash.style.display = 'flex';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          finishBoot();
+        });
+      });
+    }, 460);
+  }
+
+  function deny(){
+    if (status) status.textContent = 'ACCESS DENIED';
+    playDeniedBeep();
+    if (input) {
+      input.focus();
+      input.classList.remove('deny-flash');
+      void input.offsetWidth;
+      input.classList.add('deny-flash');
+    }
+  }
+
+  function unlock(){
+    const value = (input?.value || '').trim();
+    if (!value) {
+      deny();
+      return;
+    }
+    if (status) status.textContent = 'ACCESS ACCEPTED';
+    showSplashThenApp();
+  }
+
+  if (button) button.addEventListener('click', unlock);
+  if (input) {
+    input.focus();
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') unlock();
+    });
+  }
 });
 </script>
+
+
 
 </body>
 </html>
