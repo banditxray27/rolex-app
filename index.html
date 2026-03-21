@@ -13,7 +13,7 @@
       --bg:#f5f5f4;
       --card:#fff;
       --muted:#6b7280;
-      --red:#b91c1c;
+      --red:#dc2626;
       --amber:#b45309;
       --border:#e5e7eb;
     }
@@ -111,6 +111,26 @@
       font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
       word-break:break-word
     }
+
+    .classified-line{
+      margin-top:8px;
+      font-weight:900;
+      font-size:20px;
+      line-height:1.2;
+      color:#f87171;
+      letter-spacing:.04em;
+    }
+    .classified-sub{
+      font-size:18px;
+    }
+    @keyframes pulseSecret {
+      0% { opacity:.72; text-shadow:0 0 2px rgba(248,113,113,.20); }
+      50% { opacity:1; text-shadow:0 0 12px rgba(248,113,113,.55); }
+      100% { opacity:.72; text-shadow:0 0 2px rgba(248,113,113,.20); }
+    }
+    .secret-pulse{
+      animation:pulseSecret 1.8s ease-in-out infinite;
+    }
     @media (max-width: 900px){
       .row-2,.row-main,.grid-3,.grid-2{grid-template-columns:1fr}
       .topbar{align-items:flex-start}
@@ -136,7 +156,8 @@
         <div>
           <div style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#065f46;font-weight:bold">Bandit Xray</div>
           <h1>Rolex Master Field Manual 2026</h1>
-          <div class="muted">Model-aware database, inference engine, scam detector, decision tree, update system, and OCR camera tools.</div>
+          <div class="classified-line">INDUSTRY ONLY TOOL</div>
+          <div class="classified-line classified-sub secret-pulse">CLASSIFIED AS ****SECRET****</div>
         </div>
       </div>
       <div class="section">
