@@ -1232,23 +1232,28 @@ function updateIntelligence(){
   const theme = document.getElementById('confidenceTheme').value;
 
   const hasInput =
-    model ||
-    (serial && serial.trim()) ||
-    (clasp && clasp.trim()) ||
+    !!model ||
+    !!String(serial || '').trim() ||
+    !!String(clasp || '').trim() ||
     (visualFactory && visualFactory !== "none") ||
     (sellerClaim && sellerClaim !== "none");
 
-  if(!hasInput){
-    document.getElementById('topFactory').textContent = "No result";
+  if (!hasInput) {
+    document.getElementById('topFactory').textContent = "Waiting for input…";
     const topScore = document.getElementById('topScore');
-    topScore.textContent = "0%";
+    topScore.textContent = "—";
     topScore.className = "badge dark";
 
     const bar = document.getElementById('topBar');
     bar.style.width = "0%";
+    bar.style.background = "#111827";
 
-    document.getElementById('topReasons').innerHTML =
-      `<div class="list-item" style="text-align:center;padding:18px"><div style="font-weight:bold;color:#065f46;margin-bottom:6px">Waiting for input…</div><div class="small muted">Select a model or add serial, clasp, visual, or seller data to generate an inference.</div></div>`;
+    document.getElementById('topReasons').innerHTML = `
+      <div class="list-item" style="text-align:center;padding:18px">
+        <div style="font-weight:bold;color:#065f46;margin-bottom:6px">Waiting for input…</div>
+        <div class="small muted">Select a model or add serial, clasp, visual, or seller data to generate an inference.</div>
+      </div>
+    `;
 
     currentIntel = null;
     renderIntelPanel();
@@ -1257,8 +1262,6 @@ function updateIntelligence(){
   }
 
   const ranked = getScoreBreakdown({model, reference, serial, clasp, visualFactory});
-  const top = ranked[0] || {factory:"No result", score:0, reasons:[]};
- getScoreBreakdown({model, reference, serial, clasp, visualFactory});
   const top = ranked[0] || {factory:"No result", score:0, reasons:[]};
 
   document.getElementById('topFactory').textContent = top.factory;
