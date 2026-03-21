@@ -354,7 +354,7 @@ const modelData = [
     highTierFactories:["Clean","GMF / BP"]
   },
   {
-    model: "GMT-Master",
+    model: "GMT-Master II",
     references: [
       { ref: "116710LN / 126710 BLNR / BLRO / VTNR / GRNR", entries: [
         { factory:"Clean", serials:["Y2L3","L2L6","L6V6","Y2L6"], clasps:["1NQ","F6U"] },
@@ -555,7 +555,7 @@ function getEntriesForModelAndRef(modelName, refName){
 
 function inferModelWeight(model){
   if(model==="Daytona") return {visual:45,serial:20,clasp:15,ref:10,combo:10};
-  if(model==="GMT-Master") return {visual:40,serial:20,clasp:20,ref:10,combo:10};
+  if(model==="GMT-Master II") return {visual:40,serial:20,clasp:20,ref:10,combo:10};
   if(model==="Submariner") return {visual:40,serial:25,clasp:20,ref:10,combo:5};
   if(model==="Datejust") return {visual:35,serial:25,clasp:25,ref:10,combo:5};
   return {visual:40,serial:25,clasp:20,ref:10,combo:5};
@@ -566,11 +566,6 @@ function confidenceClass(score, theme){
   if(score>=75) return "";
   if(score>=45) return "amber";
   return "red";
-}
-
-function referenceMatches(inputRef, candidateRef){
-  if (!inputRef || inputRef === 'All references') return true;
-  return inputRef === candidateRef;
 }
 
 function serialMatches(input, candidate){
@@ -708,7 +703,7 @@ function getDecisionTreeOutput({model,strongestTell,dialQuality,caseQuality,seri
     if (strongestTell === "bad") outcomes.push("Daytona subdial spacing fails → high counterfeit risk regardless of code.");
     else outcomes.push("Daytona subdial spacing passes → continue to dial/case validation.");
   }
-  if (model === "GMT-Master") {
+  if (model === "GMT-Master II") {
     if (strongestTell === "bad") outcomes.push("GMT hand stack/bezel split fails → likely wrong movement tier or low-tier build.");
     else outcomes.push("GMT hand stack looks good → continue to serial/clasp support.");
   }
@@ -716,7 +711,7 @@ function getDecisionTreeOutput({model,strongestTell,dialQuality,caseQuality,seri
     if (strongestTell === "bad") outcomes.push(`${model} primary tell fails → downgrade any high-tier seller claim.`);
     else outcomes.push(`${model} primary tell looks good → check dial and bracelet before trusting codes.`);
   }
-  if (!["Submariner","Datejust","GMT-Master","Daytona"].includes(model)) {
+  if (!["Submariner","Datejust","GMT-Master II","Daytona"].includes(model)) {
     if (strongestTell === "bad") outcomes.push(`${model} main visual tell fails → downgrade any code-based confidence.`);
     else outcomes.push(`${model} main visual tell looks acceptable → continue with code support only as secondary evidence.`);
   }
@@ -739,7 +734,6 @@ function getDecisionTreeOutput({model,strongestTell,dialQuality,caseQuality,seri
 }
 
 function parseAutoScan(input){
-  const text = normalizeToken(String(input || '').replace(/\s+/g,' '));
   const rawUpper = String(input || '').toUpperCase();
   let model = "";
   modelData.forEach(m => {
@@ -748,7 +742,7 @@ function parseAutoScan(input){
     }
   });
   if (!model) {
-    if (rawUpper.includes("GMT")) model = "GMT-Master";
+    if (rawUpper.includes("GMT")) model = "GMT-Master II";
     else if (rawUpper.includes("DAYTONA")) model = "Daytona";
     else if (rawUpper.includes("DATEJUST")) model = "Datejust";
     else if (rawUpper.includes("SUB")) model = "Submariner";
