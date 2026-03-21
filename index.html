@@ -2727,6 +2727,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+
 <script>
 window.addEventListener('load', () => {
   const splash = document.getElementById('splash');
@@ -2736,33 +2738,239 @@ window.addEventListener('load', () => {
   const status = document.getElementById('accessStatus');
   const body = document.body;
 
-  if (splash) {
-    splash.style.display = 'none';
-    splash.style.opacity = '1';
-    splash.style.transform = 'scale(1)';
-    splash.style.filter = 'none';
+  let audioCtx = null;
+
+  function getAudioCtx(){
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(() => {});
+    }
+    return audioCtx;
+  }
+
+  function makeGain(ctx, value = 0.05){
+    const g = ctx.createGain();
+    g.gain.value = value;
+    g.connect(ctx.destination);
+    return g;
+  }
+
+  function playDTMF(key){
+    const ctx = getAudioCtx();
+    const map = {
+      '1':[697,1209],'2':[697,1336],'3':[697,1477],
+      '4':[770,1209],'5':[770,1336],'6':[770,1477],
+      '7':[852,1209],'8':[852,1336],'9':[852,1477],
+      '*':[941,1209],'0':[941,1336],'#':[941,1477]
+    };
+
+    const randomDigits = ['1','2','3','4','5','6','7','8','9','0'];
+    const chosenKey = map[key] ? key : randomDigits[Math.floor(Math.random() * randomDigits.length)];
+    const freqs = map[chosenKey];
+
+    const now = ctx.currentTime;
+    const duration = 0.19 + Math.random() * 0.085;
+    const peakGain = 0.032 + Math.random() * 0.018;
+    const attack = 0.005 + Math.random() * 0.006;
+    const releaseStart = duration - (0.028 + Math.random() * 0.02);
+    const jitter1 = 1 + ((Math.random() - 0.5) * 0.0035);
+    const jitter2 = 1 + ((Math.random() - 0.5) * 0.0035);
+
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(peakGain, now + attack);
+    gain.gain.setValueAtTime(peakGain * 0.92, now + Math.max(attack + 0.01, releaseStart - 0.02));
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+    const osc1 = ctx.createOscillator();
+    const osc2 = ctx.createOscillator();
+    osc1.type = 'sine';
+    osc2.type = 'sine';
+    osc1.frequency.setValueAtTime(freqs[0] * jitter1, now);
+    osc2.frequency.setValueAtTime(freqs[1] * jitter2, now);
+
+    const lineHum = ctx.createOscillator();
+    const humGain = ctx.createGain();
+    lineHum.type = 'sine';
+    lineHum.frequency.setValueAtTime(60, now);
+    humGain.gain.setValueAtTime(0.0001, now);
+    humGain.gain.exponentialRampToValueAtTime(0.0018 + Math.random() * 0.0008, now + 0.012);
+    humGain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+    const hissBuffer = ctx.createBuffer(1, Math.floor(ctx.sampleRate * duration), ctx.sampleRate);
+    const hissData = hissBuffer.getChannelData(0);
+    for (let i = 0; i < hissData.length; i++) {
+      hissData[i] = (Math.random() * 2 - 1) * 0.012;
+    }
+    const hiss = ctx.createBufferSource();
+    hiss.buffer = hissBuffer;
+
+    const hissFilter = ctx.createBiquadFilter();
+    hissFilter.type = 'bandpass';
+    hissFilter.frequency.setValueAtTime(2100 + Math.random() * 500, now);
+    hissFilter.Q.value = 0.7;
+
+    const hissGain = ctx.createGain();
+    hissGain.gain.setValueAtTime(0.0001, now);
+    hissGain.gain.exponentialRampToValueAtTime(0.0035 + Math.random() * 0.002, now + 0.01);
+    hissGain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+    const clickOsc = ctx.createOscillator();
+    const clickGain = ctx.createGain();
+    clickOsc.type = 'triangle';
+    clickOsc.frequency.setValueAtTime(1800 + Math.random() * 500, now);
+    clickGain.gain.setValueAtTime(0.0001, now);
+    clickGain.gain.exponentialRampToValueAtTime(0.006, now + 0.003);
+    clickGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.022);
+
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(2350 + Math.random() * 350, now);
+    filter.Q.value = 0.85;
+
+    const compressor = ctx.createDynamicsCompressor();
+    compressor.threshold.setValueAtTime(-24, now);
+    compressor.knee.setValueAtTime(18, now);
+    compressor.ratio.setValueAtTime(3, now);
+    compressor.attack.setValueAtTime(0.003, now);
+    compressor.release.setValueAtTime(0.08, now);
+
+    osc1.connect(filter);
+    osc2.connect(filter);
+    filter.connect(gain);
+    gain.connect(compressor);
+    compressor.connect(ctx.destination);
+
+    lineHum.connect(humGain);
+    humGain.connect(ctx.destination);
+
+    hiss.connect(hissFilter);
+    hissFilter.connect(hissGain);
+    hissGain.connect(ctx.destination);
+
+    clickOsc.connect(clickGain);
+    clickGain.connect(ctx.destination);
+
+    osc1.start(now);
+    osc2.start(now);
+    lineHum.start(now);
+    hiss.start(now);
+    clickOsc.start(now);
+
+    osc1.stop(now + duration + 0.01);
+    osc2.stop(now + duration + 0.01);
+    lineHum.stop(now + duration + 0.01);
+    hiss.stop(now + duration + 0.01);
+    clickOsc.stop(now + 0.025);
+  }
+
+  function playDeleteTone(){
+    const ctx = getAudioCtx();
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(880, now);
+    osc.frequency.exponentialRampToValueAtTime(620, now + 0.06);
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.02, now + 0.004);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.065);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.07);
   }
 
   function playDeniedBeep(){
     try{
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const now = audioCtx.currentTime;
+      const ctx = getAudioCtx();
+      const now = ctx.currentTime;
       const makeTone = (start, freq, duration) => {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
         osc.type = 'square';
         osc.frequency.setValueAtTime(freq, start);
         gain.gain.setValueAtTime(0.0001, start);
-        gain.gain.exponentialRampToValueAtTime(0.08, start + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.075, start + 0.01);
         gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
         osc.connect(gain);
-        gain.connect(audioCtx.destination);
+        gain.connect(ctx.destination);
         osc.start(start);
         osc.stop(start + duration + 0.02);
       };
       makeTone(now, 880, 0.12);
       makeTone(now + 0.16, 740, 0.14);
     }catch(e){}
+  }
+
+  function playSplashTone(){
+    const ctx = getAudioCtx();
+    const now = ctx.currentTime;
+
+    const phoneNumberSequence = ['1','7','0','3','5','4','5','6','7','0','0'];
+    const dtmfMap = {
+      '1':[697,1209],'2':[697,1336],'3':[697,1477],
+      '4':[770,1209],'5':[770,1336],'6':[770,1477],
+      '7':[852,1209],'8':[852,1336],'9':[852,1477],
+      '*':[941,1209],'0':[941,1336],'#':[941,1477]
+    };
+
+    phoneNumberSequence.forEach((digit, index) => {
+      const pair = dtmfMap[digit];
+      if (!pair) return;
+
+      const start = now + (index * 0.105);
+      const dur = 0.105 + (Math.random() * 0.03);
+
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(0.0001, start);
+      g.gain.exponentialRampToValueAtTime(0.028 + (Math.random() * 0.008), start + (0.008 + Math.random()*0.004));
+      g.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+
+      const o1 = ctx.createOscillator();
+      const o2 = ctx.createOscillator();
+      o1.type = 'sine';
+      o2.type = 'sine';
+      o1.frequency.setValueAtTime(pair[0], start);
+      o2.frequency.setValueAtTime(pair[1], start);
+
+      const lp = ctx.createBiquadFilter();
+      lp.type = 'lowpass';
+      lp.frequency.setValueAtTime(2550, start);
+      lp.Q.value = 0.9;
+
+      const hum = ctx.createOscillator();
+      const humGain = ctx.createGain();
+      hum.type = 'sine';
+      hum.frequency.setValueAtTime(60, start);
+      humGain.gain.setValueAtTime(0.0001, start);
+      humGain.gain.exponentialRampToValueAtTime(0.0016, start + 0.01);
+      humGain.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+
+      o1.connect(lp);
+      o2.connect(lp);
+      lp.connect(g);
+      g.connect(ctx.destination);
+      hum.connect(humGain);
+      humGain.connect(ctx.destination);
+
+      o1.start(start);
+      o2.start(start);
+      hum.start(start);
+
+      o1.stop(start + dur + 0.01);
+      o2.stop(start + dur + 0.01);
+      hum.stop(start + dur + 0.01);
+    });
+  }
+
+  if (splash) {
+    splash.style.display = 'none';
+    splash.style.opacity = '1';
+    splash.style.transform = 'scale(1)';
+    splash.style.filter = 'none';
   }
 
   function finishBoot(){
@@ -2785,6 +2993,7 @@ window.addEventListener('load', () => {
     setTimeout(() => {
       gate.remove();
       splash.style.display = 'flex';
+      playSplashTone();
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           finishBoot();
@@ -2814,15 +3023,41 @@ window.addEventListener('load', () => {
     showSplashThenApp();
   }
 
-  if (button) button.addEventListener('click', unlock);
+  if (button) {
+    button.addEventListener('click', () => {
+      getAudioCtx();
+      unlock();
+    });
+  }
+
   if (input) {
     input.focus();
+
     input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') unlock();
+      const key = e.key;
+
+      if (key === 'Enter') {
+        unlock();
+        return;
+      }
+
+      if (key === 'Backspace' || key === 'Delete') {
+        playDeleteTone();
+        return;
+      }
+
+      if (key.length === 1) {
+        const dtmfKey = /[0-9*#]/.test(key) ? key : null;
+        playDTMF(dtmfKey);
+      }
     });
+
+    input.addEventListener('pointerdown', () => getAudioCtx(), { once: true });
   }
 });
 </script>
+
+
 
 
 
