@@ -564,31 +564,46 @@
   inset:0;
   overflow:hidden;
   pointer-events:none;
-  opacity:.34;
+  opacity:.72;
+}
+.agent-code-bg::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg, rgba(248,113,113,.14), transparent 18%, transparent 82%, rgba(248,113,113,.14)),
+    radial-gradient(circle at center, rgba(248,113,113,.08), transparent 42%);
+  pointer-events:none;
 }
 .agent-code-track{
   position:absolute;
-  left:-20%;
-  width:140%;
+  left:-5vw;
+  width:110vw;
   white-space:nowrap;
   font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-  font-size:13px;
-  font-weight:700;
-  letter-spacing:.24em;
-  color:rgba(248,113,113,.34);
-  text-shadow:0 0 10px rgba(248,113,113,.12);
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:.20em;
+  color:rgba(252,165,165,.64);
+  text-shadow:
+    0 0 10px rgba(248,113,113,.34),
+    0 0 22px rgba(248,113,113,.18);
   animation:agentSweep linear infinite;
+  will-change:transform;
 }
-.agent-code-track.track-1{ top:14%; animation-duration:18s; }
-.agent-code-track.track-2{ top:28%; animation-duration:22s; animation-direction:reverse; }
-.agent-code-track.track-3{ top:42%; animation-duration:16s; }
-.agent-code-track.track-4{ top:56%; animation-duration:24s; animation-direction:reverse; }
-.agent-code-track.track-5{ top:70%; animation-duration:19s; }
-.agent-code-track.track-6{ top:84%; animation-duration:26s; animation-direction:reverse; }
+.agent-code-track.track-1{ top:9%; animation-duration:16s; }
+.agent-code-track.track-2{ top:18%; animation-duration:19s; animation-direction:reverse; }
+.agent-code-track.track-3{ top:27%; animation-duration:14s; }
+.agent-code-track.track-4{ top:36%; animation-duration:21s; animation-direction:reverse; }
+.agent-code-track.track-5{ top:45%; animation-duration:15s; }
+.agent-code-track.track-6{ top:54%; animation-duration:23s; animation-direction:reverse; }
+.agent-code-track.track-7{ top:63%; animation-duration:17s; }
+.agent-code-track.track-8{ top:72%; animation-duration:22s; animation-direction:reverse; }
+.agent-code-track.track-9{ top:81%; animation-duration:18s; }
 
 @keyframes agentSweep{
   0%{ transform:translateX(0); }
-  100%{ transform:translateX(-18%); }
+  100%{ transform:translateX(-24vw); }
 }
 
 .access-vignette{
@@ -678,9 +693,12 @@
   letter-spacing:.10em;
 }
 @media (max-width: 600px){
+  .agent-code-bg{opacity:.78}
   .agent-code-track{
-    font-size:10px;
-    letter-spacing:.16em;
+    left:-8vw;
+    width:116vw;
+    font-size:11px;
+    letter-spacing:.12em;
   }
   .access-panel{
     width:min(94vw, 560px);
@@ -751,12 +769,15 @@ body.preboot{
 
 <div id="accessGate">
   <div class="agent-code-bg" aria-hidden="true">
-    <div class="agent-code-track track-1">SIGMA • EYES ONLY • CF • CLEAN • VSF • GMT-MASTER II • ENCRYPTED • 126610 • 7GJ • 1NQ • 3VV • 6RV6 • FIELD ACCESS •</div>
-    <div class="agent-code-track track-2">RESTRICTED • BLACK CHANNEL • DAYTONA • OXJ2 • H88F • SUBMARINER • 124060 • DEALER INTEL • VERIFIED NODE •</div>
-    <div class="agent-code-track track-3">AUTH GRID • DATEJUST • CLEAN • VSF • 126234 • ORV • 1LD • AIR-KING • SEA-DWELLER • INTERNAL TRAFFIC •</div>
-    <div class="agent-code-track track-4">COMPARTMENTALIZED • EXPLORER • OYSTER PERPETUAL • GMF / BP • YACHT-MASTER • SIGNAL MAP • CODE TRACE •</div>
-    <div class="agent-code-track track-5">ZX-91A • ENCRYPT • ACCESS NODE • GMT-MASTER II • BLRO • BLNR • VTNR • GRNR • CLASSIFIED • SECRET •</div>
-    <div class="agent-code-track track-6">WATCH INTEL • SERIAL CLUSTER • CLASP MAP • VISUAL PROFILE • SCAM DETECTION • BLACK OPS CHANNEL •</div>
+    <div class="agent-code-track track-1">SIGMA • EYES ONLY • CF • CLEAN • VSF • GMT-MASTER II • ENCRYPTED • 126610 • 7GJ • 1NQ • 3VV • 6RV6 • FIELD ACCESS • SIGMA • EYES ONLY • CF • CLEAN • VSF • GMT-MASTER II • ENCRYPTED • 126610 • 7GJ • 1NQ • 3VV • 6RV6 • FIELD ACCESS •</div>
+    <div class="agent-code-track track-2">RESTRICTED • BLACK CHANNEL • DAYTONA • OXJ2 • H88F • SUBMARINER • 124060 • DEALER INTEL • VERIFIED NODE • RESTRICTED • BLACK CHANNEL • DAYTONA • OXJ2 • H88F • SUBMARINER • 124060 • DEALER INTEL • VERIFIED NODE •</div>
+    <div class="agent-code-track track-3">AUTH GRID • DATEJUST • CLEAN • VSF • 126234 • ORV • 1LD • AIR-KING • SEA-DWELLER • INTERNAL TRAFFIC • AUTH GRID • DATEJUST • CLEAN • VSF • 126234 • ORV • 1LD • AIR-KING • SEA-DWELLER • INTERNAL TRAFFIC •</div>
+    <div class="agent-code-track track-4">COMPARTMENTALIZED • EXPLORER • OYSTER PERPETUAL • GMF / BP • YACHT-MASTER • SIGNAL MAP • CODE TRACE • COMPARTMENTALIZED • EXPLORER • OYSTER PERPETUAL • GMF / BP • YACHT-MASTER • SIGNAL MAP • CODE TRACE •</div>
+    <div class="agent-code-track track-5">ZX-91A • ENCRYPT • ACCESS NODE • GMT-MASTER II • BLRO • BLNR • VTNR • GRNR • CLASSIFIED • SECRET • ZX-91A • ENCRYPT • ACCESS NODE • GMT-MASTER II • BLRO • BLNR • VTNR • GRNR • CLASSIFIED • SECRET •</div>
+    <div class="agent-code-track track-6">WATCH INTEL • SERIAL CLUSTER • CLASP MAP • VISUAL PROFILE • SCAM DETECTION • BLACK OPS CHANNEL • WATCH INTEL • SERIAL CLUSTER • CLASP MAP • VISUAL PROFILE • SCAM DETECTION • BLACK OPS CHANNEL •</div>
+    <div class="agent-code-track track-7">DEEP CHANNEL • QC PRIORITY • DAYTONA • DATEJUST • SUBMARINER • GMT • EXPLORER • SEA-DWELLER • DEEP CHANNEL • QC PRIORITY • DAYTONA • DATEJUST • SUBMARINER • GMT • EXPLORER • SEA-DWELLER •</div>
+    <div class="agent-code-track track-8">REHAUT • DIAL PRINT • CASE SHAPE • SCAN READY • LIVE OCR • MATCH ENGINE • CLASP TRACE • REHAUT • DIAL PRINT • CASE SHAPE • SCAN READY • LIVE OCR • MATCH ENGINE • CLASP TRACE •</div>
+    <div class="agent-code-track track-9">SATELLITE UPLINK • SECURE TERMINAL • INTERNAL USE • CLASSIFIED • AUTHORIZED ACCESS • SATELLITE UPLINK • SECURE TERMINAL • INTERNAL USE • CLASSIFIED • AUTHORIZED ACCESS •</div>
   </div>
   <div class="access-vignette"></div>
   <div class="access-panel">
@@ -804,7 +825,7 @@ body.preboot{
     <div class="topbar">
       <div>
         <div style="font-weight:bold;color:#065f46">Bandit Xray Rolex Manual</div>
-        <div class="muted">Installable field app with search, inference, scam detection, OCR, camera, learning, and updates.</div>
+        <div class="muted">Installable field app with search, inference, detection engine, scam detection, OCR, camera, learning, and updates.</div>
       </div>
       <button class="btn hidden" id="installBtn" disabled>Install</button>
     </div>
@@ -856,6 +877,7 @@ body.preboot{
         <div><div class="small muted">Confidence theme</div><select id="confidenceTheme"><option value="dynamic">Dynamic risk colors</option><option value="simple">Simple monochrome</option></select></div>
         <div style="grid-column:1/-1"><div class="small muted">Serial pattern</div><input id="serialInput" class="search mono" placeholder="Example: 6R****V6, Z10Y, OXJ2, Q66T…" /></div>
         <div style="grid-column:1/-1"><div class="small muted">Clasp code</div><input id="claspInput" class="search mono" placeholder="Example: 1LD, 7GJ, TL11, A8L…" /></div>
+        <div id="claspIntelCard" style="grid-column:1/-1"></div>
       </div>
       <div class="result">
         <div class="topbar">
@@ -881,6 +903,7 @@ body.preboot{
   <div id="panel-qc" class="panel"></div>
   <div id="panel-workflow" class="panel"></div>
   <div id="panel-intel" class="panel"></div>
+  <div id="panel-detect" class="panel"></div>
   <div id="panel-scam" class="panel"></div>
   <div id="panel-tree" class="panel"></div>
   <div id="panel-auto" class="panel"></div>
@@ -917,19 +940,20 @@ const modelData = [
         { factory:"ARF", serials:["55D1"], clasps:["C0C"] }
       ]},
       { ref: "36 - 126234", entries: [
-        { factory:"Clean", serials:["6R87Y","5L67K","1PK5"], clasps:["F6U","Z5D"] },
+        { factory:"Clean", serials:["6R87Y","5L67K","1PK5","6R9291V1"], clasps:["F6U","Z5D"] },
+        { factory:"EWE", serials:["6R9291V1"], clasps:["5LX"] },
         { factory:"VSF", serials:["5X12","R86Z"], clasps:["P2K","1RD","K6G","705"] },
         { factory:"GMF / BP", serials:["49GC"], clasps:["7QE"] }
       ]},
       { ref: "41 - 126334", entries: [
-        { factory:"Clean", serials:["Z59T","6RV6","6AV6","1PK5"], clasps:["ORV"] },
-        { factory:"VSF", serials:["5X1A","5XO9","5XO8","5R06W","Z66E"], clasps:["ORV","K6G","K5G"] }
+        { factory:"Clean", serials:["Z59T","6RV6","6AV6","1PK5","7R18V6"], clasps:["ORV","F6U"] },
+        { factory:"VSF", serials:["5X1A","5XO9","5XO8","5R06W","Z66E"], clasps:["ORV","0RV","K6G","K5G","A9A"] }
       ]}
     ],
     tell:"Dial text + cyclops",
     rep:["Thicker font","Date magnification weak","Print inconsistency"],
     gen:["Razor-sharp print","Strong cyclops","Balanced bezel/case finishing"],
-    codeNotes:["Datejust has the deepest spread in this dataset","6R/5L clusters appear often on Clean","VSF Datejust often overlaps with K6G/705/1RD"],
+    codeNotes:["Datejust has the deepest spread in this dataset","6R/5L clusters appear often on Clean","ORV / 0RV / K6G are now treated as overlap-heavy","5LX + 6R9291V1 is tracked as provisional EWE research"],
     highTierFactories:["Clean","VSF","ARF"]
   },
   {
@@ -958,7 +982,7 @@ const modelData = [
     references: [
       { ref: "40 - 116610LN/LV", entries: [
         { factory:"Clean", serials:["R6V6"], clasps:["5HF"] },
-        { factory:"VSF", serials:["5RO8","K25Y","S19V","S29V","S39V","K28S","Q66T"], clasps:["7GJ"] }
+        { factory:"VSF", serials:["5RO8","K25Y","S19V","S29V","S39V","K28S","Q66T"], clasps:["7GJ","6SH"] }
       ]},
       { ref: "40 - 114060", entries: [
         { factory:"Clean", serials:["6RV6","49W9"], clasps:["5HF"] },
@@ -976,7 +1000,7 @@ const modelData = [
     tell:"Cyclops + bezel engraving",
     rep:["Weak date magnification","Shallow bezel cuts","Case shape softer"],
     gen:["Strong cyclops","Deep bezel engraving","Solid overall proportions"],
-    codeNotes:["Submariner remains one of the strongest mapped model groups","1LD/F80 are key Clean 126610/124060 signals","7GJ/1LQ/3VV matter most with good visuals"],
+    codeNotes:["Submariner remains one of the strongest mapped model groups","1LD/F80 are key Clean 126610/124060 signals","7GJ / 6SH / 3VV / 1LQ matter most with good visuals","Bracelet swaps mean clasp still counts as support, not proof"],
     highTierFactories:["Clean","VSF"]
   },
   {
@@ -1050,7 +1074,7 @@ const modelData = [
       { ref: "116710LN / 126710 BLNR / BLRO / VTNR / GRNR", entries: [
         { factory:"Clean", serials:["Y2L3","L2L6","L6V6","Y2L6"], clasps:["1NQ","F6U"] },
         { factory:"ARF", serials:["L6V6"], clasps:["F6U"] },
-        { factory:"VSF", serials:["5X1O","Y2L3"], clasps:["1NQ","A9A","F6U"] }
+        { factory:"VSF", serials:["5X1O","Y2L3"], clasps:["1NQ","A9A","F6U","ORV"] }
       ]},
       { ref: "126718GRNR", entries: [
         { factory:"Clean", serials:["R8Y8"], clasps:["A8L"] }
@@ -1062,7 +1086,7 @@ const modelData = [
     tell:"Hand stack + bezel transition",
     rep:["Incorrect hand order","Bezel transition slightly off","Case shape can be softer"],
     gen:["Proper hand layering","Crisp bezel split","Balanced GMT case profile"],
-    codeNotes:["GMT now includes LN/BLNR/BLRO/VTNR/GRNR data","A8L and A6L add GRNR coverage","1NQ/F6U remain core Clean GMT signals"],
+    codeNotes:["GMT now includes LN/BLNR/BLRO/VTNR/GRNR data","A8L and A6L add GRNR coverage","1NQ/F6U remain core GMT signals but F6U/ORV/A9A are overlap-heavy"],
     highTierFactories:["Clean","VSF","ARF"]
   },
   {
@@ -1072,7 +1096,7 @@ const modelData = [
         { factory:"Clean", serials:["216W","LV66"], clasps:["7CD"] }
       ]},
       { ref: "116500", entries: [
-        { factory:"Clean", serials:["LV66"], clasps:["7CD"] },
+        { factory:"Clean", serials:["LV66","216WF"], clasps:["7CD"] },
         { factory:"VSF", serials:["Q66T","OXJ2","LV66","H88F"], clasps:["7CD","3XU","W5Y","RP9"] },
         { factory:"EWF / BTF", serials:["V4P5","V5P5"], clasps:["W5Y"] }
       ]},
@@ -1116,7 +1140,7 @@ const modelData = [
     tell:"Subdial spacing",
     rep:["Subdials too close","Dial looks compressed","Bezel text can feel off"],
     gen:["Balanced spacing","Open, even symmetry","Refined dial layout"],
-    codeNotes:["Daytona is highly shared and needs strongest visual QC","LV66/OXJ2/H88F repeat across multiple factories","Never trust Daytona codes alone"],
+    codeNotes:["Daytona is highly shared and needs strongest visual QC","LV66/OXJ2/H88F repeat across multiple factories","7CD is a strong Clean support clue but still not proof","Never trust Daytona codes alone"],
     highTierFactories:["Clean","VSF","EWF / BTF","QF"]
   }
 ];
@@ -1136,10 +1160,11 @@ const factoryProfiles = {
   "GMF / BP":{strengths:["Useful mid-tier map points","Explorer II and Datejust signals"], cautions:["Less standardized than Clean/VSF","Visual QC matters more"]},
   "TW+":{strengths:["Useful for specific YM titanium mapping"], cautions:["Very limited coverage in this app"]},
   "EWF / BTF":{strengths:["Useful Daytona-specific mapping"], cautions:["Highly model-specific and shared on Daytona"]},
-  "QF":{strengths:["Useful precious-metal Daytona mapping"], cautions:["Small dataset, must verify visually"]}
+  "QF":{strengths:["Useful precious-metal Daytona mapping"], cautions:["Small dataset, must verify visually"]},
+  "EWE":{strengths:["Emerging community-reported Datejust mapping"], cautions:["Very small sample size","Treat as provisional until repeated in more QC data"]}
 };
 
-const factoryList = ["VSF","Clean","ARF","GMF / BP","TW+","EWF / BTF","QF"];
+const factoryList = ["VSF","Clean","ARF","GMF / BP","TW+","EWF / BTF","QF","EWE"];
 
 const bestFactoryGuideData = [
   { family:"Submariner", ref:"126610LN / 126610LV / 126619LB", movement:"3235 Clone", best:["VSF","ARF","ZF"], notes:"Current 41mm date Submariner ranking from the guide." },
@@ -1219,9 +1244,263 @@ const bestFactoryGuideData = [
 
 const bestFactoryFamilies = [...new Set(bestFactoryGuideData.map(x => x.family))].sort();
 
-const lowTierClaspCodes = ["D12","MA11","T10","S9","CL1","EO6","DE6","PJ4"];
-const sharedCodes = ["5HF","7CD","LV66","OXJ2","H88F","W5Y","F6U","1NQ","2K6J"];
-const highTierPopularCodes = ["1LD","ORV","1NQ","7GJ","1LQ","F80","F6U","7CD"];
+const lowTierClaspCodes = ["D12","MA11","T10","S9","CL1","EO6","DE6","PJ4","ST9","Y7M","5LX","OP8"];
+const sharedCodes = ["5HF","7CD","LV66","OXJ2","H88F","W5Y","F6U","1NQ","2K6J","ORV","0RV","K6G","A9A","M5X","3XU","Y8C","TL11"];
+const highTierPopularCodes = ["1LD","ORV","1NQ","7GJ","1LQ","F80","F6U","7CD","3VV","6SH","A9A","TL11"];
+
+const claspResearchMeta = {
+
+  "OP8": {
+    tierKey:"low",
+    label:"Low-tier / red-flag code",
+    overlapRisk:"Low overlap, high negative signal",
+    evidence:"Strong recurring",
+    note:"Repeatedly discussed as a low-tier or 'shitter' bracelet code rather than a premium-factory signal. Strong mismatch warning when paired with Clean or VSF seller claims.",
+    likelyFactories:["DHGate / U1 / generic","Older Noob overlap (low confidence)"],
+    pairedSerials:[],
+    models:["General Rolex rep bracelets","Deepsea / Sub-style builds"]
+  },
+  "1NQ": {
+    tierKey:"shared",
+    label:"Shared GMT oyster code",
+    overlapRisk:"High",
+    evidence:"Moderate to strong",
+    note:"Recent QC posts show 1NQ on Clean GMT oysters and on swapped VSF GMT oysters. Useful for bracelet-family context, not factory proof.",
+    likelyFactories:["Clean","VSF swap / mixed builds"],
+    pairedSerials:["Y2L3","L2L6"],
+    models:["GMT-Master II"]
+  },
+  "Y8C": {
+    tierKey:"shared",
+    label:"Legacy Clean GMT code",
+    overlapRisk:"Medium to high",
+    evidence:"Moderate",
+    note:"Often described as an older Clean GMT bracelet code before later 1NQ/F6U/A9A chatter. Should be treated as legacy support only.",
+    likelyFactories:["Clean","ARF lineage"],
+    pairedSerials:["Y2L3"],
+    models:["GMT-Master II"]
+  },
+  "TL11": {
+    tierKey:"popular",
+    label:"VSF Explorer 36 support code",
+    overlapRisk:"Low to medium",
+    evidence:"Moderate",
+    note:"Recent Explorer 124270 QC and review posts repeatedly show TL11 on VSF 36mm examples. Good model-specific support clue, still not identity proof.",
+    likelyFactories:["VSF"],
+    pairedSerials:["N1K9","X3Y6"],
+    models:["Explorer 124270 36mm"]
+  },
+  "5HF": {
+    tierKey:"shared",
+    label:"Clean / ARF overlap code",
+    overlapRisk:"High",
+    evidence:"Moderate",
+    note:"Frequently treated as a correct Clean bracelet code, but community comments also tie it to ARF supply overlap. Good support clue, not decisive.",
+    likelyFactories:["Clean","ARF"],
+    pairedSerials:["6RV6","6R87Y"],
+    models:["Submariner","Datejust","GMT-Master II"]
+  },
+  "7GJ": {
+    tierKey:"popular",
+    label:"High-tier VSF support code",
+    overlapRisk:"Low to medium",
+    evidence:"Strong recurring",
+    note:"Frequently tied to older VSF 40mm Submariner batches. Still supporting evidence only because bracelets can be swapped.",
+    likelyFactories:["VSF"],
+    pairedSerials:["Q66T","S19V","S29V","S39V","K25Y"],
+    models:["Submariner 116610","Submariner 114060","Submariner 124060"]
+  },
+  "6SH": {
+    tierKey:"popular",
+    label:"VSF transition support code",
+    overlapRisk:"Medium",
+    evidence:"Moderate",
+    note:"Community reports place 6SH alongside 7GJ as an alternate/transition VSF Sub bracelet code rather than a clean standalone factory proof.",
+    likelyFactories:["VSF"],
+    pairedSerials:["S29V","Q66T"],
+    models:["Submariner 116610"]
+  },
+  "3VV": {
+    tierKey:"popular",
+    label:"Newer VSF 41mm Sub support code",
+    overlapRisk:"Medium",
+    evidence:"Strong recurring",
+    note:"Commonly reported on newer VSF 41mm Submariner examples, often around Q66T-era discussions. Useful, but copied enough that visuals still matter.",
+    likelyFactories:["VSF"],
+    pairedSerials:["Q66T","5RO9","5XO8"],
+    models:["Submariner 126610","Submariner 124060"]
+  },
+  "1LQ": {
+    tierKey:"popular",
+    label:"VSF 41mm alternate clasp code",
+    overlapRisk:"Medium",
+    evidence:"Moderate",
+    note:"Appears as an alternate VSF 41mm Sub clasp in multiple QC discussions. Treat as supportive rather than exclusive.",
+    likelyFactories:["VSF"],
+    pairedSerials:["Q66T","2R9X","5RO9"],
+    models:["Submariner 126610"]
+  },
+  "7CD": {
+    tierKey:"popular",
+    label:"Clean Daytona support code",
+    overlapRisk:"Medium",
+    evidence:"Strong recurring",
+    note:"A strong Clean Daytona bracelet clue in community QC threads, but not decisive because some other factories and hybrids also surface with 7CD.",
+    likelyFactories:["Clean","VSF"],
+    pairedSerials:["LV66","216W","OXJ2"],
+    models:["Daytona 116500","Daytona 1265xx"]
+  },
+  "F6U": {
+    tierKey:"shared",
+    label:"Shared / overlap-heavy GMT-DJ code",
+    overlapRisk:"High",
+    evidence:"Strong recurring",
+    note:"Shows up across Clean, ARF, and some VSF chatter. Useful for narrowing, poor for proving a seller claim.",
+    likelyFactories:["Clean","ARF","VSF"],
+    pairedSerials:["L6V6","Y2L3","6RV6"],
+    models:["GMT-Master II","Datejust"]
+  },
+  "ORV": {
+    tierKey:"shared",
+    label:"Overlap-heavy bracelet code",
+    overlapRisk:"High",
+    evidence:"Strong recurring",
+    note:"Seen in Clean/ARF-style overlap and in some newer VSF V2 Datejust discussions. Good example of why clasp alone is no longer enough.",
+    likelyFactories:["Clean","VSF","ARF"],
+    pairedSerials:["6RV6","7R18V6","5XO9"],
+    models:["Datejust 41","GMT-Master II"]
+  },
+  "0RV": {
+    tierKey:"shared",
+    label:"Overlap-heavy bracelet code",
+    overlapRisk:"High",
+    evidence:"Moderate",
+    note:"Often written as 0RV/ORV in comments. Treat as overlap-heavy rather than model-locked.",
+    likelyFactories:["Clean","VSF","ARF"],
+    pairedSerials:["6RV6","5XO9"],
+    models:["Datejust 41"]
+  },
+  "K6G": {
+    tierKey:"shared",
+    label:"Shared / overlap-heavy code",
+    overlapRisk:"High",
+    evidence:"Moderate",
+    note:"Appears in VSF Datejust discussions but is also old enough and broad enough that it should not carry factory-proof weight by itself.",
+    likelyFactories:["VSF"],
+    pairedSerials:["5XO9","5X1A","Z66E"],
+    models:["Datejust 36/41"]
+  },
+  "A9A": {
+    tierKey:"shared",
+    label:"Shared / caution code",
+    overlapRisk:"High",
+    evidence:"Moderate",
+    note:"Used in community discussions as a cleaner VSF GMT-style bracelet signal, but still too overlap-prone to trust alone.",
+    likelyFactories:["VSF"],
+    pairedSerials:["Y2L3","5X1O"],
+    models:["GMT-Master II"]
+  },
+  "ST9": {
+    tierKey:"low",
+    label:"Low-tier / scam-sensitive",
+    overlapRisk:"High",
+    evidence:"Moderate",
+    note:"Recent service-thread comments describe ST9 as common on U1-style pieces, while noting older Noob overlap. Dangerous when paired with premium seller claims.",
+    likelyFactories:["U1 / low-tier","Older Noob overlap"],
+    pairedSerials:[],
+    models:["Submariner / general Rolex rep bracelets"]
+  },
+  "Y7M": {
+    tierKey:"low",
+    label:"Low-confidence suspect code",
+    overlapRisk:"High",
+    evidence:"Limited",
+    note:"Surfaced in low-tier or semi-clone discussion rather than premium-factory consensus. Keep it in the scam-sensitive bucket for now.",
+    likelyFactories:["Unknown / lower-tier"],
+    pairedSerials:[],
+    models:["GMT-Master II style builds"]
+  },
+  "5LX": {
+    tierKey:"low",
+    label:"Provisional low-confidence code",
+    overlapRisk:"High",
+    evidence:"Single-source",
+    note:"Newly surfaced as an EWE-linked Datejust clasp code in community discussion. Useful to track, but far too thin to treat as established.",
+    likelyFactories:["EWE"],
+    pairedSerials:["6R9291V1"],
+    models:["Datejust 36"]
+  }
+};
+
+const serialResearchMeta = {
+
+  "5R09": {
+    label:"Earlier VSF Sub serial batch",
+    note:"Recent batch-comparison threads treat 5R09 as an earlier VSF Sub batch that predates 5X10/5X11 refresh chatter.",
+    likelyFactories:["VSF"],
+    relatedClasp:["3VV","1LQ"]
+  },
+  "5X10": {
+    label:"Newer VSF serial cluster",
+    note:"Recent community posts discuss 5X10 as part of the newer VSF Sub/GMT serial wave after long-lived Q66T batches.",
+    likelyFactories:["VSF"],
+    relatedClasp:["3VV","A9A","F6U"]
+  },
+  "5X11": {
+    label:"Newer VSF serial cluster",
+    note:"Recent QC and discussion posts place 5X11 in the current VSF serial wave and often compare it against 5X10 and 5X12.",
+    likelyFactories:["VSF"],
+    relatedClasp:["3VV","A9A","F6U"]
+  },
+  "5X12": {
+    label:"Newest-discussed VSF serial cluster",
+    note:"Recent RepTime discussion treats 5X12 as a newer VSF Sub batch under active comparison with 5X10 and 5X11.",
+    likelyFactories:["VSF"],
+    relatedClasp:["3VV","A9A","F6U"]
+  },
+  "6RV6": {
+    label:"Clean serial cluster",
+    note:"Recent identification threads describe 6R***V6 serials as Clean-linked, especially when paired with 5HF or overlap-heavy Datejust/GMT clasps.",
+    likelyFactories:["Clean"],
+    relatedClasp:["5HF","F6U","ORV","0RV"]
+  },
+  "6R9291V1": {
+    label:"Provisional EWE Datejust serial",
+    note:"Community-reported with clasp 5LX on an EWE-linked Datejust example. Keep as provisional.",
+    likelyFactories:["EWE"],
+    relatedClasp:["5LX"]
+  },
+  "7R18V6": {
+    label:"Clean-style Datejust serial cluster",
+    note:"Tracks with newer community reports of 7R****V6 style Datejust serials discussed as Clean-linked.",
+    likelyFactories:["Clean"],
+    relatedClasp:["ORV","F6U"]
+  },
+  "Q66T": {
+    label:"VSF transition serial cluster",
+    note:"Frequently discussed with newer VSF Submariner 41 examples and often paired with 3VV or 7GJ depending on batch/bracelet.",
+    likelyFactories:["VSF"],
+    relatedClasp:["3VV","7GJ","1LQ"]
+  },
+  "LV66": {
+    label:"Shared Daytona serial cluster",
+    note:"Useful for narrowing, but reused widely enough that it cannot prove a Daytona factory by itself.",
+    likelyFactories:["Clean","VSF"],
+    relatedClasp:["7CD","W5Y","3XU"]
+  },
+  "OXJ2": {
+    label:"Shared Daytona serial cluster",
+    note:"Another overlap-heavy Daytona serial cluster discussed across multiple factory claims.",
+    likelyFactories:["Clean","VSF"],
+    relatedClasp:["7CD","M5X","V8S"]
+  },
+  "H88F": {
+    label:"Shared Daytona serial cluster",
+    note:"Shows up in overlap-heavy Daytona discussions and should be treated as supporting evidence only.",
+    likelyFactories:["VSF"],
+    relatedClasp:["7CD","V8S","RP9"]
+  }
+};
 
 const DEFAULT_STATE = {
   savedItems: [],
@@ -1348,6 +1627,147 @@ function serialMatches(input, candidate){
 
 function claspMatches(input, candidate){
   return normalizeToken(input) === normalizeToken(candidate);
+}
+
+function getClaspTierMeta(code){
+  const upper = normalizeToken(code);
+  if (!upper) return { key:"none", label:"No clasp entered", tone:"dark", note:"Enter a clasp code to see mapped context and risk notes." };
+
+  const meta = claspResearchMeta[upper];
+  if (meta) {
+    if (meta.tierKey === "low") return { key:"low", label:meta.label || "Low-tier / scam-sensitive", tone:"red", note:meta.note };
+    if (meta.tierKey === "shared") return { key:"shared", label:meta.label || "Shared / overlap-heavy", tone:"amber", note:meta.note };
+    if (meta.tierKey === "popular") return { key:"popular", label:meta.label || "High-tier but widely copied", tone:"warn", note:meta.note };
+  }
+
+  if (lowTierClaspCodes.includes(upper)) return { key:"low", label:"Low-tier / scam-sensitive", tone:"red", note:`${upper} is commonly linked to lower-tier or aftermarket bracelet usage in this dataset.` };
+  if (sharedCodes.includes(upper)) return { key:"shared", label:"Shared / overlap-heavy", tone:"amber", note:`${upper} appears in overlap-heavy contexts and should never be trusted alone.` };
+  if (highTierPopularCodes.includes(upper)) return { key:"popular", label:"High-tier but widely copied", tone:"warn", note:`${upper} is seen on sought-after higher-tier builds, but it is also heavily copied.` };
+  return { key:"mapped", label:"Mapped support code", tone:"good", note:`${upper} exists in the dataset and can be used as supporting evidence only.` };
+}
+
+function getClaspInfo(code, model, reference){
+  const upper = normalizeToken(code);
+  const tier = getClaspTierMeta(upper);
+  if (!upper) return { code:"", tier, occurrences:[], specific:[], research:null };
+
+  const occurrences = getAllEntries()
+    .filter(row => row.clasps.some(c => claspMatches(upper, c)))
+    .map(row => ({ model: row.model, ref: row.ref, factory: row.factory }));
+
+  const specific = occurrences.filter(row => {
+    const modelOk = !model || row.model === model;
+    const refOk = !reference || reference === 'All references' || row.ref === reference;
+    return modelOk && refOk;
+  });
+
+  const factories = [...new Set(occurrences.map(x => x.factory))];
+  const exactFactories = [...new Set(specific.map(x => x.factory))];
+  const research = claspResearchMeta[upper] || null;
+
+  return {
+    code: upper,
+    tier,
+    occurrences,
+    specific,
+    factories,
+    exactFactories,
+    exactCount: specific.length,
+    totalCount: occurrences.length,
+    research
+  };
+}
+
+function renderClaspIntel(){
+  const out = document.getElementById('claspIntelCard');
+  if (!out) return;
+  const code = document.getElementById('claspInput')?.value || '';
+  const model = document.getElementById('modelInput')?.value || '';
+  const reference = document.getElementById('referenceInput')?.value || 'All references';
+  const info = getClaspInfo(code, model, reference);
+
+  if (!info.code) {
+    out.innerHTML = `
+      <div class="result section">
+        <div class="topbar">
+          <div>
+            <div class="small muted">Clasp intelligence</div>
+            <div style="font-weight:bold">No clasp code entered</div>
+          </div>
+          <span class="badge dark">Waiting</span>
+        </div>
+        <div class="small section">Enter a clasp code to see where it appears, what factory overlap it has, and whether it should be treated as low-tier, shared, or commonly copied.</div>
+      </div>
+    `;
+    return;
+  }
+
+  const matches = info.specific.length ? info.specific : info.occurrences;
+  const matchLabel = info.specific.length
+    ? `${info.specific.length} selected-model match${info.specific.length === 1 ? '' : 'es'}`
+    : `${info.totalCount} dataset match${info.totalCount === 1 ? '' : 'es'}`;
+
+  out.innerHTML = `
+    <div class="result ${esc(info.tier.tone)} section">
+      <div class="topbar">
+        <div>
+          <div class="small muted">Clasp intelligence</div>
+          <div style="font-size:22px;font-weight:bold" class="mono">${esc(info.code)}</div>
+        </div>
+        <span class="badge ${esc(info.tier.tone)}">${esc(info.tier.label)}</span>
+      </div>
+      <div class="small section">${esc(info.tier.note)}</div>
+      <div class="grid grid-2 section">
+        <div class="list-item">
+          <div class="small muted">Coverage</div>
+          <div style="font-weight:bold">${esc(matchLabel)}</div>
+        </div>
+        <div class="list-item">
+          <div class="small muted">Factories seen</div>
+          <div style="font-weight:bold">${esc((info.specific.length ? info.exactFactories : info.factories).join(' • ') || 'None')}</div>
+        </div>
+        ${info.research ? `
+          <div class="list-item">
+            <div class="small muted">Overlap risk</div>
+            <div style="font-weight:bold">${esc(info.research.overlapRisk || 'Unknown')}</div>
+          </div>
+          <div class="list-item">
+            <div class="small muted">Evidence strength</div>
+            <div style="font-weight:bold">${esc(info.research.evidence || 'Dataset only')}</div>
+          </div>
+        ` : ``}
+      </div>
+      ${info.research ? `
+        <div class="section">
+          ${info.research.pairedSerials?.length ? `
+            <div class="list-item">
+              <div class="small muted">Common paired serials</div>
+              <div class="mono" style="font-weight:bold">${esc(info.research.pairedSerials.join(' • '))}</div>
+            </div>
+          ` : ``}
+          ${info.research.models?.length ? `
+            <div class="list-item">
+              <div class="small muted">Community context</div>
+              <div style="font-weight:bold">${esc(info.research.models.join(' • '))}</div>
+            </div>
+          ` : ``}
+        </div>
+      ` : ``}
+      ${matches.length ? `
+        <div class="section">
+          ${matches.slice(0, 8).map(item => `
+            <div class="list-item">
+              <div class="small muted">${esc(item.model)} • ${esc(item.factory)}</div>
+              <div style="font-weight:bold">${esc(item.ref)}</div>
+            </div>
+          `).join('')}
+          ${matches.length > 8 ? `<div class="small muted" style="margin-top:8px">+${matches.length - 8} more match${matches.length - 8 === 1 ? '' : 'es'} in the dataset.</div>` : ''}
+        </div>
+      ` : `
+        <div class="result warn section">This clasp is not mapped for the currently selected model/reference in the dataset.</div>
+      `}
+    </div>
+  `;
 }
 
 function getScoreBreakdown({model,reference,serial,clasp,visualFactory}){
@@ -1895,10 +2315,26 @@ async function doOCR(source, resultId, textId){
 }
 
 function buildSearchIndex(){
-  return getAllEntries().flatMap(row => [
+  const base = getAllEntries().flatMap(row => [
     ...row.clasps.map(code => ({ type:"Clasp", key:code, value:`${row.model} • ${row.ref} • ${row.factory}` })),
     ...row.serials.map(code => ({ type:"Serial", key:code, value:`${row.model} • ${row.ref} • ${row.factory}` }))
-  ]).concat(
+  ]);
+
+  const researchClaspRows = Object.entries(claspResearchMeta).map(([code, meta]) => ({
+    type:"Clasp",
+    key:code,
+    value:`Research • ${(meta.likelyFactories || []).join(' / ') || 'Unknown'} • ${meta.label || meta.note || 'Community note'}`
+  }));
+
+  const researchSerialRows = Object.entries(serialResearchMeta).map(([code, meta]) => ({
+    type:"Serial",
+    key:code,
+    value:`Research • ${(meta.likelyFactories || []).join(' / ') || 'Unknown'} • ${meta.label || meta.note || 'Community note'}`
+  }));
+
+  return base.concat(
+    researchClaspRows,
+    researchSerialRows,
     modelData.map(m => ({ type:"Model", key:m.model, value:m.tell })),
     modelData.flatMap(m => m.references.map(r => ({ type:"Reference", key:r.ref, value:m.model })))
   );
@@ -1912,16 +2348,26 @@ function renderSearchResults(q){
     item.key.toLowerCase().includes(query) || item.value.toLowerCase().includes(query)
   ).slice(0,60);
 
-  out.innerHTML = results.length ? results.map(item => `
-    <div class="list-item" style="display:flex;justify-content:space-between;gap:10px;align-items:center">
-      <div>
-        <div class="small muted">${esc(item.type)}</div>
-        <div style="font-weight:bold">${esc(item.key)}</div>
-        <div class="small">${esc(item.value)}</div>
+  out.innerHTML = results.length ? results.map(item => {
+    const claspMeta = item.type === "Clasp" ? getClaspInfo(item.key) : null;
+    const serialMeta = item.type === "Serial" ? serialResearchMeta[normalizeToken(item.key)] : null;
+    const extra = claspMeta
+      ? `<div class="small muted">${esc(claspMeta.tier.label)} • ${claspMeta.totalCount} mapped hit${claspMeta.totalCount === 1 ? '' : 's'}</div>`
+      : serialMeta
+        ? `<div class="small muted">${esc(serialMeta.label)}${serialMeta.relatedClasp?.length ? ` • clasp ${esc(serialMeta.relatedClasp.join(' / '))}` : ''}</div>`
+        : '';
+    return `
+      <div class="list-item" style="display:flex;justify-content:space-between;gap:10px;align-items:center">
+        <div>
+          <div class="small muted">${esc(item.type)}</div>
+          <div style="font-weight:bold">${esc(item.key)}</div>
+          <div class="small">${esc(item.value)}</div>
+          ${extra}
+        </div>
+        <button class="btn secondary save-search-btn" data-type="${esc(item.type)}" data-key="${esc(item.key)}" data-value="${esc(item.value)}">Save</button>
       </div>
-      <button class="btn secondary save-search-btn" data-type="${esc(item.type)}" data-key="${esc(item.key)}" data-value="${esc(item.value)}">Save</button>
-    </div>
-  `).join('') : `<div class="muted">No matches found.</div>`;
+    `;
+  }).join('') : `<div class="muted">No matches found.</div>`;
 }
 
 function saveSearchItem(item){
@@ -2036,7 +2482,9 @@ function updateIntelligence(){
 
     currentIntel = null;
     renderIntelPanel();
+    renderDetectionPanel();
     renderScamPanel();
+    renderClaspIntel();
     return;
   }
 
@@ -2065,7 +2513,9 @@ function updateIntelligence(){
 
   currentIntel = {model, reference, serial, clasp, visualFactory, sellerClaim, ranked, top};
   renderIntelPanel();
+  renderDetectionPanel();
   renderScamPanel();
+  renderClaspIntel();
 }
 
 function renderCodesPanel(){
@@ -2289,6 +2739,174 @@ function renderIntelPanel(){
         </div>
       </div>
     </div>`;
+}
+
+function getTokenCoverage(kind, token){
+  const upper = normalizeToken(token);
+  if (!upper) return { token:"", known:false, thin:false, occurrences:[], watches:[], factories:[], references:[] };
+  const matcher = kind === "serial"
+    ? (row) => row.serials.some(s => serialMatches(upper, s))
+    : (row) => row.clasps.some(c => claspMatches(upper, c));
+
+  const occurrences = getAllEntries()
+    .filter(row => matcher(row))
+    .map(row => ({ model: row.model, ref: row.ref, factory: row.factory }));
+
+  const watches = [...new Set(occurrences.map(o => `${o.model} • ${o.ref}`))];
+  const factories = [...new Set(occurrences.map(o => o.factory))];
+  const references = [...new Set(occurrences.map(o => o.ref))];
+  const known = occurrences.length > 0;
+  const thin = known && occurrences.length <= 1;
+  return { token: upper, known, thin, occurrences, watches, factories, references };
+}
+
+function getDetectionEngineReport(intel){
+  if (!intel) return null;
+  const serialInfo = getTokenCoverage("serial", intel.serial);
+  const claspInfo = getTokenCoverage("clasp", intel.clasp);
+  const topFactory = intel.top?.factory || "Undetermined";
+  const modelRows = intel.model ? getEntriesForModelAndRef(intel.model, intel.reference) : getAllEntries();
+  const upperSerial = normalizeToken(intel.serial);
+  const upperClasp = normalizeToken(intel.clasp);
+
+  const comboRows = modelRows.filter(row => {
+    const serialHit = upperSerial ? row.serials.some(s => serialMatches(upperSerial, s)) : false;
+    const claspHit = upperClasp ? row.clasps.some(c => claspMatches(upperClasp, c)) : false;
+    return serialHit && claspHit;
+  });
+  const comboFactories = [...new Set(comboRows.map(r => r.factory))];
+  const comboWatches = [...new Set(comboRows.map(r => `${r.model} • ${r.ref}`))];
+
+  let risk = 45;
+  const strengths = [];
+  const warnings = [];
+
+  if (serialInfo.known) { risk -= 8; strengths.push(`Serial ${serialInfo.token} is known in the registry.`); }
+  else if (upperSerial) { risk += 12; warnings.push(`Serial ${upperSerial} is currently unknown in the registry.`); }
+  if (serialInfo.thin) warnings.push(`Serial ${serialInfo.token} is known but has very thin data.`);
+
+  if (claspInfo.known) { risk -= 8; strengths.push(`Clasp ${claspInfo.token} is known in the registry.`); }
+  else if (upperClasp) { risk += 14; warnings.push(`Clasp ${upperClasp} is currently unknown in the registry.`); }
+  if (claspInfo.thin) warnings.push(`Clasp ${claspInfo.token} is known but has very thin data.`);
+
+  const claspTier = getClaspTierMeta(upperClasp).key;
+  if (claspTier === 'low') { risk += 28; warnings.push(`Clasp ${upperClasp} is in the low-tier / scam-sensitive bucket.`); }
+  if (claspTier === 'shared') { risk += 10; warnings.push(`Clasp ${upperClasp} is overlap-heavy, so it cannot prove factory identity.`); }
+  if (claspTier === 'popular') { risk += 6; warnings.push(`Clasp ${upperClasp} is popular and widely copied.`); }
+
+  if (comboRows.length) {
+    risk -= 18;
+    strengths.push(`Serial + clasp pairing is mapped together on ${comboRows.length} registry row${comboRows.length>1?'s':''}.`);
+  } else if (upperSerial && upperClasp && serialInfo.known && claspInfo.known) {
+    risk += 18;
+    warnings.push('Serial and clasp are both known, but this exact pairing is not mapped together for the selected scope.');
+  }
+
+  if (intel.visualFactory && intel.visualFactory !== 'none' && topFactory !== 'Undetermined') {
+    if (intel.visualFactory === topFactory) { risk -= 8; strengths.push(`Visual lean agrees with mapped result (${topFactory}).`); }
+    else { risk += 16; warnings.push(`Visual lean (${intel.visualFactory}) conflicts with mapped result (${topFactory}).`); }
+  }
+
+  if (intel.sellerClaim && intel.sellerClaim !== 'none' && topFactory !== 'Undetermined') {
+    if (intel.sellerClaim === topFactory) { risk -= 5; strengths.push(`Seller claim matches the top mapped factory (${topFactory}).`); }
+    else { risk += 20; warnings.push(`Seller claim (${intel.sellerClaim}) conflicts with the mapped result (${topFactory}).`); }
+  }
+
+  if (intel.top?.score >= 70) { risk -= 10; strengths.push('Current inference confidence is strong.'); }
+  else if (intel.top?.score < 45) { risk += 10; warnings.push('Current inference confidence is weak, so fraud risk remains elevated.'); }
+
+  risk = Math.max(0, Math.min(100, risk));
+  let verdict = 'Moderate review risk';
+  let badgeCls = 'amber';
+  if (risk >= 70) { verdict = 'High mismatch / scam risk'; badgeCls = 'red'; }
+  else if (risk <= 30) { verdict = 'Low mismatch risk'; badgeCls = ''; }
+
+  return {
+    risk,
+    verdict,
+    badgeCls,
+    topFactory,
+    serialInfo,
+    claspInfo,
+    comboFactories,
+    comboWatches,
+    strengths,
+    warnings
+  };
+}
+
+function renderDetectionPanel(){
+  const out = document.getElementById('panel-detect');
+  if (!out) return;
+  if (!currentIntel) {
+    out.innerHTML = `
+      <div class="card watermark-card">
+        <h3>Detection Engine</h3>
+        <div class="muted">Enter model, serial, clasp, or factory information to generate a pairing and mismatch report.</div>
+      </div>
+    `;
+    return;
+  }
+
+  const report = getDetectionEngineReport(currentIntel);
+  const scoreColor = report.risk >= 70 ? '#ff3b3b' : report.risk <= 30 ? '#16a34a' : '#f59e0b';
+  const serialSeen = report.serialInfo.known
+    ? report.serialInfo.watches.map(w => `<span class="badge dark">${esc(w)}</span>`).join(' ')
+    : '<span class="muted">Unknown in current registry</span>';
+  const claspSeen = report.claspInfo.known
+    ? report.claspInfo.watches.map(w => `<span class="badge dark">${esc(w)}</span>`).join(' ')
+    : '<span class="muted">Unknown in current registry</span>';
+  const comboSeen = report.comboWatches.length
+    ? report.comboWatches.map(w => `<span class="badge dark">${esc(w)}</span>`).join(' ')
+    : '<span class="muted">No mapped exact serial + clasp pairing found</span>';
+
+  out.innerHTML = `
+    <div class="card watermark-card">
+      <div class="topbar">
+        <h3>Detection Engine</h3>
+        <span class="badge ${report.badgeCls}">${esc(report.verdict)}</span>
+      </div>
+      <div class="grid grid-2 section">
+        <div class="result">
+          <div class="small muted">Mismatch / scam risk</div>
+          <div style="font-size:34px;font-weight:800;color:${scoreColor}">${report.risk}%</div>
+          <div class="progress section"><div class="bar" style="width:${report.risk}%;background:${scoreColor}"></div></div>
+          <div class="small muted">Lower is better. This score weighs pairing integrity, overlap risk, seller conflicts, and confidence strength.</div>
+        </div>
+        <div class="result">
+          <div class="small muted">Top mapped factory</div>
+          <div style="font-size:28px;font-weight:800;color:#065f46">${esc(report.topFactory)}</div>
+          <div class="small muted">Exact paired factories: ${report.comboFactories.length ? esc(report.comboFactories.join(', ')) : 'none mapped'}</div>
+        </div>
+        <div class="result">
+          <div class="small muted">Serial status</div>
+          <div style="font-weight:700">${report.serialInfo.token ? esc(report.serialInfo.token) : 'None entered'}</div>
+          <div class="small muted">${report.serialInfo.token ? (report.serialInfo.known ? (report.serialInfo.thin ? 'Known but not enough data' : 'Known in registry') : 'Unknown in registry') : 'No serial entered'}</div>
+          <div class="section">${serialSeen}</div>
+        </div>
+        <div class="result">
+          <div class="small muted">Clasp status</div>
+          <div style="font-weight:700">${report.claspInfo.token ? esc(report.claspInfo.token) : 'None entered'}</div>
+          <div class="small muted">${report.claspInfo.token ? (report.claspInfo.known ? (report.claspInfo.thin ? 'Known but not enough data' : 'Known in registry') : 'Unknown in registry') : 'No clasp entered'}</div>
+          <div class="section">${claspSeen}</div>
+        </div>
+        <div class="result" style="grid-column:1/-1">
+          <div class="small muted">Exact serial + clasp pair seen on</div>
+          <div class="section">${comboSeen}</div>
+        </div>
+      </div>
+      <div class="grid grid-2 section">
+        <div>
+          <h3 style="margin-bottom:8px">Strengths</h3>
+          ${report.strengths.length ? report.strengths.map(x => `<div class="list-item">${esc(x)}</div>`).join('') : '<div class="list-item muted">No strength signals yet.</div>'}
+        </div>
+        <div>
+          <h3 style="margin-bottom:8px">Warnings</h3>
+          ${report.warnings.length ? report.warnings.map(x => `<div class="list-item">${esc(x)}</div>`).join('') : '<div class="list-item muted">No active warnings.</div>'}
+        </div>
+      </div>
+    </div>
+  `;
 }
 
 function renderScamPanel(){
@@ -2717,6 +3335,7 @@ function applyUpdate(){
   saveLS();
   renderUpdatePanel();
   renderBestFactoryPanel();
+  renderClaspIntel();
 }
 
 function saveCurrentCase(){
@@ -2745,7 +3364,7 @@ function saveCurrentCase(){
 }
 
 function initTabs(){
-  const tabs = ['codes','serials','combos','models','qc','workflow','intel','scam','tree','auto','vision','learn','update','best'];
+  const tabs = ['codes','serials','combos','models','qc','workflow','intel','detect','scam','tree','auto','vision','learn','update','best'];
   document.getElementById('tabs').innerHTML = tabs.map((t,i) =>
     `<button class="tab ${i===0?'active':''}" data-tab="${t}">${t[0].toUpperCase()+t.slice(1)}</button>`
   ).join('');
@@ -2867,6 +3486,7 @@ function renderAll(){
   renderQCPanel();
   renderWorkflowPanel();
   renderIntelPanel();
+  renderDetectionPanel();
   renderScamPanel();
   renderTreePanel();
   renderAutoPanel();
